@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.8", "3.12"]
+        exclude:
+          - os: windows-latest
+            python: "3.8"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Integridad del paquete (rutas, UTF-8, versiones)
+        run: python tools/check_refs.py
+      - name: Pruebas de los scripts
+        run: python -m unittest discover -s tests -v
+      - name: Expediente de ejemplo válido
+        run: python skills/startup-engineering-chile/scripts/expediente.py validar --dir examples/expediente_demo
+
+  estilo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff==0.6.9
+      - run: ruff check skills/startup-engineering-chile/scripts tests tools

@@ -1,0 +1,76 @@
+{
+  "_verificado": "2026-11-25",
+  "_nota": "Reglas de referencia para fondos_lint.py. Cambian por convocatoria y región: contrasta con las bases del llamado vigente. No certifica admisibilidad.",
+  "instrumentos": {
+    "semilla_inicia": {
+      "nombre": "CORFO Semilla Inicia",
+      "tope_subsidio_CLP": 15000000, "cofinanciamiento_max": 0.75,
+      "beneficiarios": ["natural", "juridica"],
+      "por_tipo": {"juridica": {"meses_inicio_max": 18, "sin_ventas": true}, "natural": {}},
+      "verificar": ["Convocatoria abierta y región (las de 2026 están cerradas)", "Variante mujeres: hasta $17.000.000 y 85% (instrumento semilla_inicia_mujeres)", "Restricciones de participación en otros proyectos CORFO", "Patrocinador y condiciones de formalización"],
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/semilla-inicia/"
+    },
+    "semilla_inicia_mujeres": {
+      "nombre": "CORFO Semilla Inicia (liderada por mujeres)",
+      "tope_subsidio_CLP": 17000000, "cofinanciamiento_max": 0.85,
+      "beneficiarios": ["natural", "juridica"],
+      "por_tipo": {"juridica": {"meses_inicio_max": 18, "sin_ventas": true}, "natural": {}},
+      "verificar": ["Requisitos de participación y representación femenina según bases"],
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/semilla-inicia/"
+    },
+    "semilla_expande": {
+      "nombre": "CORFO Semilla Expande (etapa 1)",
+      "tope_subsidio_CLP": 25000000, "cofinanciamiento_max": 0.75,
+      "beneficiarios": ["juridica"],
+      "por_tipo": {"juridica": {"meses_inicio_max": 36, "ventas_12m_max_CLP": 80000000, "ventas_solucion_min_CLP": 100000}},
+      "verificar": ["Etapa 2 (hasta $20M) no es automática", "Variante mujeres: $28,3M en etapa 1", "Las ventas se acreditan con facturación, no con cartas de intención", "La nacional 2026 cerró el 24-feb-2026"],
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/semilla-expande/"
+    },
+    "escalamiento": {
+      "nombre": "CORFO Escalamiento",
+      "tope_subsidio_CLP": 60000000, "cofinanciamiento_max": 0.70,
+      "beneficiarios": ["juridica"],
+      "por_tipo": {"juridica": {"meses_inicio_max": 72, "ventas_12m_min_CLP": 80000000, "ventas_12m_max_CLP": 800000000, "ventas_solucion_min_CLP": 80000000}},
+      "verificar": ["Llamado 2026 cerrado el 27-jul; revisar la nueva edición"],
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/escalamiento/"
+    },
+    "crea_y_valida": {
+      "nombre": "CORFO Crea y Valida (individual)",
+      "tope_subsidio_CLP": 180000000, "cofinanciamiento_max": 0.80,
+      "beneficiarios": ["juridica"],
+      "por_tipo": {"juridica": {"meses_inicio_min": 24}},
+      "verificar": ["80% micro/pequeña, 60% mediana, 40% grande (+10% si es liderada por mujeres)", "Exige ventas en los últimos 24 meses", "Colaborativo hasta $220M", "Requiere riesgo tecnológico (I+D+i), no cualquier SaaS"],
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/crea-y-valida/"
+    },
+    "anid_startup_ctci": {
+      "nombre": "ANID Startup CTCI (ex Startup Ciencia)",
+      "tope_subsidio_CLP": 134550000, "cofinanciamiento_max": 0.85,
+      "beneficiarios": ["juridica"],
+      "por_tipo": {"juridica": {"meses_inicio_max": 120}},
+      "verificar": ["Base científico-tecnológica demostrable", "Micro o pequeña empresa, ventas hasta 25.000 UF", "Aporte pecuniario mínimo 15% (10% si es liderada por mujeres o fuera de la RM)", "La edición 2027 cierra el 2027-01-14 a las 17:00"],
+      "fuente": "https://anid.cl/concursos/startup-ctci-2027/"
+    },
+    "sercotec_semilla_emprende": {
+      "nombre": "Sercotec Capital Semilla Emprende",
+      "tope_subsidio_CLP": 3500000, "cofinanciamiento_max": null,
+      "beneficiarios": ["natural"],
+      "por_tipo": {"natural": {}},
+      "verificar": ["Sin inicio de actividades en primera categoría", "Para negocios sin innovación escalable suele calzar mejor que CORFO", "Abeja Emprende: misma lógica, solo mujeres, aporte 3%"],
+      "fuente": "https://www.sercotec.cl/capital-semilla-emprende/"
+    },
+    "startup_chile_build": {
+      "nombre": "Start-Up Chile Build",
+      "tope_subsidio_CLP": 15000000, "cofinanciamiento_max": null,
+      "beneficiarios": ["natural", "juridica"], "por_tipo": {},
+      "verificar": ["Sin cesión de participación", "Montos y requisitos por generación (BIG13 cerró el 2026-11-24)"],
+      "fuente": "https://startupchile.org/build/"
+    },
+    "startup_chile_ignite": {
+      "nombre": "Start-Up Chile Ignite",
+      "tope_subsidio_CLP": 30000000, "cofinanciamiento_max": null,
+      "beneficiarios": ["juridica"], "por_tipo": {"juridica": {"meses_inicio_max": 36}},
+      "verificar": ["MVP con validación", "Extensión posible de $20M", "Cofinanciamiento según bases de la generación"],
+      "fuente": "https://startupchile.org/ignite/"
+    }
+  }
+}

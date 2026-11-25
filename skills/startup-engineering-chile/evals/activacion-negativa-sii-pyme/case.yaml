@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: activacion-negativa-sii-pyme
+expected_outcome: |
+  No activa la maquinaria del expediente para una duda tributaria rutinaria de una pyme tradicional: responde breve, sugiere contador/SII, no crea carpetas ni archivos.

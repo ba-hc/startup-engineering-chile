@@ -1,4 +1,5 @@
 # Pitch, evaluación interna y red team
+> **Última verificación:** 2026-11-25 · **Revisar:** antes de cada convocatoria. Regla: si una condición de elegibilidad o un monto decide algo, contrástalo con las bases del llamado vigente (resumen actualizable en `assets/fondos/instrumentos.json`; revisión con `scripts/fondos_lint.py`).
 
 ## Pitch de 3 minutos (adaptar al formato oficial)
 | Tiempo orientativo | Tema | Criterio |

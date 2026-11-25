@@ -1,4 +1,5 @@
 # CORFO: guía de preparación y elección del instrumento
+> **Última verificación:** 2026-11-25 · **Revisar:** antes de cada convocatoria. Regla: si una condición de elegibilidad o un monto decide algo, contrástalo con las bases del llamado vigente (resumen actualizable en `assets/fondos/instrumentos.json`; revisión con `scripts/fondos_lint.py`).
 **Corte:** 25-11-2026. No es una asesoría jurídica ni una certificación de admisibilidad.
 
 ## 1. Primero, elegir el instrumento (datos de referencia)
@@ -8,12 +9,12 @@
 | Semilla Inicia mujeres | Igual etapa, liderazgo femenino según normativa | Hasta $17.000.000 y 85% en llamado consultado | Ver participación, representación, acreditación y condiciones; no aplicar automáticamente. |
 | Semilla Expande nacional 2026 | Primeras ventas, despegue comercial | Persona jurídica chilena, hasta 36 meses; ventas solución desde $100.000 netos y ventas totales dentro de máximo $80 millones últimos 12 meses según llamado; hasta 75%, etapa 1 $25M, etapa 2 $20M condicionada | Cerró 24 feb 2026; segunda etapa no automática. |
 | Escalamiento | Expansión comercial | Persona jurídica, menos de 6 años de inicio SII; ventas netas $80–800M, al menos $80M de solución; hasta $60M / 70% | Llamado 2026 cerrado 27 jul; verificar bases de nueva edición. |
-| Start-Up Chile Build/Ignite/Growth | Startup tecnológica por etapa | Términos y montos cambian por generación; investigación previa informó $15M/$30M/$75M como montos base BIG13 | No confundir extensión, subsidio máximo y base. Consultar portal. |
-| Innova Región / Crea y Valida | Innovación técnica y comercial; I+D cuando aplique | Ver requisitos, antigüedad, riesgo tecnológico, focalización y actividades | No asumir que cualquier SaaS califica. |
+| Start-Up Chile Build/Ignite/Growth | Startup tecnológica por etapa | BIG13: Build $15M, Ignite $30M (+ extensión $20M), Growth $75M; sin cesión de participación; cerró 24-nov-2026 | No confundir extensión, subsidio máximo y base. Consultar portal. |
+| Innova Región / Crea y Valida | Innovación técnica y comercial; I+D cuando aplique | Crea y Valida 2026: hasta $180M individual / $220M colaborativo; 80% micro y pequeña, 60% mediana, 40% grande; exige ≥ 24 meses de inicio de actividades y ventas en los últimos 24 meses | Cerró 04-ago-2026. No asumir que cualquier SaaS califica. |
 | Consolida y Expande Innovación / Alta Tecnología | Innovación más madura, comercialización o desarrollo complejo | Requisitos y cofinanciamiento distintos | Leer bases del llamado. |
-| ANID Startup CTCI 2027 | Base científico-tecnológica temprana | $134.550.000 y 12 meses según UV/UDP; cierre comunicado 14 ene 2027 | Verificar bases de ANID, requisitos de equipo, ventas, aportes y postulación. |
+| ANID Startup CTCI 2027 | Base científico-tecnológica temprana | $134.550.000 y 12 meses (+6); micro o pequeña < 10 años, ventas ≤ 25.000 UF; aporte pecuniario ≥ 15% (10% mujeres o regiones); abrió 16-nov-2026, cierra 14-ene-2027 17:00 | Verificar bases de ANID, requisitos de equipo, ventas, aportes y postulación. |
 | APTA Builder | Company Building y transferencia | Need assessment, building blocks, mentoría | Convocatorias y montos específicos; no garantizados. |
-| Ley I+D | Gasto certificado de I+D | Incentivo tributario, no subsidio de caja; revisar Ley 20.241 y modificaciones | Requiere certificación y elegibilidad tributaria. |
+| Ley I+D | Gasto certificado de I+D | Crédito de 35% contra primera categoría, tope 15.000 UTM/año, certifica CORFO; vigencia extendida a 2035 (Ley 21.755, verificar) | Requiere certificación y elegibilidad tributaria. |
 | Potencia / Viraliza | Apoyo a entidades ejecutoras y ecosistema | Según llamado | No presentarlos como subsidio directo de startup. |
 
 Fuentes reconsultadas: [Semilla Inicia](https://www.corfo.gob.cl/sites/cpp/programa/semilla-inicia/), [Expande 2026](https://www.corfo.gob.cl/sites/cpp/convocatoria/semilla-expande-2026/), [Escalamiento](https://www.corfo.gob.cl/sites/cpp/programa/escalamiento/), [ANID CTCI — referencia UDP](https://investigacioneinnovacion.udp.cl/convocatorias/startup-ctci-2027/). Los datos de ficha no sustituyen las bases específicas.

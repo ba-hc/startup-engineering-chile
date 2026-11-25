@@ -1,4 +1,5 @@
 # Formulación del proyecto financiable y control financiero
+> **Última verificación:** 2026-11-25 · **Revisar:** antes de cada convocatoria. Regla: si una condición de elegibilidad o un monto decide algo, contrástalo con las bases del llamado vigente (resumen actualizable en `assets/fondos/instrumentos.json`; revisión con `scripts/fondos_lint.py`).
 
 ## 1. Separar dos expedientes
 **Venture dossier:** oportunidad, mercado, producto, modelo de negocio, riesgos, equipo, caja, resultados. Es permanente.
@@ -63,4 +64,4 @@ Registrar fórmula, unidad, numerador/denominador, frecuencia, línea base, meta
 ## 8. Revisión previa a enviar
 Contrastar cada respuesta con criterio oficial. Verificar totales, cohorte/mercado, período de ventas, fechas y elegibilidad. Revisar legibilidad del pitch y consistencia de cifras entre formulario y modelo. Confirmar anexos exigidos, permisos y canal de presentación. Guardar versión final, recibo de postulación y calendario. No enviar si hay una barrera de admisibilidad sin resolver.
 
-Fuentes: FIA–Gearbox (capítulos de objetivos, indicadores, secuencia, comercialización y evaluación); resolución 1498; bases de cada instrumento; [Consolida y Expande 2026](https://www.corfo.gob.cl/sites/cpp/convocatoria/consolida-y-expande-innovacion-2026/) enlaza manuales normativos. Consultar `../biblioteca/FUENTES.md`.
+Fuentes: FIA–Gearbox (capítulos de objetivos, indicadores, secuencia, comercialización y evaluación); resolución 1498; bases de cada instrumento; [Consolida y Expande 2026](https://www.corfo.gob.cl/sites/cpp/convocatoria/consolida-y-expande-innovacion-2026/) enlaza manuales normativos. Consultar `../biblioteca/fuentes.csv`.

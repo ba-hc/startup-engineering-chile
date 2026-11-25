@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: finanzas-unit-economics-inflados
+expected_outcome: |
+  Detecta que el LTV está calculado sobre ingreso y con churn irreal, recalcula con finanzas.py (LTV sobre contribución), corrige el TAM top-down y no entrega cifras sin mostrar supuestos.

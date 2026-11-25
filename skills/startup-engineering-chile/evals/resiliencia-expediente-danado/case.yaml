@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: resiliencia-expediente-danado
+expected_outcome: |
+  Ante un expediente con un CSV vacío, un CSV con columnas faltantes y sin manifest, diagnostica con validar/doctor, repara con migrar sin perder datos y sigue con la sesión sin inventar nada.
+context:
+  scaffold_script: place-files.sh

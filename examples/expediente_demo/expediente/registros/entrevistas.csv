@@ -1,0 +1,9 @@
+﻿entrevista_id,fecha,segmento,rol,situacion,hecho_o_cita_breve,necesidad,alternativa,presupuesto_declarado,contradiccion,limitacion,consentimiento,evidence_id
+ENT-001,2026-10-01,planta-mediana,jefe-mantencion,inspección mensual de equipos,Ficticio: arma el informe en Excel el viernes (3 h),informe-oportuno,Excel+fotos,,,,si,
+ENT-002,2026-10-02,planta-mediana,jefe-mantencion,inspección mensual de equipos,Ficticio: arma el informe en Excel el viernes (4 h),informe-oportuno,Excel+fotos,,,,si,
+ENT-003,2026-10-03,planta-mediana,jefe-mantencion,inspección mensual de equipos,Ficticio: arma el informe en Excel el viernes (5 h),informe-oportuno,Excel+fotos,,,,si,
+ENT-004,2026-10-04,planta-mediana,jefe-mantencion,inspección mensual de equipos,Ficticio: arma el informe en Excel el viernes (6 h),informe-oportuno,Excel+fotos,,,,si,
+ENT-005,2026-10-05,planta-mediana,jefe-mantencion,inspección mensual de equipos,Ficticio: arma el informe en Excel el viernes (7 h),informe-oportuno,Excel+fotos,,,,si,
+ENT-006,2026-10-06,planta-mediana,jefe-mantencion,inspección mensual de equipos,Ficticio: arma el informe en Excel el viernes (8 h),informe-oportuno,Excel+fotos,,,,si,
+ENT-007,2026-10-07,planta-mediana,jefe-mantencion,inspección mensual de equipos,Ficticio: arma el informe en Excel el viernes (9 h),informe-oportuno,Excel+fotos,,,,si,
+ENT-008,2026-10-08,planta-mediana,jefe-mantencion,inspección mensual de equipos,Ficticio: arma el informe en Excel el viernes (10 h),informe-oportuno,Excel+fotos,,,,si,

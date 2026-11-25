@@ -86,15 +86,15 @@ def req(method, path, body=None, timeout=90):
         txt = e.read().decode("utf-8", errors="replace")[:800]
         low = txt.lower()
         if e.code in (404, 501) or "not supported" in low or ("cloud" in low and e.code in (401, 402, 403)):
-            raise NoDisponible(f"HTTP {e.code} en {path}: {txt}")
-        raise RuntimeError(f"HTTP {e.code} en {path}: {txt}")
+            raise NoDisponible(f"HTTP {e.code} en {path}: {txt}") from e
+        raise RuntimeError(f"HTTP {e.code} en {path}: {txt}") from e
     except urllib.error.URLError as e:
         if _es_caido(e.reason):
-            raise FirecrawlCaido(str(e.reason))
-        raise RuntimeError(f"error de red en {path}: {e.reason}")
+            raise FirecrawlCaido(str(e.reason)) from e
+        raise RuntimeError(f"error de red en {path}: {e.reason}") from e
     except (TimeoutError, ConnectionError, OSError) as e:
         # timeouts y conexiones cortadas a mitad de respuesta: falla de esta página, no del servicio
-        raise RuntimeError(f"{type(e).__name__} en {path}: {e}")
+        raise RuntimeError(f"{type(e).__name__} en {path}: {e}") from e
 
 
 def slug(texto, n=60):
@@ -164,7 +164,7 @@ def c_health(a):
             cap[nombre] = "ok" if f() else "vacio"
         except FirecrawlCaido:
             cap[nombre] = "caido"
-        except NoDisponible as e:
+        except NoDisponible:
             cap[nombre] = "no disponible"
         except Exception as e:
             cap[nombre] = ("no disponible" if nombre == "search" else "error") + f" ({str(e)[:100]})"
@@ -288,7 +288,7 @@ def puntuar(url, cat):
 def _ficha_inicial(nombre, raiz, fecha, resumen, precios):
     ficha = [f"# Ficha competidor: {nombre}", "",
              f"- URL: {raiz}", f"- Primera consulta: {fecha}", "- Fuente: sitio público (Firecrawl local)",
-             f"- Instantáneas: carpetas con fecha junto a este archivo", "",
+             "- Instantáneas: carpetas con fecha junto a este archivo", "",
              "> Completar leyendo las páginas guardadas. Distinguir lo que el sitio *declara* de lo verificado.",
              "> Cada afirmación cita archivo/URL. Si un dato no aparece, escribir 'no publicado'.",
              "> Este archivo no se sobrescribe en consultas posteriores.", "",
@@ -346,7 +346,7 @@ def competidor(url, nombre, out, max_paginas=8, limit_map=300, extra=None, pausa
             resumen["paginas"].append({"categoria": cat, "url": u, "archivo": os.path.basename(p), "titulo": meta.get("title", ""),
                                        "status": meta.get("statusCode"), "caracteres": len(md), "precios_detectados": hall})
             log(f"[{nombre}]   ✓ {cat:13} {u}")
-        except FirecrawlCaido as e:
+        except FirecrawlCaido:
             resumen["paginas"].append({"categoria": cat, "url": u, "error": "Firecrawl dejó de responder"})
             log(f"[{nombre}]   ✗ Firecrawl dejó de responder; se guarda lo obtenido")
             caido = True

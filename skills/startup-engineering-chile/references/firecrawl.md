@@ -12,7 +12,7 @@ python scripts/firecrawl.py health --deep --guardar <proyecto>/expediente/.herra
 - `health` sin `--deep` solo confirma que algo responde en el puerto.
 - Código de salida 2 → no responde. Ofrece al usuario configurarlo (sección 2) **y mientras tanto sigue trabajando** con las herramientas web del agente (WebFetch/WebSearch), anotando la fuente igual que si viniera de Firecrawl. No bloquees la sesión por esto.
 
-URL distinta a `http://localhost:3002`: define `FIRECRAWL_API_URL`. Si la instancia exige clave: `FIRECRAWL_API_KEY`.
+URL distinta a `http://localhost:3002`: define `FIRECRAWL_API_URL`. Si la instancia exige clave: `FIRECRAWL_API_KEY`. Una instancia local (self-hosted) normalmente **no** necesita clave; la nube de Firecrawl sí, y en ese caso los datos salen del computador (avisa al usuario). Firecrawl es opcional: sin él, la skill usa la búsqueda web y WebFetch del agente.
 
 ## 2. Instalación (guiar al usuario paso a paso; confirmar antes de ejecutar comandos que instalan software)
 

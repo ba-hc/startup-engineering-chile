@@ -4,15 +4,16 @@
 
 **Un mentor de startups para Claude: de la idea al negocio, con evidencia.**
 
-Te acompaña sesión a sesión a validar tu idea, entrevistar clientes, analizar la competencia, definir precio y preparar tu postulación a CORFO, ANID o Start-Up Chile, dejando todo registrado en la carpeta de tu proyecto.
+Te acompaña sesión a sesión a validar tu idea, entrevistar clientes, analizar la competencia, definir precio, hacer los números y preparar tu postulación a CORFO, ANID o Start-Up Chile, dejando todo registrado en la carpeta de tu proyecto.
 
+[![CI](https://github.com/ba-hc/startup-engineering-chile/actions/workflows/ci.yml/badge.svg)](https://github.com/ba-hc/startup-engineering-chile/actions/workflows/ci.yml)
+[![Versión](https://img.shields.io/github/v/release/ba-hc/startup-engineering-chile?label=versión)](CHANGELOG.md)
 [![Licencia: MIT](https://img.shields.io/badge/código-MIT-blue.svg)](LICENSE)
 [![Licencia: CC BY 4.0](https://img.shields.io/badge/contenido-CC%20BY%204.0-lightgrey.svg)](LICENSE-CONTENIDO.md)
 [![Claude Skill](https://img.shields.io/badge/Claude-Skill-D97757.svg)](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview)
-[![Idioma: español](https://img.shields.io/badge/idioma-español-red.svg)](#)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-3776AB.svg)](https://www.python.org/)
 
-[Instalación](#-instalación) · [Cómo se usa](#-cómo-se-usa) · [Qué incluye](#-qué-incluye) · [Firecrawl](#-investigación-web-con-firecrawl-opcional) · [Pruebas](#-resultados-de-las-pruebas)
+[Instalación](#-instalación) · [Cómo se usa](#-cómo-se-usa) · [Herramientas](#-herramientas) · [Demo](#-pruébalo-con-la-demo) · [Incubadoras](#-para-incubadoras-y-cursos) · [Privacidad](#-privacidad) · [Novedades](#-novedades-en-11)
 
 </div>
 
@@ -20,7 +21,11 @@ Te acompaña sesión a sesión a validar tu idea, entrevistar clientes, analizar
 
 ## ¿Qué es?
 
-Una **skill** (habilidad) para [Claude](https://claude.ai) basada en el pack *Startup Engineering Chile & LATAM 2026*: 28 módulos de manual, 108 plantillas, 17 registros, guía de postulación a CORFO, biblioteca de fuentes, casos y un plan de 90 días.
+Una **skill** (habilidad) para [Claude](https://claude.ai) basada en el pack *Startup Engineering Chile & LATAM 2026*. Incluye:
+
+- 28 módulos de manual, 108 plantillas y 17 registros;
+- una guía de postulación a CORFO, una biblioteca de fuentes, casos y un plan de 90 días;
+- scripts en Python para los cálculos y revisiones que no conviene dejar a la memoria del modelo.
 
 Claude no te entrega el pack de golpe. Lo aplica a **tu** proyecto: conversa contigo, te hace las preguntas correctas, investiga en la web y lleva un **expediente de evidencia** que crece en cada sesión.
 
@@ -38,8 +43,10 @@ Además:
 
 - 🔁 **Retoma donde quedaron.** Lee el expediente, te pregunta por lo pendiente y analiza lo que traes (por ejemplo, notas de entrevistas) contra el criterio que fijaron *antes* de salir a terreno.
 - 🧭 **Te ubica en una ruta de 10 etapas** (G0 Oportunidad → G9 Escala), con nivel de evidencia de 0 a 4 en cada una.
+- 🧮 **Hace los números con scripts, no de memoria:** unit economics, runway, escenarios, dilución, costo de contratar en Chile y conversión CLP/UF/USD.
+- 🏛️ **Revisa tu postulación a fondos:** elegibilidad por instrumento, gastos no financiables, coherencia entre presupuesto y marco lógico, y límites de caracteres. Antes de afirmar un requisito, lo verifica en la fuente oficial.
+- 🧪 **Pone a prueba tu propuesta** con un *red team* de tres evaluadores (CORFO, comprador B2B e inversionista) y una compuerta antisesgo antes de cada decisión.
 - 🔎 **Investiga la competencia** y guarda cada página con URL y fecha, separando lo que dice el sitio de lo que está verificado.
-- 🏛️ **Verifica fondos públicos** (CORFO, ANID, Start-Up Chile) en la fuente oficial antes de afirmar requisitos, y te avisa si un instrumento no te corresponde.
 - 🛑 **Es honesto:** no inventa entrevistas ni clientes, no baja la meta después de ver los datos y te dice cuándo conviene no construir todavía.
 
 ## 🧠 Cómo trabaja
@@ -56,6 +63,24 @@ flowchart LR
 ```
 
 **Primer turno liviano** (~300 palabras): un espejo de tu problema para que lo corrijas, el hallazgo más importante, en qué etapa estás, máximo 3 preguntas y el próximo paso. El análisis completo queda en archivos, no en el chat.
+
+**Tres niveles de profundidad**, según cuánto tiempo tengas:
+
+| Nivel | Cuándo | Qué deja |
+|---|---|---|
+| **Consulta** | Una pregunta puntual (*"¿califico a Semilla Inicia?"*) | La respuesta; no crea expediente, solo lo ofrece |
+| **Sprint** | Preparar algo concreto en días: una reunión, un pitch, una prueba de precio | Estado, hipótesis y evidencias |
+| **Completo** | Validar en serio, postular a fondos, levantar inversión | Expediente que suma registros a medida que se usan (hasta 17) |
+
+Si no lo dices, empieza liviano y sube de nivel cuando haga falta.
+
+**Modo degradado.** Si no hay terminal ni Python (por ejemplo, Claude.ai sin ejecución de código), la skill trabaja igual:
+
+- entrega plantillas y registros como bloques para copiar;
+- hace los cálculos mostrando la fórmula;
+- te avisa que no quedó guardado.
+
+Si no hay internet, usa las referencias incluidas con su fecha de corte y te lo dice.
 
 <details>
 <summary><b>Ver un ejemplo de primera respuesta</b></summary>
@@ -128,12 +153,13 @@ Si prefieres que la skill sea solo de un proyecto, cópiala en `.claude/skills/`
 
 ### Requisitos
 
-- **Python 3.8 o superior** para los scripts del expediente (solo librería estándar; no hay que instalar paquetes). En Windows, si `python` no funciona, la skill usa `py -3`.
-- **Opcional:** [Firecrawl](https://docs.firecrawl.dev/quickstarts/firecrawl-local) corriendo en tu máquina para investigar la web con más profundidad. Sin él, la skill usa la búsqueda web de Claude.
+- **Python 3.8 o superior** para los scripts (solo biblioteca estándar; no hay que instalar paquetes). En Windows, si `python` no funciona, la skill usa `py -3`.
+- **Opcional:** acceso a internet para actualizar UF, UTM y dólar desde [mindicador.cl](https://mindicador.cl). Sin conexión se usan los valores de respaldo con su fecha.
+- **Opcional:** [Firecrawl](#-investigación-web-con-firecrawl-opcional) para investigar la web con más profundidad.
 
 ### ¿Quedó instalada?
 
-Abre Claude en la carpeta de tu proyecto y escribe algo como *"tengo una idea para una startup y no sé por dónde partir"*. Si responde reflejando tu problema y ubicándote en una etapa (G0, G1…), está funcionando.
+Abre Claude en la carpeta de tu proyecto y escribe *"tengo una idea para una startup y no sé por dónde partir"*. Si responde reflejando tu problema y ubicándote en una etapa (G0, G1…), está funcionando. Para revisar el entorno, pídele *"corre el doctor del expediente"*.
 
 ## 💬 Cómo se usa
 
@@ -143,9 +169,11 @@ No necesitas comandos especiales: habla de tu emprendimiento y la skill se activ
 Tengo una idea para una app de [problema]. ¿Por dónde parto?
 Te dejo mi pitch en pitch.md. ¿Qué le falta para postular a Semilla Expande?
 Necesito un análisis de competencia para [producto] en Chile.
-Hice 5 entrevistas, te dejo mis notas. ¿Cómo lo ves?
+Hice 5 entrevistas, te dejo las transcripciones. ¿Cómo lo ves?
+¿Cuánto me cuesta contratar a un desarrollador con $1.800.000 líquidos?
+Revisa mi presupuesto CORFO antes de enviarlo.
+Mi socio quiere el 50%. ¿Cómo armamos el vesting?
 ¿Dónde estoy? Muéstrame mi ruta.
-Ayúdame a calcular TAM/SAM/SOM bottom-up para [segmento].
 ```
 
 ### El expediente
@@ -155,31 +183,89 @@ Todo queda en una carpeta `expediente/` dentro de tu proyecto, para retomar en l
 ```text
 expediente/
 ├── 00_estado.md          perfil, ruta por etapas, foco, trabajo de campo, acciones, bitácora
+├── manifest.json         versión del esquema y nivel (sprint o completo)
 ├── registros/*.csv       hipótesis, evidencias, decisiones, entrevistas, competencia…
 ├── documentos/TPL-*.md   plantillas trabajadas con tu proyecto
-├── investigacion/        páginas guardadas con URL y fecha de consulta
-└── entregables/          informes, pitch, dossier, exportaciones a Excel
+├── investigacion/        páginas guardadas con URL y fecha; notas de entrevistas anonimizadas
+├── entregables/          informes, one-pager, dashboard, modelo financiero, exportaciones
+└── .gitignore            evita subir entrevistas a git por accidente
 ```
 
-Los CSV se abren en Excel (`expediente.py exportar` genera versiones con `;` listas para Excel en español).
+Los CSV se abren en Excel. `expediente.py exportar` genera versiones con `;` y BOM, listas para Excel en español. Si vienes de la versión 1.0, la skill corre `expediente.py migrar` y actualiza tu expediente sin perder datos.
+
+## 🧰 Herramientas
+
+Claude las ejecuta por ti; también puedes usarlas directamente desde la terminal. Están en `skills/startup-engineering-chile/scripts/`.
+
+| Script | Para qué |
+|---|---|
+| `expediente.py` | Crear, revisar (`doctor`, `estado`, `validar`), migrar y consultar el expediente; informes semanales y one-pager; buscar plantillas y fuentes |
+| `finanzas.py` | Unit economics, punto de equilibrio, runway, escenarios desde el modelo, dilución (SAFE y pool), costo empleado y boletas de honorarios |
+| `indicadores_cl.py` | UF, UTM, dólar y euro del día, con caché; conversión entre CLP, UF y USD |
+| `modelo_xlsx.py` | Leer y cambiar los supuestos del modelo financiero sin romper sus fórmulas |
+| `fondos_lint.py` | Elegibilidad por instrumento, gastos no financiables, rendiciones, coherencia con el marco lógico y límites de caracteres |
+| `ingesta.py` | Anonimizar transcripciones de entrevistas (.txt, .vtt, .srt) antes de guardarlas |
+| `dashboard.py` | Tablero HTML del proyecto en un solo archivo, sin servidor |
+| `cohorte.py` | Tablero de varios equipos para incubadoras y cursos |
+| `firecrawl.py` | Investigación web con Firecrawl (opcional) |
+
+Las cifras chilenas (tasas, topes, tramos de impuesto, UF de respaldo) y las reglas de cada fondo viven en archivos JSON con su fecha de verificación: `assets/parametros_cl.json` y `assets/fondos/instrumentos.json`.
+
+## 🎬 Pruébalo con la demo
+
+[`examples/expediente_demo/`](examples/expediente_demo/) contiene el expediente de **InspectaYa**, una startup ficticia a mitad de camino: entrevistas anonimizadas, un experimento de precio que no alcanzó la meta, un piloto, un presupuesto para un fondo y el dashboard generado. Sirve para ver cómo se ve un expediente real antes de empezar el tuyo. Los comandos para explorarlo están en su README.
+
+## 🏫 Para incubadoras y cursos
+
+Si acompañas a varios equipos, cada uno trabaja con su expediente y tú ves el conjunto:
+
+```bash
+python skills/startup-engineering-chile/scripts/cohorte.py --raiz cohorte-2027 --html cohorte-2027/tablero.html
+```
+
+El tablero muestra, por equipo:
+
+- gate, entrevistas, evidencia confirmada y última decisión;
+- días sin actividad;
+- alertas: sin terreno, inactivo, acciones vencidas, hipótesis estancadas, fondo sin verificar.
+
+Al final resume los bloqueos que se repiten en la generación, para decidir qué taller dar. Guía de uso: [`references/flujos/cohorte.md`](skills/startup-engineering-chile/references/flujos/cohorte.md).
+
+## 🔒 Privacidad
+
+El expediente guarda entrevistas, y eso son datos personales. Por defecto, la skill:
+
+- **anonimiza:** usa ENT-001, rol y segmento; nunca nombre, correo, teléfono ni RUT;
+- **avisa** si una fila parece contener esos datos;
+- crea un `.gitignore` dentro del expediente;
+- **pide permiso** antes de enviar información a servicios externos.
+
+Hoy rige la Ley 19.628; la **Ley 21.719** de protección de datos entra en vigencia el **15 de octubre de 2027**. La skill trabaja desde ya con sus estándares de consentimiento. Detalle: [`references/flujos/privacidad.md`](skills/startup-engineering-chile/references/flujos/privacidad.md).
 
 ## 📚 Qué incluye
 
 | Recurso | Cantidad | Dónde |
 |---|---|---|
 | Módulos del manual (oportunidad, problema, mercado, propuesta, pricing, pilotos, ventas, fondos…) | 28 | `references/manual/` |
-| Plantillas editables | 108 | `assets/plantillas/` |
+| Flujos de trabajo (retomar, finanzas, fondos, red team, socios, compras públicas, privacidad…) | 12 | `references/flujos/` |
+| Plantillas editables (25 marcadas como troncales) | 108 | `assets/plantillas/` |
 | Registros CSV (hipótesis, evidencias, experimentos, decisiones, competencia, pipeline…) | 17 | `assets/registros/` |
 | Guía CORFO: elegir instrumento, admisibilidad, presupuesto, rendición, red team | 3 guías | `references/corfo/` |
 | Fuentes con URL y estado de verificación | 268 | `references/biblioteca/` |
 | Plan de 90 días, 20 workshops, currículo y mentoría | — | `references/operacion/` |
 | Casos y ejemplo integral (datos pedagógicos) | — | `references/casos/` |
-| Modelo financiero de ejemplo | 1 | `assets/modelo_financiero.xlsx` |
-| Scripts: expediente y Firecrawl | 2 | `scripts/` |
+| Modelo financiero editable | 1 | `assets/modelo_financiero.xlsx` |
+| Scripts | 9 | `scripts/` |
 
 ## 🔎 Investigación web con Firecrawl (opcional)
 
-[Firecrawl](https://github.com/firecrawl/firecrawl) convierte páginas web en texto limpio. La skill lo usa para guardar fichas de competidores (precios, producto, clientes) con fecha, detectar cambios entre consultas y leer bases de convocatorias en PDF. Corre en tu máquina: no hay costo por página.
+[Firecrawl](https://github.com/firecrawl/firecrawl) convierte páginas web en texto limpio. La skill lo usa para:
+
+- guardar fichas de competidores (precios, producto, clientes) con fecha;
+- detectar cambios entre consultas;
+- leer bases de convocatorias en PDF.
+
+Corre en tu máquina: no hay costo por página ni hace falta clave.
 
 Instalación rápida con Docker:
 
@@ -200,7 +286,7 @@ Luego pídele a Claude que verifique la conexión; la skill ejecuta `firecrawl.p
 
 ## 🧪 Resultados de las pruebas
 
-La skill se probó con 6 casos realistas, comparando la misma tarea con y sin la skill (última ronda, ambas con Claude Sonnet):
+La skill se probó con 6 casos realistas, comparando la misma tarea con y sin la skill (versión 1.0; última ronda, ambas con Claude Sonnet):
 
 | Caso | Con skill | Sin skill |
 |---|:---:|:---:|
@@ -212,41 +298,100 @@ La skill se probó con 6 casos realistas, comparando la misma tarea con y sin la
 | Presión para inventar entrevistas | 6/6 | 6/6 |
 | **Total** | **94 %** | **50 %** |
 
-Qué cambia en la práctica: sin la skill, el modelo tiende a diseñar la app aunque no se haya validado el problema, no deja registro para retomar y responde dudando sobre la admisibilidad a fondos en vez de verificarla. Con la skill, las respuestas son más cortas y lo detallado queda en archivos.
+Qué cambia en la práctica:
 
-*Una corrida por configuración; los casos y criterios están en [`evals/`](skills/startup-engineering-chile/evals/).*
+- **Sin la skill**, el modelo tiende a diseñar la app aunque no se haya validado el problema. Tampoco deja registro para retomar, y ante la admisibilidad a fondos responde dudando en vez de verificarla.
+- **Con la skill**, las respuestas son más cortas y el detalle queda en archivos.
+
+La versión 1.1 agrega 4 casos más:
+
+- unit economics inflados;
+- coherencia de un presupuesto CORFO;
+- expediente dañado;
+- una pregunta que **no** debe activar la skill.
+
+Todavía no tienen una ronda comparativa publicada. Los casos y criterios están en [`evals/`](skills/startup-engineering-chile/evals/).
+
+### Tests de los scripts
+
+```bash
+python tools/check_refs.py                 # rutas citadas, nombres de archivo, catálogos, versión
+python -m unittest discover -s tests -v    # cálculos, validación, anonimización, xlsx
+```
+
+La [CI](.github/workflows/ci.yml) los corre en Ubuntu y Windows con Python 3.8 y 3.12, y además valida la demo y pasa `ruff`.
 
 ## ⚠️ Límites
 
-- **Fechas de corte.** Montos, plazos y requisitos de fondos están al **25-11-2026** y cambian en cada llamado. La skill los verifica en la fuente oficial, pero confirma siempre con las bases vigentes.
-- **Orientación educativa.** Lo legal, tributario, clínico y de inversión no reemplaza a un profesional.
-- **No afiliado** a CORFO, ANID, Start-Up Chile ni Firecrawl.
-- Los casos y ejemplos del pack usan **datos pedagógicos**: no sirven como evidencia para una postulación.
+- **Fechas de corte.** Montos, plazos, tasas y requisitos de fondos están al **25-11-2026** y cambian en cada llamado. La skill los verifica en la fuente oficial, pero confirma siempre con las bases vigentes.
+- **Indicadores.** UF, UTM y dólar vienen de mindicador.cl, un servicio comunitario que puede fallar. En ese caso se usan valores de respaldo y la skill te dice de qué fecha son.
+- **Orientación educativa.** Lo legal, tributario, laboral, clínico y de inversión no reemplaza a un profesional.
+- **No afiliado** a CORFO, ANID, Start-Up Chile, mindicador.cl ni Firecrawl.
+- Los casos y ejemplos del pack, y la demo, usan **datos ficticios o pedagógicos**: no sirven como evidencia para una postulación.
 
 ## 🗂️ Estructura del repositorio
 
 ```text
 .
 ├── .claude-plugin/           manifiestos para instalar como plugin de Claude Code
+├── .github/workflows/        CI: referencias, tests, demo y ruff
 ├── skills/
 │   └── startup-engineering-chile/
-│       ├── SKILL.md          instrucciones del mentor
-│       ├── references/       manual, guía CORFO, biblioteca, casos, operación
-│       ├── assets/           plantillas, registros CSV, modelo financiero
-│       ├── scripts/          expediente.py, firecrawl.py
+│       ├── SKILL.md          instrucciones del mentor (enrutador)
+│       ├── references/       manual, flujos, guía CORFO, biblioteca, casos, operación
+│       ├── assets/           plantillas, registros CSV, modelo financiero, parámetros y fondos
+│       ├── scripts/          9 scripts en Python (biblioteca estándar)
 │       └── evals/            casos de prueba
+├── examples/expediente_demo/ expediente ficticio de ejemplo
+├── tests/                    tests de los scripts
+├── tools/check_refs.py       verificador de consistencia del repositorio
+├── docs/proceso/             documentos de cómo se construyó el pack (no van en la skill)
+├── CHANGELOG.md
 ├── LICENSE                   MIT (código)
 └── LICENSE-CONTENIDO.md      CC BY 4.0 (contenido)
 ```
 
+## 🆕 Novedades en 1.1
+
+- **7 scripts nuevos:** finanzas, indicadores, modelo xlsx, revisión de fondos, anonimización, dashboard y cohorte.
+- **12 flujos guiados**, entre ellos:
+  - router de fondos no dilutivos;
+  - red team;
+  - compuerta antisesgo;
+  - compras públicas;
+  - socios y vesting;
+  - trampas chilenas;
+  - internacionalización;
+  - privacidad.
+- **Expediente más robusto:**
+  - `doctor`, `validar` y `migrar`;
+  - esquema versionado;
+  - escrituras atómicas;
+  - CSV para Excel en español;
+  - aviso de datos personales.
+- **Niveles de profundidad** (consulta, sprint y completo) y modo degradado.
+- **Expediente de demostración**, 4 casos de prueba nuevos, tests y CI.
+- **Limpieza:** nombres de archivo sin tildes, catálogos sin duplicados y `SKILL.md` un 25 % más liviano.
+
+Detalle completo en el [CHANGELOG](CHANGELOG.md).
+
 ## 🤝 Contribuir
 
-¿Encontraste un requisito de fondo desactualizado, una fuente rota o un caso que la skill no maneja bien? Abre un [issue](https://github.com/ba-hc/startup-engineering-chile/issues) o un pull request. Si agregas un caso de prueba, sigue el formato de `evals/` (un `prompt.md`, un `case.yaml` y un archivo por criterio en `graders/`).
+¿Encontraste un requisito de fondo desactualizado, una fuente rota o un caso que la skill no maneja bien? Abre un [issue](https://github.com/ba-hc/startup-engineering-chile/issues) o un pull request.
+
+- Antes de enviar cambios, corre `python tools/check_refs.py` y los tests.
+- Si cambias una cifra, actualiza su fecha de verificación (`_verificado` en los JSON o la línea "Última verificación" en las guías).
+- Si agregas un caso de prueba, sigue el formato de `evals/`: un `prompt.md`, un `case.yaml` y un archivo por criterio en `graders/`.
+- Anota el cambio en el `CHANGELOG.md`.
 
 ## 📄 Licencia
 
-- **Código** (`scripts/`, manifiestos): [MIT](LICENSE).
-- **Contenido** (manual, plantillas, guías, registros): [CC BY 4.0](LICENSE-CONTENIDO.md). Puedes usarlo y adaptarlo, incluso comercialmente, citando la fuente.
+| Qué | Licencia | Incluye |
+|---|---|---|
+| **Código** | [MIT](LICENSE) | `scripts/`, `tests/`, `tools/`, manifiestos y CI |
+| **Contenido** | [CC BY 4.0](LICENSE-CONTENIDO.md) | Manual, flujos, plantillas, guías, registros, parámetros y demo |
+
+Puedes usar y adaptar el contenido, incluso comercialmente, citando la fuente.
 
 <div align="center">
 

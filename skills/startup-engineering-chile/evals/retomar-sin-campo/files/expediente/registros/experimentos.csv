@@ -1,0 +1,2 @@
+﻿experiment_id,hypothesis_id,metodo,poblacion,comparador,metrica,umbral,guardrail,costo_maximo_CLP,inicio,fin,resultado,evidence_id,decision,responsable
+EXP-001,H-001,entrevistas Mom Test (guion TPL-014),6 supervisoras de al menos 3 clínicas + 2 decisores,—,horas por ciclo; casos de turno descubierto con costo; prioridad declarada por decisor,≥4 de 6 supervisoras con ≥8 h por ciclo; ≥3 casos de turno descubierto con costo; ≥1 decisor lo reconoce como prioridad,no mostrar la idea ni pedir opinión sobre la app,0,2026-11-05,2026-11-20,,,,Fundadora

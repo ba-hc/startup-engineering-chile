@@ -1,0 +1,3 @@
+﻿evidence_id,hypothesis_id,tipo,afirmacion,fuente_url_o_ruta,fecha,segmento,unidad,n,resultado,limitacion,permiso_datos,responsable,estado
+EV-001,H-001,declaración sin fuente,La supervisora de la clínica donde trabajó la fundadora dedica ~2 días al mes a la planilla Excel,conversación con la fundadora,2026-11-04,clínica privada Santiago,,1,,"una sola clínica, sin medición",,Fundadora,confirmado
+EV-002,H-001,investigación secundaria,rFlex declara ofrecer gestión de turnos para instituciones de salud en Chile,https://www.rflex.io/,2026-11-04,,,,,"declaración del sitio, no verificada",,Agente,confirmado

@@ -1,0 +1,38 @@
+{
+  "_verificado": "2026-11-25",
+  "_nota": "Parámetros de referencia para finanzas.py. Cambian por ley, licitación o resolución: verifícalos en la fuente antes de usarlos en un contrato, una liquidación o una postulación. Orientación educativa, no asesoría contable ni laboral.",
+  "afc_empleador_indefinido": {"valor": 0.024, "fuente": "Ley 19.728; Previred nov-2026", "nota": "0,8% desde el año 11 de contrato"},
+  "afc_empleador_plazo_fijo": {"valor": 0.03, "fuente": "Ley 19.728; Previred nov-2026"},
+  "afc_trabajador_indefinido": {"valor": 0.006, "fuente": "Ley 19.728"},
+  "aporte_empleador_reforma": {"valor": 0.035, "vigencia": "ago-2026 a jul-2027", "fuente": "Ley 21.735 art. 4 transitorio; https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-10906.html", "nota": "Incluye el SIS (1,79% en nov-2026) y la compensación por expectativa de vida. Sube a 4,25% en ago-2027, 5% en ago-2028 y llega a 8,5% en ago-2033."},
+  "sis_incluido_en_reforma": {"valor": 0.0179, "fuente": "https://www.spensiones.cl/portal/institucional/594/w3-propertyvalue-9917.html", "nota": "Informativo: ya está dentro de aporte_empleador_reforma; no sumarlo aparte."},
+  "mutual_basica": {"valor": 0.0093, "fuente": "Ley 16.744 (0,90%) + Ley SANNA (0,03%); https://www.isl.gob.cl/cotizaciones", "nota": "La adicional va de 0% a 3,4% según actividad (hasta 6,8% con recargo DS 67)."},
+  "comision_afp_referencia": {"valor": 0.0111, "fuente": "Previred nov-2026, promedio simple (rango 0,46%-1,45%)"},
+  "tope_imponible_afp_uf": {"valor": 90, "fuente": "Res. Ex. 236/2026 Superintendencia de Pensiones, desde feb-2026"},
+  "tope_imponible_afc_uf": {"valor": 135.2, "fuente": "Res. Ex. 237/2026 Superintendencia de Pensiones, desde feb-2026"},
+  "ingreso_minimo_mensual": {"valor": 553553, "vigencia": "desde 2026-05-01", "fuente": "Ley 21.830; https://dt.gob.cl/portal/1628/w3-article-60141.html"},
+  "retencion_honorarios": {"valor": 0.1525, "nota": "2026; 16% en 2027 y 17% en 2028 (Ley 21.133)", "fuente": "https://www.sii.cl/destacados/boletas_honorarios/index.html"},
+  "iva": {"valor": 0.19, "fuente": "DL 825"},
+  "primera_categoria_pro_pyme": {"valor": 0.125, "nota": "Tasa transitoria años comerciales 2025-2027 (Ley 21.755); 15% en 2028; permanente 25%", "fuente": "SII Circular 53/2025"},
+  "primera_categoria_general": {"valor": 0.27, "nota": "2026; la Ley 21.850 la baja a 25,5% en 2027, 24% en 2028 y 23% desde 2029 (verificar)", "fuente": "https://www.bcn.cl/leychile/navegar?idNorma=1229250"},
+  "ley_id_credito": {"valor": 0.35, "nota": "Crédito de 35% contra primera categoría; tope 15.000 UTM/año; certifica CORFO; vigencia extendida a 2035 por Ley 21.755 (verificar)", "fuente": "https://www.corfo.gob.cl/sites/cpp/incentivo_tributario/"},
+  "compra_agil_max_utm": {"valor": 100, "nota": "Desde 2024-12-12; preferencia para empresas de menor tamaño y proveedores locales; mínimo 3 cotizaciones", "fuente": "https://www.chilecompra.cl/ley-compra-agil/"},
+  "impuesto_unico_tramos": {
+    "valor": [
+      {"hasta_utm": 13.5, "tasa": 0.0, "rebaja_utm": 0.0},
+      {"hasta_utm": 30, "tasa": 0.04, "rebaja_utm": 0.54},
+      {"hasta_utm": 50, "tasa": 0.08, "rebaja_utm": 1.74},
+      {"hasta_utm": 70, "tasa": 0.135, "rebaja_utm": 4.49},
+      {"hasta_utm": 90, "tasa": 0.23, "rebaja_utm": 11.14},
+      {"hasta_utm": 120, "tasa": 0.304, "rebaja_utm": 17.8},
+      {"hasta_utm": 310, "tasa": 0.35, "rebaja_utm": 23.32},
+      {"hasta_utm": null, "tasa": 0.4, "rebaja_utm": 38.82}
+    ],
+    "fuente": "Tabla mensual de impuesto único de segunda categoría (SII), en UTM",
+    "nota": "Verificar en https://www.sii.cl/valores_y_fechas/impuesto_2da_categoria/ antes de usar"
+  },
+  "respaldo_indicadores": {
+    "uf": {"valor": 41439.89, "fecha": "2026-11-30", "fuente": "Previred nov-2026"},
+    "utm": {"valor": 72440, "fecha": "2026-11-01", "fuente": "Previred nov-2026"}
+  }
+}

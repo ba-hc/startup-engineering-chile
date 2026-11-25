@@ -85,3 +85,8 @@ Programas de innovación abierta, desafíos de corporaciones, licitaciones de Co
 ## R6. Re-verificar fuentes del pack
 
 `references/biblioteca/fuentes.csv` tiene 268 fuentes, solo 59 reconsultadas al corte. Cuando una afirmación importante del usuario dependa de una fuente marcada como no verificada, scrapea la URL, confirma que dice lo que se cita y registra la reconsulta en `fuentes_nuevas.csv` (fecha, hallazgo, límite, estado). Si la URL murió, dilo y busca la fuente vigente.
+
+## R7. Fuentes públicas chilenas: compras del Estado, marcas y convocatorias
+- **Mercado Público** (demanda y precios reales del Estado): buscador web de licitaciones y órdenes de compra por rubro u organismo; la API (`api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?...&ticket=`) requiere un ticket personal obtenido con ClaveÚnica: úsala solo si el fundador lo tiene y lo autoriza. Registra precios y organismos en `competencia.csv` y `cuentas_y_pipeline.csv`. Flujo completo: `references/flujos/compras_publicas.md`.
+- **INAPI** (marcas): búsqueda preliminar de la marca y variantes en las clases Niza que apliquen (software 9 y 42; servicios 35) en el buscador de marcas de INAPI. Es preliminar: el examen de fondo lo hace INAPI. Anota resultado y fecha en `ip_licencias.csv`.
+- **Convocatorias abiertas**: páginas de convocatorias de CORFO, ANID, Sercotec, Start-Up Chile y ProChile. Scrapea la ficha y las bases (`firecrawl.py scrape URL.pdf --timeout 180`), guarda la fecha y actualiza `corfo_elegibilidad.csv`. Si un dato contradice `assets/fondos/instrumentos.json`, manda la base vigente: avisa al usuario y anótalo.

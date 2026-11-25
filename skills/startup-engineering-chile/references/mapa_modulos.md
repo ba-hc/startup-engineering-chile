@@ -44,8 +44,11 @@
 
 ## Otros recursos
 - Fórmulas y advertencias de métricas: `references/formulas_y_registros.md`.
-- Workshops (dinámicas de 90–120 min por tema): `references/operacion/02_workshops.md`.
+- Workshops (dinámicas de 90–120 min por tema): `references/operacion/workshops.csv` (taller, duración, entradas, dinámica, salida, criterio).
 - Plan de 90 días por semana y gate: `references/operacion/01_plan_90_dias.md`.
 - Casos y ejemplo integral (datos pedagógicos, no reales): `references/casos/`.
-- Fuentes con URL (268), libros, charlas, mentores: `references/biblioteca/*.csv` y `.md`.
+- Fuentes con URL (268), libros, charlas, mentores: `references/biblioteca/*.csv` (consulta con `expediente.py biblioteca "texto"`).
 - Cifras y afirmaciones verificables con su estado: `references/investigaciones/afirmaciones_y_cifras.csv`.
+- Flujos de trabajo paso a paso (retomar, ciclo de bloque, finanzas, fondos, red team, compuerta antisesgo, compras públicas, socios y equity, trampas chilenas, internacionalización, privacidad, cohorte): `references/flujos/`.
+- Qué script usar para cada cálculo o revisión: `references/herramientas.md`.
+- Parámetros chilenos verificados (UF/UTM de respaldo, tasas, tramos): `assets/parametros_cl.json`; reglas de instrumentos de fondos: `assets/fondos/instrumentos.json`.

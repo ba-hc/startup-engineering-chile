@@ -55,4 +55,4 @@ EntreComp evalúa competencias individuales; KTH IRL madurez de cliente, tecnolo
 | Escalamiento | PMF, NRR, capacidad, expansión, escenarios, gobernanza | crecer con margen o caja insuficientes |
 
 ## Lecturas de referencia
-FIA–Gearbox, MIT Disciplined Entrepreneurship, Strategyzer, KTH IRL, DOE ARL, First Round, Stage-Gate, Sercotec. Enlaces e identificadores en `../biblioteca/FUENTES.md`.
+FIA–Gearbox, MIT Disciplined Entrepreneurship, Strategyzer, KTH IRL, DOE ARL, First Round, Stage-Gate, Sercotec. Enlaces e identificadores en `../biblioteca/fuentes.csv`.
