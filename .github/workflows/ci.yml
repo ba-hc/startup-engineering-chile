@@ -14,10 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python: ["3.8", "3.12"]
-        exclude:
-          - os: windows-latest
-            python: "3.8"
+        python: ["3.12"]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -30,6 +27,17 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Expediente de ejemplo válido
         run: python skills/startup-engineering-chile/scripts/expediente.py validar --dir examples/expediente_demo
+
+  # Versión mínima soportada. Los runners actuales ya no traen Python 3.8,
+  # así que se prueba dentro de la imagen oficial de Docker.
+  python-minima:
+    runs-on: ubuntu-latest
+    container: python:3.8-slim
+    steps:
+      - uses: actions/checkout@v4
+      - run: python tools/check_refs.py
+      - run: python -m unittest discover -s tests -v
+      - run: python skills/startup-engineering-chile/scripts/expediente.py validar --dir examples/expediente_demo
 
   estilo:
     runs-on: ubuntu-latest
