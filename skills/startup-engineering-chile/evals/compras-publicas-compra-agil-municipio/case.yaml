@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: compras-publicas-compra-agil-municipio
+expected_outcome: |
+  Explica las vías de compra pública (Compra Ágil hasta 100 UTM, convenio marco, licitación, trato directo con causal) sin inventar montos, pide verificar en ChileCompra y la Ley 19.886, recomienda inscribirse en el Registro de Proveedores y convertir la prueba gratuita en un piloto con KPI y precio, y advierte que la prueba gratis no da preferencia en una licitación.

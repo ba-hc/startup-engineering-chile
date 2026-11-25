@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: activacion-negativa-entrevista-trabajo
+expected_outcome: |
+  No activa la skill: es preparación de una entrevista laboral, no el emprendimiento del usuario. Responde la pregunta directamente sin crear expediente.

@@ -1,6 +1,6 @@
 # Mapa de enrutamiento: necesidad → módulo → plantillas → registros → gate
 
-Úsalo para saltar directo a lo que el usuario necesita (modo *complementar*) o para decidir qué sigue tras el diagnóstico. Módulos en `references/manual/`, plantillas en `assets/plantillas/` (crea la copia con `expediente.py doc TPL-XXX`), registros en `expediente/registros/`.
+Úsalo para saltar directo a lo que el usuario necesita (modo *complementar*) o para decidir qué sigue tras el diagnóstico. Módulos en `references/manual/`, plantillas: las 25 troncales están completas en `assets/plantillas/`; las demás IDs del mapa se crean como esqueleto con su criterio (`expediente.py doc TPL-XXX` sirve para ambas). Umbrales por gate y ejemplos de decisiones: `expediente.py umbrales` y `references/ejemplos_y_umbrales.md`, registros en `expediente/registros/`.
 
 | # | Módulo (archivo en manual/) | Cuándo usarlo | Plantillas | Registros | Gate |
 |---|---|---|---|---|---|
@@ -49,6 +49,6 @@
 - Casos y ejemplo integral (datos pedagógicos, no reales): `references/casos/`.
 - Fuentes con URL (268), libros, charlas, mentores: `references/biblioteca/*.csv` (consulta con `expediente.py biblioteca "texto"`).
 - Cifras y afirmaciones verificables con su estado: `references/investigaciones/afirmaciones_y_cifras.csv`.
-- Flujos de trabajo paso a paso (retomar, ciclo de bloque, finanzas, fondos, red team, compuerta antisesgo, compras públicas, socios y equity, trampas chilenas, internacionalización, privacidad, cohorte): `references/flujos/`.
+- Flujos de trabajo paso a paso (retomar, ciclo de bloque, finanzas, fondos, red team, compuerta antisesgo, compras públicas, socios y equity, trampas chilenas, internacionalización, privacidad, cohorte, capital privado, sumarse a una startup, pivote y cierre, venta corporativa, caja y cobro, spin-off/EBCT, verticales reguladas, MVP con IA): `references/flujos/`.
 - Qué script usar para cada cálculo o revisión: `references/herramientas.md`.
 - Parámetros chilenos verificados (UF/UTM de respaldo, tasas, tramos): `assets/parametros_cl.json`; reglas de instrumentos de fondos: `assets/fondos/instrumentos.json`.

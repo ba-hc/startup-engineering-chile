@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: socios-reparto-dedicacion-desigual
+expected_outcome: |
+  Guía la conversación de reparto sin imponer una cifra: separa aporte de capital (que puede entrar como inversión o deuda convertible) de aporte de trabajo, propone vesting 4 años con cliff de 1 año vía pacto, simula con finanzas.py dilucion y lista temas del pacto y de PI. Aclara que es orientación y que el pacto lo redacta un abogado.

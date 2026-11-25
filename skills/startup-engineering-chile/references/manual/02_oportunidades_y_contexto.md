@@ -1,17 +1,17 @@
 # Módulo 02. Oportunidades y contexto
 
-**Propósito:** tomar decisiones y generar evidencia en este dominio.
+**Úsalo cuando:** Varias ideas, aún sin foco · **Gate:** G0 · **Plantillas:** TPL-001, 002, 003, 004, 008, 009, 010, 056 (troncales en `assets/plantillas/catalogo_plantillas.csv`)
 
 ## Métodos de referencia
 Market Opportunity Navigator; DEFI2; SIT; PESTEL; Effectuation.
 
 ## Procedimiento operativo
-1. Buscar problemas en presupuestos existentes, operaciones, regulación, compras públicas y desafíos corporativos. 
-2. Formular observaciones independientes de la solución. 
-3. Para cada tecnología listar aplicaciones por tipo de comprador, intensidad del problema y condiciones de compra. 
-4. Comparar potencial comercial frente a dificultad: acceso, competencia, integración, capital, regulación. 
-5. Elegir mercado principal y alternativas, documentar supuestos. 
-6. Establecer criterios de inversión limitados y experimento inicial. 
+1. Buscar problemas en presupuestos existentes, operaciones, regulación, compras públicas y desafíos corporativos.
+2. Formular observaciones independientes de la solución.
+3. Para cada tecnología listar aplicaciones por tipo de comprador, intensidad del problema y condiciones de compra.
+4. Comparar potencial comercial frente a dificultad: acceso, competencia, integración, capital, regulación.
+5. Elegir mercado principal y alternativas, documentar supuestos.
+6. Establecer criterios de inversión limitados y experimento inicial.
 
 ## Entregables
 Opportunity Assessment; radar de oportunidades; matriz de atractivo.
@@ -21,18 +21,6 @@ Hay una oportunidad priorizada frente a al menos una alternativa real, fuentes y
 
 ## Errores y alertas
 Elegir por moda; usar mercado global como prueba; puntuar sin evidencia; invertir en varias verticales simultáneamente.
-
-## Ejercicio aplicado
-Selecciona un emprendimiento real y redacta una hipótesis que corresponda a este módulo. Identifica qué información ya existe y su fuente; separa lo observado de lo inferido. Completa los entregables indicados con los registros de `../../assets/registros/ (o el expediente/registros/ del proyecto)`, define un responsable, una fecha, una decisión y un límite de recursos. Haz una revisión crítica con alguien del área pertinente. No inventes resultados para completar el ejercicio.
-
-## Revisión de calidad
-| Control | Estado | Evidencia | Acción |
-|---|---|---|---|
-| Alcance y unidad definidos | Pendiente | | |
-| Hipótesis explícitas y alternativas | Pendiente | | |
-| Fuente/fecha y limitaciones | Pendiente | | |
-| Coherencia con cliente, economía y etapa | Pendiente | | |
-| Decisión y siguiente prueba | Pendiente | | |
 
 ## Fuentes y materiales
 - [CORFO-025 · Manual FIA–Gearbox](https://rebrota.fia.cl/wp-content/uploads/2025/06/Guia_metodologica_formulacion_de_proyectos.pdf)

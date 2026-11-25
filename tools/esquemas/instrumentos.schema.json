@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reglas de instrumentos de fondos (assets/fondos/instrumentos.json)",
+  "type": "object",
+  "required": ["_verificado", "instrumentos"],
+  "properties": {
+    "_verificado": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "_nota": {"type": "string"},
+    "instrumentos": {
+      "type": "object",
+      "minProperties": 1,
+      "patternProperties": {
+        "^[a-z0-9_]+$": {
+          "type": "object",
+          "required": ["nombre", "tope_subsidio_CLP", "cofinanciamiento_max", "beneficiarios", "por_tipo", "verificar", "fuente"],
+          "additionalProperties": false,
+          "properties": {
+            "nombre": {"type": "string", "minLength": 3},
+            "tope_subsidio_CLP": {"type": "integer", "minimum": 0},
+            "cofinanciamiento_max": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+            "beneficiarios": {"type": "array", "items": {"enum": ["natural", "juridica"]}},
+            "por_tipo": {
+              "type": "object",
+              "additionalProperties": false,
+              "patternProperties": {
+                "^(natural|juridica)$": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "meses_inicio_max": {"type": "integer", "minimum": 0},
+                    "meses_inicio_min": {"type": "integer", "minimum": 0},
+                    "sin_ventas": {"type": "boolean"},
+                    "ventas_12m_max_CLP": {"type": "integer", "minimum": 0},
+                    "ventas_12m_min_CLP": {"type": "integer", "minimum": 0},
+                    "ventas_solucion_min_CLP": {"type": "integer", "minimum": 0}
+                  }
+                }
+              }
+            },
+            "verificar": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+            "fuente": {"type": "string", "pattern": "^https://"}
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

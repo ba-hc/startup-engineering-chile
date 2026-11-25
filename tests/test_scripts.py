@@ -153,8 +153,11 @@ class TestCatalogos(unittest.TestCase):
         h, rows = ex.leer(os.path.join(ex.PLANTILLAS, "catalogo_plantillas.csv"))
         for r in rows:
             d = dict(zip(h, r))
-            self.assertTrue(os.path.exists(os.path.join(ex.PLANTILLAS, d["ruta"])), d["ruta"])
-        self.assertGreaterEqual(sum(1 for r in rows if dict(zip(h, r))["troncal"] == "si"), 20)
+            if d["troncal"] == "si":
+                self.assertTrue(d["ruta"] and os.path.exists(os.path.join(ex.PLANTILLAS, d["ruta"])), d["id"])
+            else:
+                self.assertEqual(d["ruta"], "", d["id"])
+        self.assertEqual(sum(1 for r in rows if dict(zip(h, r))["troncal"] == "si"), 25)
         h, rows = ex.leer(os.path.join(ex.REFS, "manual", "indice_modulos.csv"))
         for r in rows:
             self.assertTrue(os.path.exists(os.path.join(ex.REFS, "manual", dict(zip(h, r))["archivo"])))
@@ -264,6 +267,198 @@ class TestModeloXlsx(unittest.TestCase):
         code, out = correr(finanzas, "escenarios", "--modelo", self.x)
         self.assertEqual(code, 0, out)
         self.assertIn("pesimista", out)
+
+
+class TestFondosRendicionCoherencia(ConExpediente):
+    def test_rendiciones_detecta_fecha_documento_y_sobrepago(self):
+        correr(ex, "add", "rendiciones", "actividad=Dev", "resultado=MVP", "presupuesto_CLP=1000000", "comprometido_CLP=1000000",
+               "pagado_CLP=1200000", "fecha=2027-08-01", "--dir", self.dir)
+        correr(ex, "add", "rendiciones", "actividad=Piloto", "resultado=Informe", "presupuesto_CLP=500000", "pagado_CLP=500000",
+               "documento=F-1", "medio_verificacion=transferencia", "fecha=2027-03-01", "--dir", self.dir)
+        correr(ex, "add", "rendiciones", "actividad=Ventas", "resultado=OC", "presupuesto_CLP=500000", "pagado_CLP=100000",
+               "documento=f-1", "medio_verificacion=transferencia", "fecha=2027-04-01", "--dir", self.dir)
+        code, out = correr(fondos_lint, "rendiciones", "--dir", self.dir, "--inicio", "2027-02-01", "--fin", "2027-06-30")
+        self.assertEqual(code, 1)
+        self.assertIn("fuera del período", out)
+        self.assertIn("pagado $1.200.000 > comprometido", out)
+        self.assertIn("pagado sin documento", out)
+        self.assertIn("repetido", out)
+
+    def test_rendiciones_ok(self):
+        correr(ex, "add", "rendiciones", "actividad=Dev", "resultado=MVP", "presupuesto_CLP=1000000", "pagado_CLP=0",
+               "fecha=2027-03-01", "--dir", self.dir)
+        code, out = correr(fondos_lint, "rendiciones", "--dir", self.dir, "--inicio", "2027-02-01", "--fin", "2027-06-30")
+        self.assertEqual(code, 0, out)
+        self.assertIn("OK", out)
+
+    def test_coherencia_marco_y_presupuesto(self):
+        correr(ex, "add", "rendiciones", "actividad=Desarrollo del módulo de reportes", "resultado=MVP", "presupuesto_CLP=1000000",
+               "--dir", self.dir)
+        correr(ex, "add", "rendiciones", "actividad=Compra de camioneta", "resultado=Logística", "presupuesto_CLP=9000000",
+               "--dir", self.dir)
+        marco = os.path.join(self.dir, "marco.md")
+        with open(marco, "w", encoding="utf-8") as fh:
+            fh.write("| Componente | Actividad | Indicador |\n|---|---|---|\n| C1 | Desarrollo del módulo de reportes | MVP |\n"
+                     "| C2 | Prueba de usabilidad con 5 usuarios | Informe |\n")
+        code, out = correr(fondos_lint, "coherencia", "--dir", self.dir, "--marco", marco)
+        self.assertEqual(code, 1)
+        self.assertIn("actividad sin presupuesto: 'Prueba de usabilidad", out)
+        self.assertIn("no corresponde a una actividad", out)
+
+
+class TestContinuidad(ConExpediente):
+    def test_empaquetar_y_restaurar(self):
+        correr(ex, "add", "hipotesis", "enunciado_refutable=Las clínicas pagan", "--dir", self.dir)
+        salida = os.path.join(self.dir, "zips")
+        code, out = correr(ex, "empaquetar", "--dir", self.dir, "--salida", salida)
+        self.assertEqual(code, 0, out)
+        z = [f for f in os.listdir(salida) if f.endswith(".zip")][0]
+        nombres = zipfile.ZipFile(os.path.join(salida, z)).namelist()
+        self.assertIn("expediente/00_estado.md", nombres)
+        self.assertIn("LEEME.txt", nombres)
+        otro = tempfile.mkdtemp()
+        try:
+            code, out = correr(ex, "restaurar", os.path.join(salida, z), "--dir", otro)
+            self.assertEqual(code, 0, out)
+            self.assertTrue(os.path.exists(os.path.join(otro, "expediente", "registros", "hipotesis.csv")))
+            code, out = correr(ex, "restaurar", os.path.join(salida, z), "--dir", otro)
+            self.assertEqual(code, 1)
+            self.assertIn("--forzar", out)
+            code, out = correr(ex, "restaurar", os.path.join(salida, z), "--dir", otro, "--forzar")
+            self.assertEqual(code, 0, out)
+            self.assertTrue(any(d.startswith("expediente.bak-") for d in os.listdir(otro)))
+        finally:
+            shutil.rmtree(otro, ignore_errors=True)
+
+    def test_restaurar_rechaza_rutas_inseguras(self):
+        malo = os.path.join(self.dir, "malo.zip")
+        with zipfile.ZipFile(malo, "w") as z:
+            z.writestr("expediente/../../fuera.txt", "x")
+        otro = tempfile.mkdtemp()
+        try:
+            code, out = correr(ex, "restaurar", malo, "--dir", otro)
+            self.assertEqual(code, 1)
+            self.assertIn("insegura", out)
+        finally:
+            shutil.rmtree(otro, ignore_errors=True)
+
+    def test_resumen_es_compacto(self):
+        code, out = correr(ex, "resumen", "--dir", self.dir)
+        self.assertEqual(code, 0, out)
+        self.assertIn("Resumen para retomar", out)
+        self.assertLess(len(out), 2700)
+
+    def test_umbrales_por_track(self):
+        code, out = correr(ex, "umbrales", "--gate", "G4", "--track", "hardware", "--dir", self.dir)
+        self.assertEqual(code, 0, out)
+        self.assertIn("BOM", out)
+        code, out = correr(ex, "umbrales", "--gate", "G4", "--track", "saas_b2b", "--dir", self.dir)
+        self.assertIn("LTV/CAC", out)
+        self.assertNotIn("BOM", out)
+
+    def test_doc_no_troncal_genera_esqueleto(self):
+        code, out = correr(ex, "doc", "TPL-002", "--dir", self.dir)
+        self.assertEqual(code, 0, out)
+        self.assertIn("esqueleto", out)
+        docs = os.listdir(os.path.join(self.dir, "expediente", "documentos"))
+        self.assertTrue(any(d.startswith("TPL-002_") for d in docs))
+
+    def test_deck_marca_faltantes(self):
+        code, out = correr(ex, "informe", "deck", "--dir", self.dir)
+        self.assertEqual(code, 0, out)
+        deck = [f for f in os.listdir(os.path.join(self.dir, "expediente", "entregables")) if f.startswith("deck_")][0]
+        texto = open(os.path.join(self.dir, "expediente", "entregables", deck), encoding="utf-8").read()
+        self.assertIn("marp: true", texto)
+        self.assertIn("[FALTA EVIDENCIA]", texto)
+
+    def test_buscar_rankea_archivos(self):
+        code, out = correr(ex, "buscar", "vesting cliff socios", "--max", "3")
+        self.assertEqual(code, 0, out)
+        self.assertIn("socios_equity.md", out.splitlines()[0])
+
+
+class TestAuditar(ConExpediente):
+    def test_detecta_go_bajo_umbral_y_entrevistas_complacientes(self):
+        import auditar
+        correr(ex, "add", "hipotesis", "enunciado_refutable=Pagan 100 mil", "--dir", self.dir)
+        correr(ex, "add", "experimentos", "hypothesis_id=H-001", "metrica=preventas", "umbral=30%", "resultado=12%",
+               "decision=Go", "--dir", self.dir, "--forzar")
+        for i in range(4):
+            correr(ex, "add", "entrevistas", "segmento=clínicas", f"hecho_o_cita_breve=Me interesa mucho, lo compraría {i}",
+                   "situacion=turnos", "--dir", self.dir, "--forzar")
+        hs = auditar.auditar(self.dir)
+        textos = " ".join(h[2] for h in hs)
+        self.assertIn("bajo el umbral", textos)
+        self.assertIn("ninguna un compromiso", textos)
+
+    def test_expediente_demo_sin_alertas(self):
+        import auditar
+        hs = auditar.auditar(os.path.join(RAIZ, "examples", "expediente_demo"))
+        self.assertFalse([h for h in hs if h[0] == "ALERTA"], hs)
+
+
+class TestFinanzasCapital(unittest.TestCase):
+    def test_safe_post_money_con_cap(self):
+        _, out = correr(finanzas, "dilucion", "--fundadores", "A:50,B:50", "--safe", "100:1000")
+        self.assertIn("10,0%", out)
+
+    def test_safe_con_descuento_en_ronda(self):
+        code, out = correr(finanzas, "dilucion", "--fundadores", "A:100", "--safe", "100:0:20", "--pre", "1000", "--inversion", "250")
+        self.assertEqual(code, 0, out)
+        self.assertIn("aplica: descuento 20%", out)
+        self.assertIn("20,0%", out)  # el inversionista de la ronda: 250 / 1250 post
+
+    def test_salida_con_preferencia_y_opciones(self):
+        pago, precio = finanzas.reparto_salida(2e9, [("F", 8e6)], [("Seed", 1e9, 2e6)], [("Yo", 1e5, 200)])
+        self.assertAlmostEqual(pago["Seed"], 1e9)
+        self.assertAlmostEqual(precio, 125)
+        self.assertEqual(pago["Yo"], 0)
+        pago, precio = finanzas.reparto_salida(1e10, [("F", 8e6)], [("Seed", 1e9, 2e6)], [("Yo", 1e5, 200)])
+        self.assertGreater(pago["Seed"], 1e9)  # convierte
+        self.assertAlmostEqual(sum(pago.values()) + 1e5 * 200, 1e10 + 1e5 * 200, delta=1)
+
+
+class TestIndicadores(unittest.TestCase):
+    def test_respaldo_futuro_no_es_desactualizado(self):
+        import datetime as dt
+        import indicadores_cl
+        hoy = dt.date(2026, 11, 25)
+        self.assertIn("ya publicado", indicadores_cl.estado_respaldo("uf", "2026-11-30", hoy))
+        self.assertIn("vigente este mes", indicadores_cl.estado_respaldo("utm", "2026-11-01", hoy))
+        self.assertIn("desactualizado", indicadores_cl.estado_respaldo("uf", "2026-06-01", hoy))
+
+
+class TestEvalsYMedicion(unittest.TestCase):
+    def test_medir_respuesta(self):
+        sys.path.insert(0, os.path.join(RAIZ, "tools"))
+        import medir_respuesta as mr
+        texto = "\n".join(["Hola. Tu idea es buena.", "", "¿Quién paga? ¿Cuánto??", "",
+                           "> Hola, ¿tienes 15 minutos?", "", "```", "x = '¿y?'", "```", ""])
+        self.assertEqual(mr.medir(texto), (8, 2))
+        with tempfile.TemporaryDirectory() as d:
+            f = os.path.join(d, "r.md")
+            with open(f, "w", encoding="utf-8") as fh:
+                fh.write(texto)
+            self.assertEqual(mr.main([f, "--max-preguntas", "1"]), 1)
+            self.assertEqual(mr.main([f, "--caso", "retomar-sin-campo"]), 0)
+
+    def test_casos_de_eval_completos(self):
+        evals = os.path.join(SKILL, "evals")
+        with open(os.path.join(RAIZ, "tools", "limites_respuesta.json"), encoding="utf-8") as fh:
+            lim = json.load(fh)
+        for caso in sorted(os.listdir(evals)):
+            d = os.path.join(evals, caso)
+            if not os.path.isdir(d):
+                continue
+            with self.subTest(caso=caso):
+                self.assertTrue(os.path.isfile(os.path.join(d, "prompt.md")))
+                with open(os.path.join(d, "case.yaml"), encoding="utf-8") as fh:
+                    y = fh.read()
+                self.assertIn(f"name: {caso}", y)
+                self.assertTrue(os.listdir(os.path.join(d, "graders")))
+                if "scaffold_script" in y:
+                    self.assertTrue(os.path.isdir(os.path.join(d, "files")))
+                self.assertIn(caso, lim, "agrega el caso a tools/limites_respuesta.json")
 
 
 class TestCLI(unittest.TestCase):

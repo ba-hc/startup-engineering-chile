@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: antisesgo-go-con-resultado-bajo-umbral
+expected_outcome: |
+  Aplica la compuerta antisesgo: el resultado (3/12) no cumple el criterio fijado antes (6/12); "dijeron que pagarían" e "idea buenísima" son intención (nivel 1), no compromiso. No da Go; propone Recycle o Hold con un umbral nuevo fijado antes, o una prueba de compromiso real (preventa, depósito, carta de intención), y no mueve el umbral a posteriori.

@@ -1,33 +1,48 @@
-# TPL-087 — Unit Economics
+# TPL-087 — Economía unitaria (Unit Economics)
 
-**Proyecto:** [ ] · **Versión:** [ ] · **Fecha:** [ ] · **Responsable:** [ ]
-
-**Uso:** Usa costos atribuibles, evita LTV sin retención estable.
+**Para qué:** saber si cada cliente deja más de lo que cuesta conseguirlo y servirlo, con CAC cargado completo y churn observado. · **Gate:** G4 / G8 · **Alimenta:** `indicadores.csv`, `cohortes.csv`, `decisiones.csv`
 
 ## Completar
-| Campo | Contenido | ID evidencia / supuesto / fuente |
+**Unidad de cobro:** [cuenta, sede, camión, usuario activo] · **Moneda:** CLP neto, sin IVA · **Fecha de corte:** [ ]
+*Fija los umbrales antes de calcular y regístralos en `decisiones.csv`:* payback ≤ [ ] meses · margen ≥ [ ]% · LTV/CAC ≥ [ ]
+
+| Componente mensual por unidad | Cómo se calcula | CLP | ID o "supuesto" |
+|---|---|---|---|
+| Ingreso neto | [precio − descuento promedio; sin IVA ni setup] | | |
+| Costos variables directos | [infra, datos, hardware amortizado, soporte (h × costo hora), comisiones] | | |
+
+| CAC del período [trimestre] | CLP | ID o "supuesto" |
 |---|---|---|
-| Unidad |  |  |
-| ingreso neto |  |  |
-| infraestructura |  |  |
-| soporte |  |  |
-| costo directo |  |  |
-| contribución |  |  |
-| CAC |  |  |
-| churn |  |  |
-| LTV |  |  |
-| payback |  |  |
-| fuente |  |  |
+| Publicidad pagada | | |
+| Ferias, viajes, demos, material | | |
+| Horas comerciales del fundador [h × valor hora] | | |
+| Comisiones, vendedores, CRM | | |
+| **Total ÷ clientes nuevos del mismo período** | | |
+
+**Churn mensual observado:** [bajas ÷ clientes-mes, desde `cohortes.csv`; con < 6 meses o < 20 clientes, usa un rango y dilo]
+*No calcules a mano:* `python scripts/finanzas.py unit --precio <ingreso> --costo-variable <CV> --cac <CAC> --churn <tasa>` y pega su tabla.
+
+## Ejemplo bueno (ficticio)
+FríoRuta: monitoreo de temperatura para distribuidoras de alimentos refrigerados; unidad = cuenta con flota promedio de 5 camiones. Umbrales (DEC-007, 2026-09-30): payback ≤ 12 · margen ≥ 60% · LTV/CAC ≥ 3.
+- Ingreso neto $350.000/mes (+IVA = $416.500), sin descuentos (EV-021, contratos).
+- Costos variables $105.000: datos M2M $25.000 · sensores en comodato $37.500 (5 × $180.000 / 24 meses) · nube $15.000 · soporte 1,5 h × $18.000 = $27.000 (EV-024, tickets).
+- CAC T3: ads $450.000 + feria $1.100.000 + fundador 80 h × $20.000 (valor hora: supuesto) + demos $350.000 + comisiones $360.000 = $3.860.000 ÷ 3 nuevos = $1.287.000.
+- Churn 3,6%: 4 bajas en 110 clientes-mes, cohortes ene–sep (`cohortes.csv`, EV-030).
+- `finanzas.py unit`: contribución $245.000 · margen 70,0% · payback 5,3 meses · vida 27,8 meses · LTV $6.805.556 · LTV/CAC 5,29 → cumple los tres umbrales.
+- Límite: solo 3 altas por trimestre; si el churn sube a 5% la vida (20 meses) no alcanza a amortizar los sensores a 24 meses.
+
+## Ejemplo malo y por qué falla
+> Precio $350.000. CAC $150.000 (Google Ads ÷ 3 clientes). Churn 1% ("en B2B nadie se va"). LTV = $350.000 × 100 meses = $35.000.000. LTV/CAC = 233.
+- CAC solo de ads: omite feria, demos, comisiones y 80 h del fundador; el cargado es 8,6 veces mayor.
+- Churn supuesto sin cohortes (el observado es 3,6%); el script además topa la vida en 60 meses.
+- LTV sobre ingreso y no sobre contribución: ignora $105.000/mes de costos variables.
+- Sin umbral previo: cualquier resultado "se ve bien".
 
 ## Criterio de aceptación
-Economía por unidad defendible.
+- Ingreso neto sin IVA ni setup y unidad de cobro declarada.
+- El CAC suma horas del fundador y todo el gasto comercial del mismo período que las altas.
+- El churn sale de `cohortes.csv` o se presenta como rango explícito.
+- La tabla viene de `finanzas.py unit` y los umbrales están en `decisiones.csv` con fecha anterior al cálculo.
 
-## Decisión y control
-- Hipótesis más incierta: [ ]
-- Alternativa considerada: [ ]
-- Evidencia faltante / limitación: [ ]
-- Próxima acción y responsable: [ ]
-- Fecha y criterio de éxito: [ ]
-- Decisión: Go / Hold / Recycle / Kill / no aplica
-
-Formato de trabajo propio, inspirado en metodologías identificadas en el manual. Si corresponde utilizar el canvas visual original, consulta los enlaces de `references/biblioteca/fuentes.csv` de la skill. No atribuir este formato a un tercero ni presentarlo como documento obligatorio de CORFO.
+## Decisión
+Criterio fijado antes: [ ] · Resultado: [ ] · Decisión: Go / Hold / Recycle / Kill · Próxima acción, responsable y fecha: [ ]

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: cohorte-incubadora-dos-equipos
+expected_outcome: |
+  Usa cohorte.py --raiz (o lee ambos expedientes) y entrega un resumen por equipo con gate, evidencia y alertas. Señala que equipo_b no tiene trabajo de campo (0 entrevistas) y recomienda priorizarlo con una acción concreta, sin inventar datos que no estén en los expedientes.
+context:
+  scaffold_script: place-files.sh

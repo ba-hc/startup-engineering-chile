@@ -240,7 +240,15 @@ def parecido(a_, b_):
 
 
 def cmd_coherencia(a):
-    txt = open(a.marco, encoding="utf-8-sig").read()
+    marco = a.marco
+    if not os.path.exists(marco) and getattr(a, "dir", None):
+        for cand in (os.path.join(a.dir, marco), os.path.join(a.dir, "expediente", marco)):
+            if os.path.exists(cand):
+                marco = cand
+                break
+    if not os.path.exists(marco):
+        sys.exit(f"No encuentro el marco lógico {a.marco} (prueba con la ruta desde la carpeta del proyecto).")
+    txt = open(marco, encoding="utf-8-sig").read()
     actividades = []
     for tabla in re.findall(r"((?:^\|.*\|\s*\n)+)", txt, re.M):
         lineas = [l for l in tabla.strip().splitlines() if not re.match(r"^\|\s*-", l)]

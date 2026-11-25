@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Parámetros legales chilenos (assets/parametros_cl.json)",
+  "type": "object",
+  "required": ["_verificado", "respaldo_indicadores"],
+  "properties": {
+    "_verificado": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "_nota": {"type": "string"},
+    "respaldo_indicadores": {
+      "type": "object",
+      "required": ["uf", "utm"],
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "required": ["valor", "fecha"],
+          "properties": {
+            "valor": {"type": "number", "minimum": 0},
+            "fecha": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+          }
+        }
+      }
+    }
+  },
+  "patternProperties": {
+    "^(?!respaldo_indicadores$)[a-z][a-z0-9_]*$": {
+      "type": "object",
+      "required": ["valor", "fuente"],
+      "properties": {
+        "valor": {"type": ["number", "array", "null"]},
+        "fuente": {"type": "string", "minLength": 3},
+        "nota": {"type": "string"},
+        "vigencia": {"type": "string"}
+      }
+    }
+  },
+  "additionalProperties": false
+}

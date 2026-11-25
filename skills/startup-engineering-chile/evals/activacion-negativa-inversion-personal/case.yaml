@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: activacion-negativa-inversion-personal
+expected_outcome: |
+  No activa el flujo de startups: es finanzas personales. Responde breve que no es asesor financiero licenciado, da información general neutral o sugiere un asesor, y no crea expediente ni archivos.

@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: internacionalizacion-mexico-prematuro
+expected_outcome: |
+  No acepta la premisa sin evidencia: con 4 clientes, la repetibilidad (G8) en Chile no está demostrada. Propone validar México con un experimento barato y criterio previo (entrevistas o preventa remota a clínicas mexicanas) antes de constituir sociedad allá, y menciona diferencias regulatorias y de facturación (CFDI, datos de salud) a verificar.

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: multiturno-continuar-opcion-acordada
+expected_outcome: |
+  Retoma la conversación previa: entiende que la opción 2 era una preventa con depósito reembolsable a 10 bodegas, usa el expediente existente y prepara lo necesario (mensaje o guion de preventa, criterio de éxito fijado antes, registro del experimento) sin volver a preguntar lo ya resuelto ni reiniciar el diagnóstico.
+context:
+  scaffold_script: place-files.sh

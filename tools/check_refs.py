@@ -43,6 +43,10 @@ def main():
                               ("references/manual/indice_modulos.csv", "archivo", "references/manual")):
         with open(os.path.join(SKILL, cat), encoding="utf-8-sig") as fh:
             for r in csv.DictReader(fh):
+                if not r[col]:
+                    if r.get("troncal") == "si":
+                        problemas.append(f"{cat}: {r['id']} es troncal y no tiene archivo")
+                    continue
                 if not os.path.exists(os.path.join(SKILL, carpeta, r[col])):
                     problemas.append(f"{cat}: {r[col]} no existe")
     plugin = json.load(open(os.path.join(RAIZ, ".claude-plugin", "plugin.json"), encoding="utf-8"))

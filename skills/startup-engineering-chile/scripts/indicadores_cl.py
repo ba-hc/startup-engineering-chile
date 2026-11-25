@@ -10,7 +10,7 @@
 
 Fuente: API pública de mindicador.cl (datos del Banco Central y SII). Orden de uso:
 1) consulta en línea (si hay internet) y guarda caché; 2) caché local con su fecha;
-3) valores de respaldo de assets/parametros_cl.json (con fecha, desactualizados).
+3) valores de respaldo de assets/parametros_cl.json (con su fecha y si siguen vigentes).
 La salida siempre dice de dónde salió cada valor y su fecha: cítala en presupuestos y postulaciones.
 Caché: $SEC_CACHE o ~/.cache/startup-engineering-chile/indicadores.json
 """
@@ -92,8 +92,28 @@ def obtener(nombres, red=True):
         except (OSError, ValueError):
             r = None
         if r:
-            res[n] = {"valor": float(r["valor"]), "fecha": r["fecha"], "origen": "respaldo (desactualizado)"}
+            res[n] = {"valor": float(r["valor"]), "fecha": r["fecha"], "origen": estado_respaldo(n, r["fecha"])}
     return res
+
+
+def estado_respaldo(nombre, fecha, hoy=None):
+    """Describe qué tan vigente es un valor de respaldo. La UF se publica por adelantado (hasta el día 9 del mes
+    siguiente), así que una fecha futura cercana no está desactualizada; la UTM es mensual."""
+    hoy = hoy or dt.date.today()
+    try:
+        f = dt.date.fromisoformat(str(fecha)[:10])
+    except ValueError:
+        return "respaldo (fecha ilegible)"
+    if nombre == "utm" and (f.year, f.month) == (hoy.year, hoy.month):
+        return "respaldo (vigente este mes)"
+    if f == hoy:
+        return "respaldo (vigente hoy)"
+    if hoy < f <= hoy + dt.timedelta(days=45):
+        return f"respaldo (valor del {f.isoformat()}, ya publicado; difiere poco del de hoy)"
+    dias = (hoy - f).days
+    if dias < 0:
+        return "respaldo (fecha futura lejana: revisa parametros_cl.json)"
+    return f"respaldo (desactualizado: {dias} días)"
 
 
 def valor(nombre, red=True):

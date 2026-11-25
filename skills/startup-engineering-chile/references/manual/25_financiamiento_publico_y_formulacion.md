@@ -1,17 +1,17 @@
 # Módulo 25. Financiamiento público y formulación
 
-**Propósito:** tomar decisiones y generar evidencia en este dominio.
+**Úsalo cuando:** Postular a CORFO/ANID/Start-Up Chile · **Gate:** CORFO · **Plantillas:** TPL-103–108 (troncales en `assets/plantillas/catalogo_plantillas.csv`)
 
 ## Métodos de referencia
 CORFO; ANID; FIA–Gearbox; marco lógico; Five Case Model.
 
 ## Procedimiento operativo
-1. Determinar etapa, ventas, constitución, territorio, innovación e incompatibilidades. 
-2. Versionar bases, focalización, formulario, FAQ, convenio y manual rendición. 
-3. Separar negocio de intervención financiable; justificar adicionalidad, objetivos, actividades, recursos, indicadores, medios de verificación y riesgos. 
-4. Probar coherencia con caja y aportes. 
-5. Red team por criterio y admisibilidad. 
-6. No inventar cartas ni comprometer resultados desproporcionados. 
+1. Determinar etapa, ventas, constitución, territorio, innovación e incompatibilidades.
+2. Versionar bases, focalización, formulario, FAQ, convenio y manual rendición.
+3. Separar negocio de intervención financiable; justificar adicionalidad, objetivos, actividades, recursos, indicadores, medios de verificación y riesgos.
+4. Probar coherencia con caja y aportes.
+5. Red team por criterio y admisibilidad.
+6. No inventar cartas ni comprometer resultados desproporcionados.
 
 ## Entregables
 Funding Dossier; bases; matriz elegibilidad; objetivos/hitos.
@@ -21,18 +21,6 @@ Cada requisito tiene estado y evidencia, presupuesto reconciliado y cronograma; 
 
 ## Errores y alertas
 Postular a fondo incorrecto; confundir carta de intención con factura; no leer focalización; asumir subsidio sin aporte o aprobación de gastos.
-
-## Ejercicio aplicado
-Selecciona un emprendimiento real y redacta una hipótesis que corresponda a este módulo. Identifica qué información ya existe y su fuente; separa lo observado de lo inferido. Completa los entregables indicados con los registros de `../../assets/registros/ (o el expediente/registros/ del proyecto)`, define un responsable, una fecha, una decisión y un límite de recursos. Haz una revisión crítica con alguien del área pertinente. No inventes resultados para completar el ejercicio.
-
-## Revisión de calidad
-| Control | Estado | Evidencia | Acción |
-|---|---|---|---|
-| Alcance y unidad definidos | Pendiente | | |
-| Hipótesis explícitas y alternativas | Pendiente | | |
-| Fuente/fecha y limitaciones | Pendiente | | |
-| Coherencia con cliente, economía y etapa | Pendiente | | |
-| Decisión y siguiente prueba | Pendiente | | |
 
 ## Fuentes y materiales
 - [CORFO-001 · Semilla Inicia — ficha y convocatorias](https://www.corfo.gob.cl/sites/cpp/programa/semilla-inicia/)

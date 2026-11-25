@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: activacion-negativa-programar-producto
+expected_outcome: |
+  No activa la skill: es programar el producto. Responde con la solución técnica (normalizar la fecha a UTC o con zona horaria) sin crear expediente ni desviar a validación.

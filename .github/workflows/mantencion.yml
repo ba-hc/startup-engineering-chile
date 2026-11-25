@@ -1,0 +1,45 @@
+name: Mantención de fuentes
+
+# Cada lunes revisa que los enlaces de la biblioteca respondan y que los datos fechados
+# (parámetros, reglas de fondos, umbrales, flujos) no superen su umbral de antigüedad.
+# Si encuentra algo, abre o actualiza un issue con la etiqueta "mantencion".
+on:
+  schedule:
+    - cron: "17 11 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Vigencia de los datos
+        id: vigencia
+        continue-on-error: true
+        run: python tools/revisar_vigencia.py --salida vigencia.md
+      - name: Enlaces de la biblioteca
+        id: enlaces
+        continue-on-error: true
+        run: python tools/revisar_enlaces.py --salida enlaces.md
+      - name: Informe
+        if: always()
+        run: cat vigencia.md enlaces.md > informe.md && cat informe.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Abrir o actualizar issue
+        if: steps.vigencia.outcome == 'failure' || steps.enlaces.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create mantencion --color FBCA04 --description "Fuentes o datos por revisar" 2>/dev/null || true
+          num=$(gh issue list --label mantencion --state open --json number --jq '.[0].number')
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body-file informe.md
+          else
+            gh issue create --title "Mantención: fuentes o datos por revisar" --label mantencion --body-file informe.md
+          fi

@@ -9,8 +9,10 @@
   finanzas.py equilibrio   --costos-fijos CF --precio P --costo-variable CV
   finanzas.py runway       --caja C --gasto G [--ingreso I] [--crecimiento-ingreso 0.05]
   finanzas.py escenarios   --modelo modelo_financiero.xlsx [--meses 24]   # o con flags (ver --help)
-  finanzas.py dilucion     --fundadores "Ana:60,Beto:40" [--pool 0] [--safe MONTO:CAP_POST ...]
+  finanzas.py dilucion     --fundadores "Ana:60,Beto:40" [--pool 0] [--safe MONTO:CAP_POST[:DESC%] ...]
                            [--pre VALOR_PRE --inversion MONTO --pool-post 10]
+  finanzas.py salida       --comunes "Ana:6000000,Beto:4000000" [--preferentes "Seed:MONTO:ACCIONES"]
+                           [--opciones "Yo:CANTIDAD:PRECIO_EJERCICIO"] --valores 1e9,5e9 [--multiplo 1]
   finanzas.py costo-empleado (--bruto B | --liquido L) [--contrato indefinido|plazo-fijo]
                            [--mutual-adicional 0] [--gratificacion] [--provision-indemnizacion]
                            [--uf V] [--utm V]
@@ -84,7 +86,7 @@ def indicador(nombre, explicito):
         pass
     r = params().get("respaldo_indicadores", {}).get(nombre)
     if r:
-        return float(r["valor"]), f"respaldo {r['fecha']} (desactualizado: pasa --{nombre})"
+        return float(r["valor"]), f"respaldo {r['fecha']} (pasa --{nombre} con el valor del día si necesitas precisión)"
     sys.exit(f"Falta el valor de {nombre.upper()}: pásalo con --{nombre} o ejecuta indicadores_cl.py obtener")
 
 
@@ -224,6 +226,16 @@ def parse_pares(texto):
     return out
 
 
+def parse_safe(s):
+    partes = [x.strip().rstrip("%") for x in s.split(":")]
+    monto = float(partes[0])
+    cap = float(partes[1]) if len(partes) > 1 and partes[1] not in ("", "0") else None
+    desc = float(partes[2]) / 100 if len(partes) > 2 and partes[2] else 0.0
+    if desc >= 1:
+        sys.exit("El descuento va en porcentaje (p. ej. 20), no como fracción mayor a 1.")
+    return monto, cap, desc
+
+
 def cmd_dilucion(a):
     fundadores = parse_pares(a.fundadores)
     total_f = sum(v for _, v in fundadores)
@@ -232,41 +244,123 @@ def cmd_dilucion(a):
     if a.pool:
         acciones["Pool de opciones"] = BASE * a.pool / 100
     T0 = sum(acciones.values())
-    safes = []
-    for s in a.safe or []:
-        monto, cap = (float(x) for x in s.split(":"))
-        safes.append((monto, cap))
-    s_total = sum(m / c for m, c in safes)
-    if s_total >= 1:
-        sys.exit("Los SAFE suman ≥ 100% de propiedad: revisa montos y caps.")
-    if safes:
+    P0 = acciones.get("Pool de opciones", 0.0)
+    safes = [parse_safe(s) for s in a.safe or []]
+    tabla = [("Antes de convertir instrumentos", dict(acciones))]
+    ronda = bool(a.pre and a.inversion)
+    if safes and not ronda:
+        if any(c is None for _, c, _ in safes):
+            sys.exit("Un SAFE sin cap solo convierte en una ronda con precio: agrega --pre y --inversion.")
+        s_total = sum(m / c for m, c, _ in safes)
+        if s_total >= 1:
+            sys.exit("Los SAFE suman ≥ 100% de propiedad: revisa montos y caps.")
         X = s_total * T0 / (1 - s_total)
-        for i, (m, c) in enumerate(safes, 1):
+        for i, (m, c, _) in enumerate(safes, 1):
             acciones[f"SAFE {i} ({clp(m)} cap {clp(c)})"] = X * (m / c) / s_total
-    tabla = [("Antes de la ronda", dict(acciones))]
-    if a.pre and a.inversion:
-        post = a.pre + a.inversion
-        inv_frac = a.inversion / post
+        tabla.append(("Con los SAFE convertidos al cap (post-money)", dict(acciones)))
+    if ronda:
         p = a.pool_post / 100
-        T1 = sum(acciones.values())
-        P0 = acciones.get("Pool de opciones", 0.0)
-        N = T1 / (1 - inv_frac)
-        if p and P0 / N < p:
-            N = (T1 - P0) / (1 - p - inv_frac)
-            acciones["Pool de opciones"] = N * p
-        acciones["Inversionista ronda"] = N * inv_frac
+        S, Padd, detalle = 0.0, 0.0, []
+        for _ in range(500):
+            cap_base = T0 + S                       # capitalización del SAFE post-money (sin el aumento de pool de la ronda)
+            precio = a.pre / (T0 + S + Padd)        # el pre-money incluye SAFE convertidos y aumento de pool
+            nuevos, detalle = [], []
+            for m, cap, d in safes:
+                opciones = {"precio de la ronda": precio}
+                if cap:
+                    opciones["cap"] = cap / cap_base
+                if d:
+                    opciones[f"descuento {d * 100:.0f}%"] = precio * (1 - d)
+                via = min(opciones, key=opciones.get)
+                nuevos.append(m / opciones[via])
+                detalle.append((m, cap, d, opciones[via], via))
+            S_n = sum(nuevos)
+            N = T0 + S_n + Padd + a.inversion / precio
+            Padd_n = max(0.0, p * N - P0) if p else 0.0
+            if abs(S_n - S) < 1e-6 and abs(Padd_n - Padd) < 1e-6:
+                break
+            S, Padd = S_n, Padd_n
+        else:
+            sys.exit("El cálculo no converge: revisa caps, descuentos y valorización.")
+        for i, (m, cap, d, pr, via) in enumerate(detalle, 1):
+            etiqueta = f"SAFE {i} ({clp(m)}" + (f", cap {clp(cap)}" if cap else "") + (f", desc. {d * 100:.0f}%" if d else "") + ")"
+            acciones[etiqueta] = m / pr
+        if Padd:
+            acciones["Pool de opciones"] = P0 + Padd
+        acciones["Inversionista ronda"] = a.inversion / precio
         tabla.append((f"Después de la ronda (pre {clp(a.pre)}, inversión {clp(a.inversion)})", dict(acciones)))
-        precio = post / N
-        print(f"Precio por acción de la ronda: {miles(precio, 2)} CLP (sobre {miles(N)} acciones totales).\n")
+        print(f"Precio por acción de la ronda: {miles(precio, 2)} CLP.")
+        for i, (m, cap, d, pr, via) in enumerate(detalle, 1):
+            print(f"SAFE {i} convierte a {miles(pr, 2)} CLP por acción (aplica: {via}).")
+        if Padd:
+            print(f"Aumento de pool antes de la ronda: {miles(Padd)} acciones (lo pagan los accionistas previos).")
+        print()
     for titulo, acc in tabla:
         tot = sum(acc.values())
         print(f"### {titulo}\n| Titular | Acciones | % |\n|---|---|---|")
         for n, v in acc.items():
             print(f"| {n} | {miles(v)} | {pct(v / tot)} |")
         print()
-    print("Supuestos: SAFE post-money solo con cap (sin descuento), convierte sobre la capitalización previa a la ronda;")
-    print("el aumento de pool se crea antes de la ronda (pre-money) y diluye a los tenedores previos.")
+    print("Supuestos: SAFE post-money estilo YC (cap sobre la capitalización sin el aumento de pool de la ronda; convierte al menor")
+    print("entre precio con cap, precio con descuento y precio de la ronda); el pre-money incluye SAFE y aumento de pool.")
     print("El texto exacto de tu SAFE, nota o pacto manda: revísalo con un abogado.")
+
+
+def parse_lista(texto, campos):
+    out = []
+    for parte in (texto or "").split(","):
+        if not parte.strip():
+            continue
+        valores = parte.split(":")
+        if len(valores) != campos + 1:
+            sys.exit(f"Formato inválido en «{parte}»: se esperan {campos + 1} valores separados por ':'.")
+        out.append((valores[0].strip(), *[float(v) for v in valores[1:]]))
+    return out
+
+
+def reparto_salida(V, comunes, preferentes, opciones, multiplo=1.0):
+    """Cascada con preferencia de liquidación no participativa (pari passu). Devuelve {titular: monto} y precio por acción común."""
+    pref = {n: m * multiplo for n, m, _ in preferentes}
+    convierte = {n: False for n, _, _ in preferentes}
+    ejerce = {n: False for n, _, _ in opciones}
+    precio = 0.0
+    for _ in range(100):
+        caja = V + sum(q * k for n, q, k in opciones if ejerce[n])
+        reservado = sum(pref[n] for n in pref if not convierte[n])
+        if caja <= reservado:
+            total = sum(pref[n] for n in pref if not convierte[n]) or 1
+            pago = {n: caja * pref[n] / total if not convierte[n] else 0.0 for n in pref}
+            pago.update({n: 0.0 for n, _ in comunes})
+            pago.update({n: 0.0 for n, _, _ in opciones})
+            return pago, 0.0
+        acciones = sum(s for _, s in comunes) + sum(s for n, _, s in preferentes if convierte[n]) + sum(q for n, q, _ in opciones if ejerce[n])
+        precio = (caja - reservado) / acciones
+        nuevo_c = {n: precio * s > pref[n] for n, _, s in preferentes}
+        nuevo_e = {n: precio > k for n, _, k in opciones}
+        if nuevo_c == convierte and nuevo_e == ejerce:
+            break
+        convierte, ejerce = nuevo_c, nuevo_e
+    pago = {n: (precio * s if convierte[n] else pref[n]) for n, _, s in preferentes}
+    pago.update({n: precio * s for n, s in comunes})
+    pago.update({n: (precio - k) * q if ejerce[n] else 0.0 for n, q, k in opciones})
+    return pago, precio
+
+
+def cmd_salida(a):
+    comunes = parse_pares(a.comunes)
+    preferentes = parse_lista(a.preferentes, 2)
+    opciones = parse_lista(a.opciones, 2)
+    valores = [float(v) for v in a.valores.split(",")]
+    titulares = [n for n, _, _ in preferentes] + [n for n, _ in comunes] + [n for n, _, _ in opciones]
+    res = [reparto_salida(V, comunes, preferentes, opciones, a.multiplo) for V in valores]
+    print("| Titular | " + " | ".join(f"Salida {clp(V)}" for V in valores) + " |")
+    print("|---|" + "---|" * len(valores))
+    for n in titulares:
+        print(f"| {n} | " + " | ".join(f"{clp(r[0][n])} ({pct(r[0][n] / V if V else 0)})" for r, V in zip(res, valores)) + " |")
+    print("| Precio por acción común | " + " | ".join(miles(r[1], 2) for r in res) + " |")
+    print(f"\nSupuestos: preferencia {a.multiplo:g}x no participativa y pari passu entre preferentes; cada preferente elige el mayor entre")
+    print("su preferencia y convertir a común; las opciones se ejercen si el precio supera su precio de ejercicio (monto neto del")
+    print("ejercicio, antes de impuestos). Sin deuda, costos de transacción ni retenciones. Revisa el pacto real con un abogado.")
 
 
 # ---------------------------------------------------------------- costo empleado (Chile)
@@ -373,6 +467,9 @@ def main(argv=None):
     p = sp.add_parser("dilucion"); p.add_argument("--fundadores", required=True); p.add_argument("--pool", type=float, default=0)
     p.add_argument("--safe", action="append"); p.add_argument("--pre", type=float); p.add_argument("--inversion", type=float)
     p.add_argument("--pool-post", type=float, default=0); p.set_defaults(f=cmd_dilucion)
+    p = sp.add_parser("salida"); p.add_argument("--comunes", required=True); p.add_argument("--preferentes", default="")
+    p.add_argument("--opciones", default=""); p.add_argument("--valores", required=True); p.add_argument("--multiplo", type=float, default=1.0)
+    p.set_defaults(f=cmd_salida)
     p = sp.add_parser("costo-empleado"); g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--bruto", type=float); g.add_argument("--liquido", type=float)
     p.add_argument("--contrato", default="indefinido", choices=["indefinido", "plazo-fijo"])

@@ -23,7 +23,7 @@ Te acompaña sesión a sesión a validar tu idea, entrevistar clientes, analizar
 
 Una **skill** (habilidad) para [Claude](https://claude.ai) basada en el pack *Startup Engineering Chile & LATAM 2026*. Incluye:
 
-- 28 módulos de manual, 108 plantillas y 17 registros;
+- 28 módulos de manual, 25 plantillas completas con ejemplos buenos y malos (y 83 más en el catálogo), umbrales por etapa y 17 registros;
 - una guía de postulación a CORFO, una biblioteca de fuentes, casos y un plan de 90 días;
 - scripts en Python para los cálculos y revisiones que no conviene dejar a la memoria del modelo.
 
@@ -43,7 +43,9 @@ Además:
 
 - 🔁 **Retoma donde quedaron.** Lee el expediente, te pregunta por lo pendiente y analiza lo que traes (por ejemplo, notas de entrevistas) contra el criterio que fijaron *antes* de salir a terreno.
 - 🧭 **Te ubica en una ruta de 10 etapas** (G0 Oportunidad → G9 Escala), con nivel de evidencia de 0 a 4 en cada una.
-- 🧮 **Hace los números con scripts, no de memoria:** unit economics, runway, escenarios, dilución, costo de contratar en Chile y conversión CLP/UF/USD.
+- 🧮 **Hace los números con scripts, no de memoria:** unit economics, runway, escenarios, dilución con SAFE (cap y descuento), reparto en una venta (preferencia de liquidación), costo de contratar en Chile y conversión CLP/UF/USD.
+- 💸 **Más allá de validar:** capital privado (ángeles, SAFE, term sheet), venta a grandes empresas, caja y cobro, spin-offs universitarias, salud y otras verticales reguladas, productos con IA, sumarse a una startup ajena, y pivotar o cerrar con orden.
+- 🔍 **Audita tu expediente:** detecta un Go sin evidencia, resultados bajo la meta, entrevistas complacientes, costo hundido y precios que no calzan con el pipeline.
 - 🏛️ **Revisa tu postulación a fondos:** elegibilidad por instrumento, gastos no financiables, coherencia entre presupuesto y marco lógico, y límites de caracteres. Antes de afirmar un requisito, lo verifica en la fuente oficial.
 - 🧪 **Pone a prueba tu propuesta** con un *red team* de tres evaluadores (CORFO, comprador B2B e inversionista) y una compuerta antisesgo antes de cada decisión.
 - 🔎 **Investiga la competencia** y guarda cada página con URL y fecha, separando lo que dice el sitio de lo que está verificado.
@@ -78,7 +80,9 @@ Si no lo dices, empieza liviano y sube de nivel cuando haga falta.
 
 - entrega plantillas y registros como bloques para copiar;
 - hace los cálculos mostrando la fórmula;
-- te avisa que no quedó guardado.
+- te avisa que no quedó guardado y te deja un resumen para pegar la próxima vez.
+
+**Sin memoria entre conversaciones** (Claude.ai): al cerrar, la skill empaqueta el expediente en un ZIP para que lo descargues; la próxima vez lo subes y sigue donde quedaron (`expediente.py empaquetar` / `restaurar`). Para cambiar de conversación sin ZIP, `expediente.py resumen` da un estado de ~600 tokens.
 
 Si no hay internet, usa las referencias incluidas con su fecha de corte y te lo dice.
 
@@ -155,7 +159,6 @@ Si prefieres que la skill sea solo de un proyecto, cópiala en `.claude/skills/`
 
 - **Python 3.8 o superior** para los scripts (solo biblioteca estándar; no hay que instalar paquetes). En Windows, si `python` no funciona, la skill usa `py -3`.
 - **Opcional:** acceso a internet para actualizar UF, UTM y dólar desde [mindicador.cl](https://mindicador.cl). Sin conexión se usan los valores de respaldo con su fecha.
-- **Opcional:** [Firecrawl](#-investigación-web-con-firecrawl-opcional) para investigar la web con más profundidad.
 
 ### ¿Quedó instalada?
 
@@ -173,6 +176,9 @@ Hice 5 entrevistas, te dejo las transcripciones. ¿Cómo lo ves?
 ¿Cuánto me cuesta contratar a un desarrollador con $1.800.000 líquidos?
 Revisa mi presupuesto CORFO antes de enviarlo.
 Mi socio quiere el 50%. ¿Cómo armamos el vesting?
+Un ángel me ofrece un SAFE con cap de USD 2 millones. ¿Cuánto me diluyo?
+Me ofrecieron opciones en una startup. ¿Cómo evalúo la oferta?
+Llevamos un año y no despega. ¿Pivoteamos o cerramos?
 ¿Dónde estoy? Muéstrame mi ruta.
 ```
 
@@ -183,7 +189,7 @@ Todo queda en una carpeta `expediente/` dentro de tu proyecto, para retomar en l
 ```text
 expediente/
 ├── 00_estado.md          perfil, ruta por etapas, foco, trabajo de campo, acciones, bitácora
-├── manifest.json         versión del esquema y nivel (sprint o completo)
+├── manifest.json         versión del esquema, nivel (sprint o completo) y tipo de startup
 ├── registros/*.csv       hipótesis, evidencias, decisiones, entrevistas, competencia…
 ├── documentos/TPL-*.md   plantillas trabajadas con tu proyecto
 ├── investigacion/        páginas guardadas con URL y fecha; notas de entrevistas anonimizadas
@@ -199,17 +205,18 @@ Claude las ejecuta por ti; también puedes usarlas directamente desde la termina
 
 | Script | Para qué |
 |---|---|
-| `expediente.py` | Crear, revisar (`doctor`, `estado`, `validar`), migrar y consultar el expediente; informes semanales y one-pager; buscar plantillas y fuentes |
-| `finanzas.py` | Unit economics, punto de equilibrio, runway, escenarios desde el modelo, dilución (SAFE y pool), costo empleado y boletas de honorarios |
+| `expediente.py` | Crear, revisar (`doctor`, `estado`, `validar`), migrar y consultar el expediente; umbrales por etapa; búsqueda sin internet en el manual y las plantillas; informes (semanal, one-pager, deck en Markdown); resumen, empaquetar y restaurar para seguir en otra conversación |
+| `finanzas.py` | Unit economics, punto de equilibrio, runway, escenarios desde el modelo, dilución (SAFE con cap y descuento, pool), reparto en una venta, costo empleado y boletas de honorarios |
+| `auditar.py` | Contradicciones y sesgos del expediente: decisiones sin evidencia, metas no cumplidas, entrevistas complacientes, costo hundido |
 | `indicadores_cl.py` | UF, UTM, dólar y euro del día, con caché; conversión entre CLP, UF y USD |
 | `modelo_xlsx.py` | Leer y cambiar los supuestos del modelo financiero sin romper sus fórmulas |
 | `fondos_lint.py` | Elegibilidad por instrumento, gastos no financiables, rendiciones, coherencia con el marco lógico y límites de caracteres |
 | `ingesta.py` | Anonimizar transcripciones de entrevistas (.txt, .vtt, .srt) antes de guardarlas |
 | `dashboard.py` | Tablero HTML del proyecto en un solo archivo, sin servidor |
 | `cohorte.py` | Tablero de varios equipos para incubadoras y cursos |
-| `firecrawl.py` | Investigación web con Firecrawl (opcional) |
+| `firecrawl.py` | Opcional: archiva páginas si ya tienes Firecrawl corriendo |
 
-Las cifras chilenas (tasas, topes, tramos de impuesto, UF de respaldo) y las reglas de cada fondo viven en archivos JSON con su fecha de verificación: `assets/parametros_cl.json` y `assets/fondos/instrumentos.json`.
+Las cifras chilenas (tasas, topes, tramos de impuesto, UF de respaldo) y las reglas de cada fondo viven en archivos JSON con su fecha de verificación: `assets/parametros_cl.json`, `assets/fondos/instrumentos.json` y `assets/umbrales_gates.json`. `expediente.py doctor` avisa si alguna fecha venció.
 
 ## 🎬 Pruébalo con la demo
 
@@ -247,42 +254,21 @@ Hoy rige la Ley 19.628; la **Ley 21.719** de protección de datos entra en vigen
 | Recurso | Cantidad | Dónde |
 |---|---|---|
 | Módulos del manual (oportunidad, problema, mercado, propuesta, pricing, pilotos, ventas, fondos…) | 28 | `references/manual/` |
-| Flujos de trabajo (retomar, finanzas, fondos, red team, socios, compras públicas, privacidad…) | 12 | `references/flujos/` |
-| Plantillas editables (25 marcadas como troncales) | 108 | `assets/plantillas/` |
+| Flujos de trabajo (retomar, finanzas, fondos, capital privado, venta corporativa, caja, pivote y cierre, verticales reguladas…) | 20 | `references/flujos/` |
+| Plantillas completas, con ejemplo bueno y malo | 25 | `assets/plantillas/` |
+| Plantillas de catálogo (se generan como esqueleto con su criterio) | 83 | `assets/plantillas/catalogo_plantillas.csv` |
+| Umbrales por etapa y tipo de startup (SaaS B2B, B2C, marketplace, deeptech, hardware, servicios) | 10 etapas × 6 | `assets/umbrales_gates.json` |
 | Registros CSV (hipótesis, evidencias, experimentos, decisiones, competencia, pipeline…) | 17 | `assets/registros/` |
 | Guía CORFO: elegir instrumento, admisibilidad, presupuesto, rendición, red team | 3 guías | `references/corfo/` |
 | Fuentes con URL y estado de verificación | 268 | `references/biblioteca/` |
 | Plan de 90 días, 20 workshops, currículo y mentoría | — | `references/operacion/` |
 | Casos y ejemplo integral (datos pedagógicos) | — | `references/casos/` |
 | Modelo financiero editable | 1 | `assets/modelo_financiero.xlsx` |
-| Scripts | 9 | `scripts/` |
+| Scripts | 10 | `scripts/` |
 
-## 🔎 Investigación web con Firecrawl (opcional)
+## 🔎 Investigación web
 
-[Firecrawl](https://github.com/firecrawl/firecrawl) convierte páginas web en texto limpio. La skill lo usa para:
-
-- guardar fichas de competidores (precios, producto, clientes) con fecha;
-- detectar cambios entre consultas;
-- leer bases de convocatorias en PDF.
-
-Corre en tu máquina: no hay costo por página ni hace falta clave.
-
-Instalación rápida con Docker:
-
-```bash
-git clone https://github.com/firecrawl/firecrawl.git
-cd firecrawl
-# crea un archivo .env con:
-#   USE_DB_AUTHENTICATION=false
-#   POSTGRES_USER=postgres
-#   POSTGRES_PASSWORD=<una clave larga y aleatoria>
-#   POSTGRES_DB=postgres
-docker compose up --build -d
-```
-
-Luego pídele a Claude que verifique la conexión; la skill ejecuta `firecrawl.py health --deep` y anota qué funciona. Guía completa, alternativa sin Docker y solución de problemas: [`references/firecrawl.md`](skills/startup-engineering-chile/references/firecrawl.md).
-
-**Sin Firecrawl todo funciona igual**, usando la búsqueda web de Claude.
+La skill usa la búsqueda web que tenga tu cliente de Claude y guarda cada página relevante con URL y fecha en `investigacion/`. Si ya tienes [Firecrawl](https://github.com/firecrawl/firecrawl) corriendo en tu máquina, también puede usarlo para archivar páginas; no hace falta instalarlo. Guía para quien lo quiera: [`references/firecrawl.md`](skills/startup-engineering-chile/references/firecrawl.md).
 
 ## 🧪 Resultados de las pruebas
 
@@ -303,23 +289,17 @@ Qué cambia en la práctica:
 - **Sin la skill**, el modelo tiende a diseñar la app aunque no se haya validado el problema. Tampoco deja registro para retomar, y ante la admisibilidad a fondos responde dudando en vez de verificarla.
 - **Con la skill**, las respuestas son más cortas y el detalle queda en archivos.
 
-La versión 1.1 agrega 4 casos más:
-
-- unit economics inflados;
-- coherencia de un presupuesto CORFO;
-- expediente dañado;
-- una pregunta que **no** debe activar la skill.
-
-Todavía no tienen una ronda comparativa publicada. Los casos y criterios están en [`evals/`](skills/startup-engineering-chile/evals/).
+Desde entonces la batería creció a **24 casos**: socios, capital privado, compras públicas, internacionalización, red team, antisesgo, privacidad, cohorte, persistencia con ZIP, un caso multi-turno y 4 preguntas que **no** deben activar la skill. El largo de cada respuesta (palabras y preguntas) lo mide un script, no un evaluador LLM. Los casos nuevos todavía no tienen una ronda comparativa publicada. Cómo correrlos, con y sin la skill: [`docs/evals.md`](docs/evals.md).
 
 ### Tests de los scripts
 
 ```bash
 python tools/check_refs.py                 # rutas citadas, nombres de archivo, catálogos, versión
-python -m unittest discover -s tests -v    # cálculos, validación, anonimización, xlsx
+python tools/validar_datos.py              # JSON de datos contra sus esquemas
+python -m unittest discover -s tests -v    # cálculos, validación, anonimización, xlsx, evals
 ```
 
-La [CI](.github/workflows/ci.yml) los corre en Ubuntu y Windows con Python 3.8 y 3.12, y además valida la demo y pasa `ruff`.
+La [CI](.github/workflows/ci.yml) los corre en Ubuntu y Windows con Python 3.8 y 3.12, y además valida la demo y pasa `ruff`. Un [workflow semanal](.github/workflows/mantencion.yml) revisa los enlaces de la biblioteca y la antigüedad de los datos, y abre un issue si algo venció o se rompió.
 
 ## ⚠️ Límites
 
@@ -334,44 +314,33 @@ La [CI](.github/workflows/ci.yml) los corre en Ubuntu y Windows con Python 3.8 y
 ```text
 .
 ├── .claude-plugin/           manifiestos para instalar como plugin de Claude Code
-├── .github/workflows/        CI: referencias, tests, demo y ruff
+├── .github/workflows/        CI (referencias, datos, tests, demo, ruff) y mantención semanal
 ├── skills/
 │   └── startup-engineering-chile/
 │       ├── SKILL.md          instrucciones del mentor (enrutador)
 │       ├── references/       manual, flujos, guía CORFO, biblioteca, casos, operación
 │       ├── assets/           plantillas, registros CSV, modelo financiero, parámetros y fondos
-│       ├── scripts/          9 scripts en Python (biblioteca estándar)
+│       ├── scripts/          10 scripts en Python (biblioteca estándar)
 │       └── evals/            casos de prueba
 ├── examples/expediente_demo/ expediente ficticio de ejemplo
 ├── tests/                    tests de los scripts
-├── tools/check_refs.py       verificador de consistencia del repositorio
-├── docs/proceso/             documentos de cómo se construyó el pack (no van en la skill)
+├── tools/                    consistencia, esquemas de datos, enlaces, vigencia y medición de evals
+├── docs/                     evals y proceso de construcción del pack (no van en la skill)
+├── CONTRIBUTING.md
 ├── CHANGELOG.md
 ├── LICENSE                   MIT (código)
 └── LICENSE-CONTENIDO.md      CC BY 4.0 (contenido)
 ```
 
-## 🆕 Novedades en 1.1
+## 🆕 Novedades en 1.2
 
-- **7 scripts nuevos:** finanzas, indicadores, modelo xlsx, revisión de fondos, anonimización, dashboard y cohorte.
-- **12 flujos guiados**, entre ellos:
-  - router de fondos no dilutivos;
-  - red team;
-  - compuerta antisesgo;
-  - compras públicas;
-  - socios y vesting;
-  - trampas chilenas;
-  - internacionalización;
-  - privacidad.
-- **Expediente más robusto:**
-  - `doctor`, `validar` y `migrar`;
-  - esquema versionado;
-  - escrituras atómicas;
-  - CSV para Excel en español;
-  - aviso de datos personales.
-- **Niveles de profundidad** (consulta, sprint y completo) y modo degradado.
-- **Expediente de demostración**, 4 casos de prueba nuevos, tests y CI.
-- **Limpieza:** nombres de archivo sin tildes, catálogos sin duplicados y `SKILL.md` un 25 % más liviano.
+- **Plantillas podadas:** 25 completas, cada una con un ejemplo bueno, uno malo y su criterio de aceptación; las demás se generan como esqueleto. El manual perdió el texto repetido (−30 %).
+- **Umbrales por etapa y tipo de startup**, y ejemplos de decisiones bien y mal tomadas.
+- **8 flujos nuevos:** capital privado, sumarse a una startup, pivote y cierre, venta corporativa, caja y cobro, spin-offs universitarias, verticales reguladas y MVP con IA.
+- **Continuidad fuera de Claude Code:** `empaquetar`, `restaurar` y `resumen`.
+- **Scripts:** `auditar.py`, búsqueda BM25 sin internet, deck en Markdown, SAFE con descuento y reparto en una venta (waterfall).
+- **Mantenimiento:** esquemas para los JSON de datos, revisión semanal de enlaces y fechas, y fecha de verificación leída de los datos (no escrita a mano).
+- **Evals:** 24 casos y medición de largo por script.
 
 Detalle completo en el [CHANGELOG](CHANGELOG.md).
 
@@ -379,10 +348,7 @@ Detalle completo en el [CHANGELOG](CHANGELOG.md).
 
 ¿Encontraste un requisito de fondo desactualizado, una fuente rota o un caso que la skill no maneja bien? Abre un [issue](https://github.com/ba-hc/startup-engineering-chile/issues) o un pull request.
 
-- Antes de enviar cambios, corre `python tools/check_refs.py` y los tests.
-- Si cambias una cifra, actualiza su fecha de verificación (`_verificado` en los JSON o la línea "Última verificación" en las guías).
-- Si agregas un caso de prueba, sigue el formato de `evals/`: un `prompt.md`, un `case.yaml` y un archivo por criterio en `graders/`.
-- Anota el cambio en el `CHANGELOG.md`.
+Antes de enviar cambios, lee [CONTRIBUTING.md](CONTRIBUTING.md): cómo actualizar una cifra o una regla de fondo con su fuente y fecha, cómo agregar un flujo o un caso de prueba, y qué revisa la CI.
 
 ## 📄 Licencia
 

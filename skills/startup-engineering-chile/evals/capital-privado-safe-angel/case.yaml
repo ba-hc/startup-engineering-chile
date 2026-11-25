@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: capital-privado-safe-angel
+expected_outcome: |
+  Explica el SAFE (post-money, cap y descuento: convierte al menor precio), calcula la dilución con finanzas.py dilucion en al menos un escenario de seed (p. ej. pre-money sobre y bajo el cap) mostrando supuestos, y da criterios para evaluar el trato sin dar asesoría financiera personalizada; recomienda revisar el documento con abogado y menciona el tratamiento tributario por verificar.

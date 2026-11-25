@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: retomar-con-zip-restaurar
+expected_outcome: |
+  Restaura el expediente desde el ZIP (expediente.py restaurar) en la carpeta actual, lee el estado y responde dónde quedaron (gate, foco, trabajo de campo pendiente) y el siguiente paso, sin reiniciar el diagnóstico. Si el entorno no persiste, recuerda empaquetar al cerrar.
+context:
+  scaffold_script: place-files.sh

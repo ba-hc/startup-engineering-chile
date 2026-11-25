@@ -1,18 +1,18 @@
 # Módulo 17. Product-Market Fit, retención y expansión
 
-**Propósito:** tomar decisiones y generar evidencia en este dominio.
+**Úsalo cuando:** Churn, cohortes, ¿tenemos PMF? · **Gate:** G8 · **Plantillas:** TPL-078, 079, 080, 085 (troncales en `assets/plantillas/catalogo_plantillas.csv`)
 
 ## Métodos de referencia
 First Round; Dan Olsen; cohortes; AARRR; North Star; Growth Loops.
 
 ## Procedimiento operativo
-1. Medir demanda (compradores, ofertas, cierres), satisfacción (uso, resultados, retención) y eficiencia (CAC, onboarding, soporte, contribución). 
-2. Para usuarios que experimentaron valor, encuesta de pérdida puede complementar retención; umbral del 40% no es prueba universal. 
-3. Definir activación y tiempo hasta primer valor. 
-4. Agrupar cohortes por fecha/segmento, controlar denominador. 
-5. Separar nuevo, expansión, contracción y churn. 
-6. Diseñar ciclos de referencia, integración o expansión medibles. 
-7. No escalar gasto hasta demostrar señales de repetibilidad. 
+1. Medir demanda (compradores, ofertas, cierres), satisfacción (uso, resultados, retención) y eficiencia (CAC, onboarding, soporte, contribución).
+2. Para usuarios que experimentaron valor, encuesta de pérdida puede complementar retención; umbral del 40% no es prueba universal.
+3. Definir activación y tiempo hasta primer valor.
+4. Agrupar cohortes por fecha/segmento, controlar denominador.
+5. Separar nuevo, expansión, contracción y churn.
+6. Diseñar ciclos de referencia, integración o expansión medibles.
+7. No escalar gasto hasta demostrar señales de repetibilidad.
 
 ## Entregables
 PMF assessment; cohortes; MRR waterfall; CS playbook.
@@ -22,18 +22,6 @@ Hay métricas por segmento con períodos y definiciones; se detecta el cuello de
 
 ## Errores y alertas
 Confundir registros, GMV, ventas acumuladas y MRR; extrapolar cohortes pequeñas; vanity metrics; ocultar churn con nuevos clientes.
-
-## Ejercicio aplicado
-Selecciona un emprendimiento real y redacta una hipótesis que corresponda a este módulo. Identifica qué información ya existe y su fuente; separa lo observado de lo inferido. Completa los entregables indicados con los registros de `../../assets/registros/ (o el expediente/registros/ del proyecto)`, define un responsable, una fecha, una decisión y un límite de recursos. Haz una revisión crítica con alguien del área pertinente. No inventes resultados para completar el ejercicio.
-
-## Revisión de calidad
-| Control | Estado | Evidencia | Acción |
-|---|---|---|---|
-| Alcance y unidad definidos | Pendiente | | |
-| Hipótesis explícitas y alternativas | Pendiente | | |
-| Fuente/fecha y limitaciones | Pendiente | | |
-| Coherencia con cliente, economía y etapa | Pendiente | | |
-| Decisión y siguiente prueba | Pendiente | | |
 
 ## Fuentes y materiales
 - [METODO-051 · 4 Levels of PMF](https://www.firstround.com/levels)

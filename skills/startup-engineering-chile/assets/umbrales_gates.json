@@ -1,0 +1,136 @@
+{
+  "_nota": "Umbrales de referencia de la skill para pasar cada gate. Son heurísticas para fijar el criterio ANTES de salir a terreno, no normas: el equipo puede fijar otro umbral si lo justifica por escrito antes de ver los datos. Un umbral 'por_track' reemplaza al común con la misma clave o se suma a la lista.",
+  "_verificado": "2026-11-25",
+  "_fuentes": {
+    "sean_ellis": "Sean Ellis, prueba de PMF (40% 'muy decepcionado'): https://pmfsurvey.com/",
+    "skok": "David Skok, SaaS Metrics 2.0 (LTV > 3×CAC, payback < 12 meses): https://www.forentrepreneurs.com/saas-metrics-2/",
+    "trl": "Escala TRL (NASA / H2020), usada por ANID y CORFO en bases de I+D"
+  },
+  "tracks": {
+    "saas_b2b": "Software o SaaS que vende a empresas",
+    "b2c": "App o servicio digital para personas",
+    "marketplace": "Plataforma que conecta oferta y demanda (cobra comisión)",
+    "deeptech": "Base científico-tecnológica (EBCT, spin-off universitaria, biotech, materiales)",
+    "hardware": "Producto físico o IoT, incluye agro y minería con equipos",
+    "servicios": "Servicio con tecnología (implementación, consultoría productizada, salud)"
+  },
+  "gates": {
+    "G0": {
+      "pregunta": "¿Vale la pena investigar?",
+      "comun": [
+        "Oportunidad escrita sin nombrar la solución (TPL-001)",
+        "Al menos 1 alternativa real que hoy usa el cliente, con fuente",
+        "Pérdida aceptable definida: horas y dinero máximos antes de decidir (TPL-036)"
+      ],
+      "por_track": {
+        "deeptech": ["Resultado de investigación identificado y situación de su PI conocida (quién es dueño, si hay publicación o patente)"]
+      }
+    },
+    "G1": {
+      "pregunta": "¿Qué necesidad existe?",
+      "comun": [
+        "≥8 entrevistas en UN segmento, con personas que viven el problema (no amigos ni potenciales inversionistas)",
+        "≥5 relatan un episodio concreto de los últimos 3 meses sin que se les sugiera",
+        "Costo del problema cuantificado (horas, dinero, multas, pérdidas) en ≥3 entrevistas",
+        "Criterio fijado antes de entrevistar y registrado en experimentos.csv"
+      ],
+      "por_track": {
+        "b2c": ["≥12 entrevistas o una encuesta con n ≥ 100 y método declarado, además de las entrevistas"],
+        "deeptech": ["≥5 entrevistas con usuarios industriales o clínicos (no solo académicos)", "Revisión de estado del arte y de patentes documentada"]
+      }
+    },
+    "G2": {
+      "pregunta": "¿A quién vender?",
+      "comun": [
+        "ICP definido con criterios observables (tamaño, rubro, disparador de compra)",
+        "Número de cuentas del ICP contado con fuente (SII, INE, gremio, Mercado Público), no estimado como % de un mercado",
+        "SAM bottom-up: cuentas × precio anual × penetración razonable (TPL-030)"
+      ],
+      "por_track": {
+        "saas_b2b": ["Usuario, comprador y aprobador identificados en ≥3 cuentas reales (TPL-020)"],
+        "b2c": ["Canal de adquisición principal identificado con un costo por usuario estimado o probado"],
+        "marketplace": ["Lado más difícil de atraer identificado y con ≥10 conversaciones de ese lado"]
+      }
+    },
+    "G3": {
+      "pregunta": "¿Por qué elegirnos?",
+      "comun": [
+        "Diferencia frente a la alternativa principal demostrada con evidencia, no declarada (TPL-031)",
+        "≥3 de 5 personas del segmento prefieren la propuesta frente a su alternativa actual en una prueba (demo, prototipo, landing con compromiso)"
+      ],
+      "por_track": {
+        "deeptech": ["Ventaja técnica medida frente al estado del arte (métrica y condición de prueba)"]
+      }
+    },
+    "G4": {
+      "pregunta": "¿Se puede cobrar rentablemente?",
+      "comun": [
+        "Prueba de precio con compromiso real: preventa, depósito, carta de intención firmada con precio, u orden de compra",
+        "Margen de contribución positivo por unidad con costos reales, no supuestos (finanzas.py unit)",
+        "Precio con IVA y unidad de cobro explícitos (TPL-054)"
+      ],
+      "por_track": {
+        "saas_b2b": ["≥2 compromisos firmados al precio objetivo", "Proyección LTV/CAC ≥ 3 y payback ≤ 12–18 meses con churn supuesto conservador"],
+        "b2c": ["Conversión a pago o reserva medida con tráfico del canal real; el umbral se fija antes según canal (referencia en tráfico frío: 1–5 %)"],
+        "marketplace": ["Take rate aceptado por el lado que paga en ≥5 transacciones o compromisos"],
+        "hardware": ["Costo unitario de fabricación (BOM + armado + logística) cotizado con proveedor para el volumen del primer lote", "Margen bruto objetivo ≥ 40 % al volumen del primer lote"],
+        "deeptech": ["Modelo de ingresos elegido (licencia, producto, servicio) con ≥1 contraparte industrial que valide el precio o cofinancie"]
+      }
+    },
+    "G5": {
+      "pregunta": "¿Funciona técnicamente?",
+      "comun": [
+        "Prototipo resuelve la tarea de referencia en condiciones reales del cliente, medido con el mismo KPI del problema",
+        "Riesgos de seguridad y datos personales revisados (TPL-097, flujos/privacidad.md)"
+      ],
+      "por_track": {
+        "deeptech": ["TRL ≥ 5 (validado en entorno relevante) documentado"],
+        "hardware": ["Prototipo funcional probado en terreno ≥ 2 semanas o ciclo operativo completo", "Certificaciones necesarias identificadas (SEC, ISP, SAG, etc.)"]
+      }
+    },
+    "G6": {
+      "pregunta": "¿Entrega valor en contexto?",
+      "comun": [
+        "Piloto con sponsor, comprador, baseline, KPI, duración y precio posterior acordados antes de partir (TPL-067)",
+        "KPI mejora al menos el umbral fijado frente al baseline",
+        "≥1 piloto convierte a contrato pagado o tiene precio posterior aceptado por escrito"
+      ],
+      "por_track": {
+        "deeptech": ["TRL ≥ 7 (demostración en entorno operativo)"],
+        "hardware": ["Tasa de fallas y costo de soporte en terreno medidos"]
+      }
+    },
+    "G7": {
+      "pregunta": "¿Compra y usa el cliente?",
+      "comun": [
+        "Clientes pagando sin descuentos de amigo, con uso activo medido (no solo licencias vendidas)"
+      ],
+      "por_track": {
+        "saas_b2b": ["≥3–5 clientes pagando", "≥60 % de los usuarios con licencia activos cada semana"],
+        "b2c": ["Retención de la cohorte a 30 días medida y estable en ≥2 cohortes"],
+        "marketplace": ["Tasa de repetición de compra del lado demanda medida"]
+      }
+    },
+    "G8": {
+      "pregunta": "¿Se repite venta e implementación?",
+      "comun": [
+        "≥10 ventas con el mismo proceso; ciclo de venta y CAC conocidos por canal",
+        "Implementación y soporte funcionan sin los fundadores",
+        "Prueba de Sean Ellis ≥ 40 % 'muy decepcionado' en usuarios activos, o retención de cohortes que se aplana"
+      ],
+      "por_track": {
+        "saas_b2b": ["Churn mensual de logos ≤ 2–3 % (pymes) o NRR ≥ 100 % (empresas medianas)"],
+        "b2c": ["Curva de retención que se aplana (no tiende a cero) en ≥3 cohortes"]
+      }
+    },
+    "G9": {
+      "pregunta": "¿Conviene invertir más?",
+      "comun": [
+        "Unit economics se mantienen al duplicar el canal principal",
+        "Caja para 12–18 meses con el plan de crecimiento (finanzas.py runway)",
+        "Riesgos de escala (equipo, regulación, nuevo país) con dueño y plan"
+      ],
+      "por_track": {}
+    }
+  }
+}

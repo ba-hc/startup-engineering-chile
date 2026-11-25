@@ -8,7 +8,7 @@
 Uso (--dir es la carpeta del proyecto; el expediente vive en RUTA/expediente/):
   expediente.py doctor   [--dir RUTA]              # verifica Python, permisos, skill, Firecrawl e internet
   expediente.py init     --dir RUTA --proyecto "Nombre" [--modo empezar|pulir|complementar]
-                         [--nivel sprint|completo]  # sprint: 00_estado + 2 registros
+                         [--nivel sprint|completo] [--track saas_b2b|b2c|marketplace|deeptech|hardware|servicios]
   expediente.py estado   --dir RUTA                # ruta por gates, campo pendiente, acciones vencidas
   expediente.py add      REGISTRO campo=valor ... --dir RUTA [--confirmado] [--forzar]
   expediente.py ver      REGISTRO --dir RUTA [--ultimos N] [--columnas a,b]
@@ -19,9 +19,13 @@ Uso (--dir es la carpeta del proyecto; el expediente vive en RUTA/expediente/):
   expediente.py biblioteca "texto" [--tipo fuentes|libros|mentores|charlas|casos|workshops|curriculo|cifras]
   expediente.py id       REGISTRO --dir RUTA       # siguiente ID libre (p. ej. EV-004)
   expediente.py exportar [REGISTRO|todos] --dir RUTA   # CSV con ';' y BOM para Excel en español
-  expediente.py informe  semanal|onepager --dir RUTA   # Markdown en entregables/
+  expediente.py informe  semanal|onepager|deck --dir RUTA   # Markdown en entregables/ (deck: Marp)
   expediente.py modelo   --dir RUTA                # copia el modelo financiero de ejemplo
-  expediente.py buscar   "texto" [--en plantillas|manual|todo]
+  expediente.py buscar   "texto" [--gate G4] [--en plantillas|manual|todo]   # ranking BM25: qué archivos leer
+  expediente.py umbrales [--gate G4] [--track saas_b2b] --dir RUTA     # criterios de referencia del gate
+  expediente.py resumen  --dir RUTA [--guardar]     # ~600 tokens para retomar en otra conversación
+  expediente.py empaquetar --dir RUTA [--salida CARPETA]   # ZIP del expediente para descargar
+  expediente.py restaurar  PAQUETE.zip --dir RUTA [--forzar]  # vuelve a abrir un ZIP empaquetado
 
 Solo biblioteca estándar de Python (3.8+).
 """
@@ -30,12 +34,15 @@ import csv
 import datetime as dt
 import io
 import json
+import math
 import os
 import re
 import shutil
 import sys
 import tempfile
+import unicodedata
 import urllib.request
+import zipfile
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -310,7 +317,7 @@ def cmd_doctor(a):
         linea("ERROR", f"Python {v.major}.{v.minor} es muy antiguo", "instala Python 3.8 o superior (python.org) y usa `py -3` en Windows")
     nreg = len(registros_disponibles())
     npl = sum(1 for _, _, fs in os.walk(PLANTILLAS) for f in fs if re.match(r"TPL-\d{3}_.*\.md$", f))
-    if nreg >= 17 and npl >= 100 and os.path.exists(os.path.join(ASSETS, "modelo_financiero.xlsx")):
+    if nreg >= 17 and npl >= 25 and os.path.exists(os.path.join(ASSETS, "modelo_financiero.xlsx")):
         linea("OK", f"Skill completa: {nreg} registros, {npl} plantillas, modelo financiero")
     else:
         linea("ERROR", f"Skill incompleta ({nreg} registros, {npl} plantillas)", "reinstala la skill desde el repositorio o el ZIP del release")
@@ -324,13 +331,27 @@ def cmd_doctor(a):
         linea("ERROR", f"No se puede escribir en {destino} ({e.strerror})", "elige otra carpeta del proyecto con --dir")
     if os.name == "nt" and len(destino) > 200:
         linea("AVISO", "Ruta muy larga para Windows", "ejecuta desde una carpeta corta y pasa rutas absolutas")
+    for rel, nombre, meses in (("parametros_cl.json", "Parámetros legales", 6),
+                               (os.path.join("fondos", "instrumentos.json"), "Reglas de fondos", 3),
+                               ("umbrales_gates.json", "Umbrales por gate", 12)):
+        try:
+            with open(os.path.join(ASSETS, rel), encoding="utf-8") as f:
+                ver = json.load(f).get("_verificado", "")
+            dias = (dt.date.today() - dt.date.fromisoformat(ver)).days
+        except (OSError, ValueError, TypeError):
+            linea("AVISO", f"{nombre}: sin fecha de verificación legible ({rel})")
+            continue
+        if dias > meses * 30:
+            linea("AVISO", f"{nombre}: verificado el {ver} (hace {dias} días; más de {meses} meses)",
+                  "dilo al usuario y verifica en la fuente antes de afirmar cifras o reglas")
+        else:
+            linea("OK", f"{nombre}: verificado el {ver}")
     url = os.environ.get("FIRECRAWL_API_URL", "http://localhost:3002").rstrip("/")
     try:
         urllib.request.urlopen(url + "/", timeout=2)
         linea("OK", f"Firecrawl responde en {url}")
     except Exception:
-        linea("INFO", f"Firecrawl no responde en {url} (opcional)",
-              "la skill sigue con la búsqueda web del agente; para instalarlo ver references/firecrawl.md")
+        linea("INFO", f"Firecrawl no está activo en {url} (opcional; no hace falta)")
     try:
         urllib.request.urlopen(urllib.request.Request("https://mindicador.cl/api", headers={"User-Agent": "sec-doctor"}), timeout=4).read(64)
         linea("OK", "API de indicadores (mindicador.cl) responde")
@@ -373,15 +394,20 @@ def cmd_init(a):
     gi = os.path.join(e, ".gitignore")
     if not os.path.exists(gi):
         escribir_atomico(gi, GITIGNORE_EXPEDIENTE)
-    escribir_manifest(a.dir, nivel=a.nivel)
+    escribir_manifest(a.dir, nivel=a.nivel, **({"track": a.track} if a.track else {}))
     print(f"Expediente listo en {e} (nivel {a.nivel}). Los demás registros se crean al usarlos (`add`).")
     print("Por privacidad, expediente/.gitignore evita que se suba a git; bórralo si usas un repo privado.")
 
 
-def template_path(tpl_id):
+def normalizar_tpl(tpl_id):
     tpl_id = tpl_id.upper()
     if re.fullmatch(r"TPL-?\d{1,3}", tpl_id):
         tpl_id = "TPL-" + tpl_id.split("-")[-1].replace("TPL", "").zfill(3)
+    return tpl_id
+
+
+def template_path(tpl_id):
+    tpl_id = normalizar_tpl(tpl_id)
     for root, _, files in os.walk(PLANTILLAS):
         for f in files:
             if f.upper().startswith(tpl_id + "_"):
@@ -389,22 +415,56 @@ def template_path(tpl_id):
     return None
 
 
+def catalogo_fila(tpl_id):
+    tpl_id = normalizar_tpl(tpl_id)
+    h, rows = leer(os.path.join(PLANTILLAS, "catalogo_plantillas.csv"))
+    for r in rows:
+        d = dict(zip(h, r))
+        if d.get("id") == tpl_id:
+            return d
+    return None
+
+
+def slug(texto):
+    s = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]+", "_", s).strip("_")[:60]
+
+
+def esqueleto_plantilla(d):
+    """Las plantillas no troncales viven solo en el catálogo: se genera un esqueleto breve."""
+    return "\n".join([
+        f"# {d['id']} — {d['nombre']}", "",
+        f"**Para qué:** {d['uso']}", "",
+        f"*Plantilla no troncal: estructúrala según el capítulo del manual del dominio «{d['dominio']}» y los "
+        "ejemplos de `references/ejemplos_y_umbrales.md`. Cada afirmación con su ID de evidencia o marcada como supuesto.*", "",
+        "## Completar", "[ ]", "",
+        "## Criterio de aceptación", f"- {d['criterio_aceptacion']}", "",
+        "## Decisión",
+        "Criterio fijado antes: [ ] · Resultado: [ ] · Decisión: Go / Hold / Recycle / Kill · Próxima acción, responsable y fecha: [ ]",
+        ""])
+
+
 def cmd_doc(a):
     src = template_path(a.tpl)
-    if not src:
+    fila = None if src else catalogo_fila(a.tpl)
+    if not src and not fila:
         sys.exit(f"No existe la plantilla {a.tpl}. Lista: expediente.py plantillas")
     requiere_expediente(a.dir)
-    dst = os.path.join(exp_dir(a.dir), "documentos", os.path.basename(src))
+    nombre = os.path.basename(src) if src else f"{fila['id']}_{slug(fila['nombre'])}.md"
+    dst = os.path.join(exp_dir(a.dir), "documentos", nombre)
     if os.path.exists(dst):
         print(f"Ya existe: {dst} (edítalo, no se sobrescribe)")
         return
-    proyecto = nombre_proyecto(a.dir)
-    txt = open(src, encoding="utf-8-sig").read()
-    txt = txt.replace("**Proyecto:** [ ]", f"**Proyecto:** {proyecto or '[ ]'}", 1)
-    txt = txt.replace("**Versión:** [ ]", "**Versión:** v1", 1)
-    txt = txt.replace("**Fecha:** [ ]", f"**Fecha:** {dt.date.today().isoformat()}", 1)
+    proyecto = nombre_proyecto(a.dir) or "[ ]"
+    txt = open(src, encoding="utf-8-sig").read() if src else esqueleto_plantilla(fila)
+    cabecera = f"**Proyecto:** {proyecto} · **Versión:** v1 · **Fecha:** {dt.date.today().isoformat()} · **Responsable:** [ ]"
+    if "**Proyecto:** [ ]" in txt:
+        txt = re.sub(r"^\*\*Proyecto:\*\* \[ \].*$", cabecera, txt, count=1, flags=re.M)
+    else:
+        primera, _, resto = txt.partition("\n")
+        txt = f"{primera}\n\n{cabecera}\n{resto}"
     escribir_atomico(dst, txt)
-    print(f"Creado {dst}")
+    print(f"Creado {dst}" + ("" if src else " (esqueleto desde el catálogo)"))
 
 
 def siguiente_id(base, reg):
@@ -864,7 +924,7 @@ def cmd_informe(a):
         out.append("\n## Próxima semana")
         out += [f"- {acc} · {resp} · {f}" for acc, resp, f in (venc + pend)[:6]] or ["- (sin acciones registradas)"]
         nombre = f"reporte_semanal_{hoy.isoformat()}.md"
-    else:
+    elif a.tipo == "onepager":
         perfil = seccion(txt, "Perfil")
         frase = re.search(r"Una frase[^:]*:\*\*\s*(.+)", perfil)
         out.append(f"# {proyecto} — one-pager\n\n> Borrador generado desde el expediente el {hoy.isoformat()}. "
@@ -888,6 +948,11 @@ def cmd_informe(a):
         objetivo = re.search(r"Objetivo próximo y fecha límite:\*\*\s*(.*)", perfil)
         out.append("\n## Qué pedimos / próximo hito\n" + ((objetivo.group(1).strip() or "[completar]") if objetivo else "[completar]"))
         nombre = f"one_pager_{hoy.isoformat()}.md"
+    if a.tipo == "deck":
+        dst = os.path.join(exp_dir(a.dir), "entregables", f"deck_{hoy.isoformat()}.md")
+        escribir_atomico(dst, deck_md(a.dir))
+        print(f"Creado {dst} (Markdown para Marp: marp {os.path.basename(dst)} --pptx). Revisa cada [FALTA EVIDENCIA].")
+        return
     dst = os.path.join(exp_dir(a.dir), "entregables", nombre)
     escribir_atomico(dst, "\n".join(out) + "\n")
     print(f"Creado {dst}")
@@ -918,6 +983,9 @@ def cmd_biblioteca(a):
                 return
     if not n:
         print("Sin resultados.")
+    elif "mentores" in tipos:
+        print("Nota: los perfiles de mentores son resúmenes de fuentes públicas sin reverificar (ver columnas estado y "
+              "fecha_consulta). Antes de citar a una persona, abre su URL; no la contactes en nombre del usuario.")
 
 
 def cmd_plantillas(a):
@@ -935,27 +1003,290 @@ def cmd_plantillas(a):
         marca = "★ " if d.get("troncal") == "si" else "  "
         print(f"{marca}{d['id']} [{d['dominio']}] {d['nombre']} — {d['uso'][:110]}")
         n += 1
-    print(f"\n{n} plantilla(s). ★ = troncal (empieza por estas).")
+    print(f"\n{n} plantilla(s). ★ = troncal, con estructura y ejemplos; las demás se crean como esqueleto con `doc`.")
+
+
+def tokens(texto):
+    s = unicodedata.normalize("NFKD", texto.lower()).encode("ascii", "ignore").decode()
+    return [t for t in re.findall(r"[a-z0-9]{3,}", s) if t not in STOP]
+
+
+STOP = set("que los las del con por para una uno como mas pero sus este esta son ser hay sin sobre entre cuando donde cual "
+           "the and for you".split())
+
+
+def corpus(en):
+    roots = {"plantillas": [PLANTILLAS], "manual": [REFS], "todo": [PLANTILLAS, REFS]}[en]
+    for root in roots:
+        for dp, _, fs in os.walk(root):
+            for f in sorted(fs):
+                if f.endswith((".md", ".csv")):
+                    p = os.path.join(dp, f)
+                    yield p, open(p, encoding="utf-8-sig", errors="replace").read()
 
 
 def cmd_buscar(a):
-    roots = {"plantillas": [PLANTILLAS], "manual": [REFS], "todo": [PLANTILLAS, REFS]}[a.en]
-    pat = re.compile(re.escape(a.texto), re.I)
-    hits = 0
-    for root in roots:
-        for dp, _, fs in os.walk(root):
-            for f in fs:
-                if not f.endswith((".md", ".csv")):
-                    continue
-                p = os.path.join(dp, f)
-                for i, line in enumerate(open(p, encoding="utf-8-sig", errors="replace"), 1):
-                    if pat.search(line):
-                        print(f"{os.path.relpath(p, SKILL_DIR)}:{i}: {line.strip()[:200]}")
-                        hits += 1
-                        if hits >= a.max:
-                            return
-    if not hits:
+    """Ranking BM25 de archivos de la skill para una consulta; muestra las líneas más pertinentes."""
+    q = tokens(a.texto + (" " + a.gate if a.gate else ""))
+    if not q:
+        sys.exit("Consulta vacía: usa palabras de 3 letras o más.")
+    docs = [(p, t, tokens(t)) for p, t in corpus(a.en)]
+    N = len(docs)
+    avg = sum(len(d[2]) for d in docs) / max(N, 1)
+    df = {t: sum(1 for d in docs if t in set(d[2])) for t in set(q)}
+    k1, b = 1.4, 0.75
+    puntajes = []
+    for p, t, toks in docs:
+        tf = {}
+        for x in toks:
+            if x in df:
+                tf[x] = tf.get(x, 0) + 1
+        s = 0.0
+        for term in set(q):
+            if term in tf:
+                idf = math.log(1 + (N - df[term] + 0.5) / (df[term] + 0.5))
+                s += idf * tf[term] * (k1 + 1) / (tf[term] + k1 * (1 - b + b * len(toks) / avg))
+        if s > 0:
+            puntajes.append((s, p, t))
+    puntajes.sort(reverse=True)
+    if not puntajes:
         print("Sin resultados.")
+        return
+    for s, p, t in puntajes[:a.max]:
+        mejores = sorted(((sum(1 for x in tokens(l) if x in df), i, l.strip()) for i, l in enumerate(t.splitlines(), 1) if l.strip()),
+                         reverse=True)[:2]
+        print(f"{os.path.relpath(p, SKILL_DIR).replace(os.sep, '/')}  (puntaje {s:.1f})")
+        for c, i, l in mejores:
+            if c:
+                print(f"    {i}: {l[:180]}")
+
+
+# ---------------------------------------------------------------- continuidad entre sesiones
+def umbrales_data():
+    return json.load(open(os.path.join(ASSETS, "umbrales_gates.json"), encoding="utf-8"))
+
+
+def gate_actual_de(base):
+    mm = re.search(r"Gate actual:\*\*\s*(G\d)", seccion(leer_estado(base), "Foco actual"))
+    return mm.group(1) if mm else None
+
+
+def lineas_umbral(gate, track):
+    g = umbrales_data()["gates"].get(gate)
+    if not g:
+        return []
+    return list(g.get("comun", [])) + list(g.get("por_track", {}).get(track or "", []))
+
+
+def cmd_umbrales(a):
+    data = umbrales_data()
+    track = a.track or ((leer_manifest(a.dir) or {}).get("track") if os.path.isdir(exp_dir(a.dir)) else None)
+    gates = [a.gate.upper()] if a.gate else ([gate_actual_de(a.dir)] if os.path.isdir(exp_dir(a.dir)) and gate_actual_de(a.dir) else list(data["gates"]))
+    print(f"Track: {track or 'sin definir (usa --track o init --track)'} · referencia verificada {data.get('_verificado')}\n")
+    for g in gates:
+        if g not in data["gates"]:
+            sys.exit(f"Gate desconocido {g}. Usa G0–G9.")
+        print(f"## {g} — {data['gates'][g]['pregunta']}")
+        for linea in lineas_umbral(g, track):
+            print(f"- {linea}")
+        print()
+    print("Son umbrales de referencia para fijar el criterio ANTES de salir a terreno; otro umbral vale si se justifica antes de ver los datos.")
+
+
+def cmd_resumen(a):
+    """Resumen compacto (≈600 tokens) para retomar en otra conversación o en otro cliente."""
+    requiere_expediente(a.dir)
+    hoy = dt.date.today()
+    txt = leer_estado(a.dir)
+    m = leer_manifest(a.dir) or {}
+    foco = seccion(txt, "Foco actual")
+
+    def campo(et):
+        mm = re.search(re.escape(et) + r":\*\*\s*(.*)", txt)
+        return mm.group(1).strip() if mm else ""
+    gate = gate_actual_de(a.dir) or "?"
+    out = [f"# Resumen para retomar — {nombre_proyecto(a.dir)} — {hoy.isoformat()}",
+           f"Modo {campo('Modo de trabajo') or '?'} · nivel {m.get('nivel', '?')} · track {m.get('track') or '?'} · gate actual {gate}",
+           f"Problema: {campo('Una frase (sin nombrar la solución)')[:220] or '[sin definir]'}",
+           f"Objetivo: {campo('Objetivo próximo y fecha límite')[:160] or '[sin definir]'}"]
+    hr = re.search(r"Hipótesis más riesgosa:\*\*\s*(.*)", foco)
+    if hr and hr.group(1).strip():
+        out.append(f"Hipótesis más riesgosa: {hr.group(1).strip()[:160]}")
+    dec = filas(a.dir, "decisiones")[-3:]
+    if dec:
+        out.append("Últimas decisiones: " + " | ".join(f"{d.get('gate')} {d.get('decision')} {d.get('fecha', '')[:10]}: {d.get('justificacion', '')[:70]}" for d in dec))
+    abiertos = [d for d in filas(a.dir, "experimentos") if not d.get("resultado", "").strip()]
+    if abiertos:
+        out.append("Experimentos abiertos: " + " | ".join(
+            f"{d.get('experiment_id')} ({d.get('hypothesis_id')}): {d.get('metrica', '')[:50]} umbral {d.get('umbral', '')[:30]} hasta {d.get('fin', '') or '?'}"
+            for d in abiertos[:3]))
+    pend, venc = acciones(txt, hoy)
+    est = hipotesis_estancadas(a.dir, hoy)
+    errores, _ = validar(a.dir)
+    alertas = []
+    if venc:
+        alertas.append(f"{len(venc)} acción(es) vencida(s)")
+    if est:
+        alertas.append(f"{len(est)} hipótesis estancada(s): " + ", ".join(h for h, _, _ in est[:4]))
+    if errores:
+        alertas.append(f"{len(errores)} error(es) de validación")
+    out.append("Alertas: " + ("; ".join(alertas) if alertas else "ninguna"))
+    if venc or pend:
+        out.append("Próximas acciones: " + " | ".join(f"{acc} ({resp}, {f})" for acc, resp, f in (venc + pend)[:3]))
+    cuentas = []
+    for reg in ("entrevistas", "evidencias", "experimentos", "cuentas_y_pipeline", "pilotos"):
+        n = len(filas(a.dir, reg))
+        if n:
+            cuentas.append(f"{reg}={n}")
+    out.append("Registros: " + (", ".join(cuentas) or "vacíos"))
+    lu = lineas_umbral(gate, m.get("track"))
+    if lu:
+        out.append(f"Para pasar {gate}: " + "; ".join(lu[:3]))
+    texto = "\n".join(out)
+    if len(texto) > 2600:
+        texto = texto[:2580].rsplit("\n", 1)[0] + "\n[recortado]"
+    print(texto)
+    if a.guardar:
+        dst = os.path.join(exp_dir(a.dir), "entregables", f"resumen_{hoy.isoformat()}.md")
+        escribir_atomico(dst, texto + "\n")
+        print(f"\nGuardado en {dst}")
+
+
+LEEME_ZIP = """Expediente de {proyecto} empaquetado el {fecha} con la skill startup-engineering-chile.
+
+Para retomar en otra sesión (por ejemplo en Claude.ai, donde los archivos se borran entre conversaciones):
+1. Sube este ZIP al iniciar la conversación.
+2. Pide: "retomemos mi proyecto con este expediente".
+   La skill corre: expediente.py restaurar <zip> --dir <carpeta>
+
+Contiene entrevistas y datos del proyecto: guárdalo en un lugar privado.
+"""
+
+
+def cmd_empaquetar(a):
+    requiere_expediente(a.dir)
+    e = exp_dir(a.dir)
+    hoy = dt.date.today().isoformat()
+    proyecto = nombre_proyecto(a.dir) or "proyecto"
+    salida = os.path.abspath(a.salida or a.dir)
+    os.makedirs(salida, exist_ok=True)
+    dst = os.path.join(salida, f"expediente_{slug(proyecto) or 'proyecto'}_{hoy}.zip")
+    escribir_manifest(a.dir, empaquetado=hoy)
+    fd, tmp = tempfile.mkstemp(dir=salida, suffix=".tmp")
+    os.close(fd)
+    n = 0
+    try:
+        with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as z:
+            for root, dirs, files in os.walk(e):
+                dirs[:] = sorted(d for d in dirs if d != "__pycache__")
+                for f in sorted(files):
+                    if ".bak" in f or f.endswith(".tmp"):
+                        continue
+                    p = os.path.join(root, f)
+                    z.write(p, os.path.relpath(p, os.path.dirname(e)).replace(os.sep, "/"))
+                    n += 1
+            z.writestr("LEEME.txt", LEEME_ZIP.format(proyecto=proyecto, fecha=hoy))
+        os.replace(tmp, dst)
+    finally:
+        if os.path.exists(tmp):
+            os.remove(tmp)
+    print(f"Empaquetado {n} archivo(s) en {dst} ({os.path.getsize(dst) // 1024 + 1} KB)")
+    print("Entrégaselo al usuario para que lo descargue y lo vuelva a subir en la próxima sesión. Contiene datos privados.")
+
+
+MAX_ZIP_BYTES = 200 * 1024 * 1024
+
+
+def cmd_restaurar(a):
+    if not zipfile.is_zipfile(a.zip):
+        sys.exit(f"{a.zip} no es un ZIP válido.")
+    destino = os.path.abspath(a.dir)
+    e = exp_dir(a.dir)
+    with zipfile.ZipFile(a.zip) as z:
+        miembros = [i for i in z.infolist() if i.filename.startswith("expediente/") and not i.is_dir()]
+        if not miembros:
+            sys.exit("El ZIP no contiene una carpeta expediente/. ¿Es un paquete de `expediente.py empaquetar`?")
+        if sum(i.file_size for i in miembros) > MAX_ZIP_BYTES:
+            sys.exit("El ZIP descomprimido supera 200 MB; no se restaura.")
+        for i in miembros:
+            objetivo = os.path.abspath(os.path.join(destino, i.filename))
+            if not objetivo.startswith(destino + os.sep):
+                sys.exit(f"Ruta insegura en el ZIP: {i.filename}; no se restaura.")
+        if os.path.isdir(e):
+            if not a.forzar:
+                actual = (leer_manifest(a.dir) or {}).get("actualizado", "?")
+                sys.exit(f"Ya hay un expediente en {e} (actualizado {actual}). Usa --forzar para reemplazarlo; "
+                         "el actual se respalda como expediente.bak-<fecha-hora>.")
+            respaldo = e + ".bak-" + dt.datetime.now().strftime("%Y%m%d-%H%M%S")
+            shutil.move(e, respaldo)
+            print(f"Respaldo del expediente anterior: {respaldo}")
+        for i in miembros:
+            objetivo = os.path.join(destino, *i.filename.split("/"))
+            os.makedirs(os.path.dirname(objetivo), exist_ok=True)
+            with z.open(i) as src, open(objetivo, "wb") as out:
+                shutil.copyfileobj(src, out)
+    m = leer_manifest(a.dir) or {}
+    print(f"Restaurado {len(miembros)} archivo(s) en {e} (empaquetado {m.get('empaquetado', '?')}).")
+    if m.get("schema_version", 1) < SCHEMA_VERSION:
+        print("Esquema antiguo: corre `expediente.py migrar`.")
+    errores, avisos = validar(a.dir)
+    print(f"Validación: {len(errores)} error(es), {len(avisos)} aviso(s). Sigue con `expediente.py estado`.")
+
+
+def deck_md(base):
+    """Pitch deck en Markdown compatible con Marp, desde el expediente; marca vacíos con [FALTA EVIDENCIA]."""
+    F = "[FALTA EVIDENCIA]"
+    txt = leer_estado(base)
+    perfil = seccion(txt, "Perfil")
+
+    def campo(et):
+        mm = re.search(re.escape(et) + r"[^:]*:\*\*\s*(.*)", perfil)
+        return (mm.group(1).strip() if mm else "") or F
+    evs = [d for d in filas(base, "evidencias") if d.get("estado") == "confirmado"]
+    ents = filas(base, "entrevistas")
+    comp = filas(base, "competencia")
+    pils = filas(base, "pilotos")
+    pipe = filas(base, "cuentas_y_pipeline")
+    kpis = filas(base, "indicadores")
+    precio = ""
+    for d in filas(base, "experimentos"):
+        if re.search(r"precio|pago|preventa|carta", d.get("metrica", "") + d.get("metodo", ""), re.I) and d.get("resultado"):
+            precio = f"{d.get('metrica')}: {d.get('resultado')} (umbral {d.get('umbral')}; {d.get('experiment_id')})"
+    modelo = os.path.join(exp_dir(base), "entregables", "modelo_financiero.xlsx")
+    sup = {}
+    if os.path.exists(modelo):
+        try:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            import modelo_xlsx
+            sup = {s["variable"]: s["valor"] for s in modelo_xlsx.supuestos(modelo, "Supuestos")}
+        except Exception:
+            sup = {}
+    sl = ["---", "marp: true", "paginate: true", "---", "",
+          f"# {nombre_proyecto(base)}", f"{campo('Una frase')}", "",
+          "> Borrador generado desde el expediente el " + dt.date.today().isoformat() + ". Todo lo marcado " + F + " debe respaldarse o quitarse.",
+          "", "---", "", "## El problema", campo("Una frase"), ""]
+    sl += [f"- {d.get('afirmacion')} (n={d.get('n') or '?'}; {d.get('evidence_id')})" for d in evs[:3]] or [f"- {F} sin evidencia confirmada del problema"]
+    sl += ["", "---", "", "## A quién le pasa", f"- Entrevistas registradas: {len(ents)}"]
+    segs = sorted({d.get("segmento", "") for d in ents if d.get("segmento")})
+    sl += [f"- Segmentos entrevistados: {', '.join(segs[:4])}" if segs else f"- {F} segmento del cliente"]
+    sl += ["", "---", "", "## Cómo lo resuelven hoy"]
+    sl += [f"- {c.get('alternativa')} ({c.get('tipo')}): {c.get('limitacion') or F}" for c in comp[:4]] or [f"- {F} alternativas y competencia"]
+    sl += ["", "---", "", "## Nuestra propuesta", f"- {F} propuesta de valor con la diferencia demostrada (TPL-049, TPL-031)", "",
+           "---", "", "## Modelo de negocio y precio", f"- {precio or F + ' prueba de precio con compromiso'}"]
+    if sup.get("Precio mensual"):
+        sl.append(f"- Precio supuesto en el modelo: {sup['Precio mensual']} CLP/mes (supuesto, no evidencia)")
+    sl += ["", "---", "", "## Tracción", f"- Pilotos: {len(pils)} · Cuentas en pipeline: {len(pipe)}"]
+    sl += [f"- {k.get('nombre')}: {k.get('baseline') or F} → meta {k.get('meta') or F}" for k in kpis[:3]] or [f"- {F} indicadores de uso o venta"]
+    sl += ["", "---", "", "## Economía unitaria"]
+    if sup:
+        for et in ("CAC", "Churn mensual", "Infraestructura variable"):
+            if et in sup:
+                sl.append(f"- {et}: {sup[et]} (supuesto del modelo; respáldalo con `finanzas.py unit`)")
+    else:
+        sl.append(f"- {F} unit economics (`finanzas.py unit`)")
+    sl += ["", "---", "", "## Equipo", f"- {campo('Equipo y dedicación')}", "", "---", "", "## Qué pedimos",
+           f"- {campo('Objetivo próximo y fecha límite')}", f"- {F} monto, uso de fondos e hito que se alcanza", ""]
+    return "\n".join(sl) + "\n"
 
 
 def main(argv=None):
@@ -964,7 +1295,8 @@ def main(argv=None):
     p = sp.add_parser("doctor"); p.add_argument("--dir", default="."); p.set_defaults(f=cmd_doctor)
     p = sp.add_parser("init"); p.add_argument("--dir", default="."); p.add_argument("--proyecto", required=True)
     p.add_argument("--modo", default="empezar", choices=["empezar", "pulir", "complementar"])
-    p.add_argument("--nivel", default="completo", choices=list(NIVELES)); p.set_defaults(f=cmd_init)
+    p.add_argument("--nivel", default="completo", choices=list(NIVELES))
+    p.add_argument("--track", choices=list(umbrales_data()["tracks"])); p.set_defaults(f=cmd_init)
     p = sp.add_parser("estado"); p.add_argument("--dir", default="."); p.set_defaults(f=cmd_estado)
     p = sp.add_parser("add"); p.add_argument("registro"); p.add_argument("campos", nargs="+")
     p.add_argument("--dir", default="."); p.add_argument("--confirmado", action="store_true")
@@ -982,11 +1314,19 @@ def main(argv=None):
     p = sp.add_parser("id"); p.add_argument("registro"); p.add_argument("--dir", default="."); p.set_defaults(f=cmd_id)
     p = sp.add_parser("exportar"); p.add_argument("registro", nargs="?", default="todos"); p.add_argument("--dir", default=".")
     p.set_defaults(f=cmd_exportar)
-    p = sp.add_parser("informe"); p.add_argument("tipo", choices=["semanal", "onepager"]); p.add_argument("--dir", default=".")
+    p = sp.add_parser("informe"); p.add_argument("tipo", choices=["semanal", "onepager", "deck"]); p.add_argument("--dir", default=".")
     p.add_argument("--dias", type=int, default=7); p.set_defaults(f=cmd_informe)
     p = sp.add_parser("modelo"); p.add_argument("--dir", default="."); p.set_defaults(f=cmd_modelo)
     p = sp.add_parser("buscar"); p.add_argument("texto"); p.add_argument("--en", default="todo", choices=["plantillas", "manual", "todo"])
-    p.add_argument("--max", type=int, default=40); p.set_defaults(f=cmd_buscar)
+    p.add_argument("--gate"); p.add_argument("--max", type=int, default=5); p.set_defaults(f=cmd_buscar)
+    p = sp.add_parser("umbrales"); p.add_argument("--dir", default="."); p.add_argument("--gate")
+    p.add_argument("--track", choices=list(umbrales_data()["tracks"])); p.set_defaults(f=cmd_umbrales)
+    p = sp.add_parser("resumen"); p.add_argument("--dir", default="."); p.add_argument("--guardar", action="store_true")
+    p.set_defaults(f=cmd_resumen)
+    p = sp.add_parser("empaquetar"); p.add_argument("--dir", default="."); p.add_argument("--salida")
+    p.set_defaults(f=cmd_empaquetar)
+    p = sp.add_parser("restaurar"); p.add_argument("zip"); p.add_argument("--dir", default=".")
+    p.add_argument("--forzar", action="store_true"); p.set_defaults(f=cmd_restaurar)
     a = ap.parse_args(argv)
     a.f(a)
 
