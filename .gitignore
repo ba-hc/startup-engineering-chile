@@ -5,3 +5,4 @@ Thumbs.db
 *.skill
 *.zip
 /expediente/
+!skills/startup-engineering-chile/evals/*/files/*.zip
