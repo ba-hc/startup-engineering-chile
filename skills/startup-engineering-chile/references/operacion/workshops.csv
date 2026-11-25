@@ -1,0 +1,21 @@
+﻿numero,taller,duracion_min_propuesta,entradas,dinamica,salida,criterio
+1,Founder-Market Fit,90,"Experiencia, roles y objetivos",Autoevaluación y contraste con evidencias; priorizar brechas,"Team Charter, Affordable Loss",Equipo y recursos reales
+2,Opportunity Discovery,120,Radar y problemas,"Listar oportunidades, comparar atractivo y dificultad, elegir foco",Scorecard y Opportunity Brief,Mercado candidato
+3,Problem Framing,120,Observaciones y procesos,"Resignificar, árbol causal, SIPOC y HMW",Problem Definition y VSM,Problema sin solución presupuesta
+4,Customer Research,120,Hipótesis y roles,"Diseñar entrevistas, selección, consentimiento y análisis",Protocolo e Interview Snapshot,Plan de evidencia
+5,Customer Segmentation,90,Entrevistas y señales,"Variables industriales, DMU, inclusión/exclusión",ICP y matriz,Comprador localizable
+6,Market Analysis,120,Datos públicos y filtros,"Unidad, universo, TAM/SAM/SOM, sensibilidad",Market Report,Cálculo reproducible
+7,Competitive Analysis,90,Alternativas reales,"Benchmark, FODA/TOWS, VRIO",Comparación,Diferenciación hipotética
+8,Foundation Sprint,720,Cliente y alternativas,"Dos días; fundamentos, diferenciadores, enfoques y decisión",Hipótesis fundacional,Apuesta comprobable
+9,Value Proposition,120,"Jobs, pains, gains","Priorizar necesidades, comparar valor, construir oferta",VPC y Customer Value Model,Beneficio cuantificado
+10,Business Model Ideation,120,Tecnología y mercado,Patrones y modelos alternativos,Navigator / Revenue model,Modelo elegido con riesgos
+11,Monetization,120,"Gasto actual, costos","Unidad, precio, packaging, ofertas, sensibilidad",Pricing hypothesis,Economía y prueba
+12,Business Model Design,90,Resultados anteriores,"Completar nueve bloques y relaciones, revisar coherencia",BMC versionado,Modelo consistente
+13,Assumption Mapping,60,BMC y riesgos,"Extraer, ordenar por importancia/incertidumbre",Registro hipótesis,Riesgo prioritario
+14,Experiment Design,120,Supuestos críticos,"Elegir método, métrica, umbral, guardrail y presupuesto",Test Card y plan,Prueba predefinida
+15,Product Discovery,120,Cliente y valor,"Opportunity tree, MVP, restricciones",Lean Product Canvas,Scope v1
+16,Design Sprint,1800,Problema y método,"Cinco jornadas orientativas, mapa, opciones, storyboard, prototipo, prueba",Prototipo e informe,Resultado observado
+17,Go-to-Market,120,ICP y oferta,"Canales, cuentas, mensaje, funnel, buyer enablement",GTM y Sales Playbook,Adquisición medible
+18,Business Economics,120,"Precio, costos, capacidad","ROI, unit economics, caja y escenarios",Modelo financiero,Valores críticos
+19,Innovation Readiness,90,Evidencia y pruebas,"Diagnóstico TRL/IRL/ARL/PMF, riesgos y gates",Readiness Assessment,Brechas claras
+20,Funding & Pitch,120,Bases y venture dossier,"Admisibilidad, adicionalidad, hitos y red team",Funding Dossier y pitch,Decisión de postulación

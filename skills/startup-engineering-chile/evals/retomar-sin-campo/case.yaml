@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: retomar-sin-campo
+expected_outcome: |
+  Retoma desde el expediente (entrevistas vencidas el 20-11). No se pone a diseñar la app ni genera documentos de producto; explica en breve por qué, diagnostica el bloqueo (reclutar/tiempo), entrega 2-3 mensajes de contacto listos para enviar, achica el paso (p. ej. 2 conversaciones esta semana), sugiere una tarea útil no-programación para el amigo y replanifica en 00_estado.md.
+context:
+  scaffold_script: place-files.sh

@@ -1,0 +1,109 @@
+﻿id,dominio,nombre,uso,criterio_aceptacion,ruta
+TPL-001,opportunity,Opportunity Brief,Formula una oportunidad sin presuponer producto; compara una alternativa y limita recursos.,"Necesidad, cliente y prueba están definidos.",opportunity/TPL-001_opportunity_brief.md
+TPL-002,opportunity,Opportunity Scorecard,"Puntúa 0–5 con evidencia y pesos que sumen 100. Si falta evidencia, marca desconocido, no cero automático.",Ranking explicable y sensibilidad de pesos.,opportunity/TPL-002_opportunity_scorecard.md
+TPL-003,opportunity,Market Opportunity Navigator,"Construye conjunto de mercados, mapa atractivo/dificultad y foco. No ejecutar todos a la vez.",Mercado inicial y alternativas justificadas.,opportunity/TPL-003_market_opportunity_navigator.md
+TPL-004,opportunity,Radar de oportunidades,"Registra compras, desafíos, regulación y procesos; revisa licencias de fuentes.",Señales se convierten en preguntas comprobables.,opportunity/TPL-004_radar_de_oportunidades.md
+TPL-005,opportunity,Problem Definition,Escribe el problema sin nombrar solución; separa hechos y causas hipotéticas.,Problema delimitado y medible.,opportunity/TPL-005_problem_definition.md
+TPL-006,opportunity,Problem Tree,Pregunta por qué y triangula; no tomar correlación como causalidad.,"Árbol causal plausible, supuestos explícitos.",opportunity/TPL-006_problem_tree.md
+TPL-007,opportunity,How Might We,Reformula como pregunta abierta que permite varias soluciones.,Desafío no contiene solución predeterminada.,opportunity/TPL-007_how_might_we.md
+TPL-008,opportunity,Context Canvas y PESTEL,Distingue hechos externos y escenarios; asigna relevancia e incertidumbre.,Factores materiales vinculados a decisiones.,opportunity/TPL-008_context_canvas_y_pestel.md
+TPL-009,opportunity,Trend Map,Contrasta al menos dos perspectivas cuando la señal sea débil.,No se presenta una predicción como hecho.,opportunity/TPL-009_trend_map.md
+TPL-010,opportunity,Innovation Matrix,Evalúa alternativas con criterios explícitos antes de votar.,Selección justificada y siguientes experimentos.,opportunity/TPL-010_innovation_matrix.md
+TPL-011,opportunity,5 Whys y Pareto,"Usa los porqués como guía, no como prueba causal; registra Pareto con denominador.",Causas prioritarias a comprobar.,opportunity/TPL-011_5_whys_y_pareto.md
+TPL-012,opportunity,Value Stream Map / SIPOC,Mapa actual antes de futuro; mide cuellos de botella.,Costos y pasos están medidos o declarados supuestos.,opportunity/TPL-012_value_stream_map_sipoc.md
+TPL-013,cliente,Research Protocol,Diseña antes de entrevistar; protege datos y limita inferencias.,Método replicable.,cliente/TPL-013_research_protocol.md
+TPL-014,cliente,Guión de entrevista,"No vendas durante discovery; pregunta por hechos, no aprobación de idea.",Evidencia concreta y notas separadas de interpretación.,cliente/TPL-014_guin_de_entrevista.md
+TPL-015,cliente,Interview Snapshot,Usa seudónimo; enlaza registro original autorizado.,Trazabilidad sin datos innecesarios.,cliente/TPL-015_interview_snapshot.md
+TPL-016,cliente,Qualitative Coding Matrix,"Codifica, compara dentro/entre segmentos, documenta saturación y sesgos.","Conclusiones auditables, casos negativos incluidos.",cliente/TPL-016_qualitative_coding_matrix.md
+TPL-017,cliente,Encuesta y ficha metodológica,Evita preguntas sesgadas o dobles; explicita muestra de conveniencia.,"Resultados con denominador, sin inferencias indebidas.",cliente/TPL-017_encuesta_y_ficha_metodolgica.md
+TPL-018,cliente,Empathy Map,No inventes estado mental; separa declaración y observación.,Perfil basado en datos reales.,cliente/TPL-018_empathy_map.md
+TPL-019,cliente,Persona Canvas,"Crea personas basadas en patrones, no atributos estereotipados.",Describe un grupo útil para diseño.,cliente/TPL-019_persona_canvas.md
+TPL-020,cliente,Ideal Customer Profile,Prioriza segmento alcanzable y define cómo listar cuentas.,"ICP operativo, no público genérico.",cliente/TPL-020_ideal_customer_profile.md
+TPL-021,cliente,Industrial Segmentation Matrix,Agrupa por comportamiento operacional y compra; evita duplicados.,Segmentos comercialmente diferenciables.,cliente/TPL-021_industrial_segmentation_matrix.md
+TPL-022,cliente,Decision-Making Unit,Mapea el proceso de compra y quién aprueba.,Identifica decisor y bloqueos.,cliente/TPL-022_decision_making_unit.md
+TPL-023,cliente,JTBD,Describe resultado deseado independiente de producto.,Job específico y observado.,cliente/TPL-023_jtbd.md
+TPL-024,cliente,Customer Profile,Prioriza necesidades; no mezcles varios segmentos.,Necesidades priorizadas y trazables.,cliente/TPL-024_customer_profile.md
+TPL-025,cliente,Stakeholder Map,Identifica quién afecta o es afectado por decisión.,Mapa con responsables y acciones.,cliente/TPL-025_stakeholder_map.md
+TPL-026,cliente,Customer Journey / Experience Map,Reconstruye experiencia actual y futura; usa datos observados.,Fricciones vinculadas a oportunidades.,cliente/TPL-026_customer_journey_experience_map.md
+TPL-027,cliente,Service Blueprint,Distingue experiencia visible de operación interna.,Dependencias y fallos identificados.,cliente/TPL-027_service_blueprint.md
+TPL-028,cliente,Affinity Diagram,Agrupa observaciones antes de formular insight.,Patrones trazables sin excluir negativos.,cliente/TPL-028_affinity_diagram.md
+TPL-029,cliente,Importance-Satisfaction Matrix,Identifica necesidad importante poco satisfecha; no inferir sin medición.,Prioridades defendibles.,cliente/TPL-029_importance_satisfaction_matrix.md
+TPL-030,mercado,TAM SAM SOM,Calcula bottom-up y límites comerciales. Expresa rangos y evita doble conteo.,Mercado reproducible y SOM derivado de capacidad.,mercado/TPL-030_tam_sam_som.md
+TPL-031,mercado,Competitive Benchmark,Incluye no hacer nada e in-house; compara misma tarea y condiciones.,Competidores relevantes y diferencias demostrables.,mercado/TPL-031_competitive_benchmark.md
+TPL-032,mercado,Market Intelligence Report,Combina fuentes secundarias y primarias sin confundirlas.,Estudio reproducible y útil para decisión.,mercado/TPL-032_market_intelligence_report.md
+TPL-033,mercado,Positioning Map / Strategy Canvas,Escala y compara atributos valorados por compradores.,Posicionamiento frente a alternativas reales.,mercado/TPL-033_positioning_map_strategy_canvas.md
+TPL-034,estrategia,Team Charter Canvas,Alinea equipo; acuerda formalmente cuando corresponda.,Responsables y reglas explícitas.,estrategia/TPL-034_team_charter_canvas.md
+TPL-035,estrategia,Founder-Market Fit,Evalúa capacidades demostradas y faltantes.,Plan de cierre de brechas.,estrategia/TPL-035_founder_market_fit.md
+TPL-036,estrategia,Affordable Loss,Establece límite antes de experimentar.,Límite financiero/tiempo aprobado.,estrategia/TPL-036_affordable_loss.md
+TPL-037,estrategia,Vision y Design Criteria,Traduce visión en restricciones y criterios de diseño.,"Criterios verificables, no solo eslogan.",estrategia/TPL-037_vision_y_design_criteria.md
+TPL-038,estrategia,Foundation Sprint Brief,"Compara enfoques con cliente, pragmatismo, crecimiento y economía.","Hipótesis específica, refutable.",estrategia/TPL-038_foundation_sprint_brief.md
+TPL-039,estrategia,Entrepreneurial Strategy Compass,Explora al menos dos estrategias antes de comprometer recursos.,Elección y evidencia faltante.,estrategia/TPL-039_entrepreneurial_strategy_compass.md
+TPL-040,estrategia,Lean Strategy Canvas,Distingue objetivos de funcionalidades.,Estrategia medible.,estrategia/TPL-040_lean_strategy_canvas.md
+TPL-041,estrategia,FODA y TOWS,Fortalezas/debilidades internas y oportunidades/amenazas externas; cruza para generar acciones.,Acciones priorizadas con fuente.,estrategia/TPL-041_foda_y_tows.md
+TPL-042,estrategia,VRIO,"Evalúa cada recurso, no marca automáticamente sí.",Ventaja temporal o defendible explicada.,estrategia/TPL-042_vrio.md
+TPL-043,estrategia,Cinco Fuerzas,Define industria y estructura económica; no confundir con benchmark individual.,Implicaciones claras para modelo.,estrategia/TPL-043_cinco_fuerzas.md
+TPL-044,estrategia,ERRC Grid,Rediseña oferta comparando valor y costos.,Cambio específico que merece prueba.,estrategia/TPL-044_errc_grid.md
+TPL-045,estrategia,Business Model Space,Revisa condiciones externas del modelo.,Entorno relacionado con decisiones.,estrategia/TPL-045_business_model_space.md
+TPL-046,estrategia,Portfolio Map,Compara portafolio; no confundir esfuerzo invertido con atractivo.,Recursos concentrados en hipótesis críticas.,estrategia/TPL-046_portfolio_map.md
+TPL-047,negocio,Business Model Canvas,"Completa una configuración por segmento/modelo; documenta hipótesis y dependencias. Plantilla textual original, consulta formato oficial Strategyzer.",Nueve bloques coherentes con números.,negocio/TPL-047_business_model_canvas.md
+TPL-048,negocio,Lean Canvas,Emplea en idea temprana; versiona tras pruebas.,Supuestos críticos identificados.,negocio/TPL-048_lean_canvas.md
+TPL-049,negocio,Value Proposition Canvas,Mapea oferta a necesidades observadas; consulta formato original Strategyzer.,Ajuste valor-cliente explícito.,negocio/TPL-049_value_proposition_canvas.md
+TPL-050,negocio,Disciplined Entrepreneurship Canvas,Usa como síntesis propia de temas MIT; no sustituye 24 pasos oficiales.,"Conexión mercado, producto, monetización y escala.",negocio/TPL-050_disciplined_entrepreneurship_canvas.md
+TPL-051,negocio,Business Model Kit / intercambio de valor,Dibuja quién intercambia qué y quién paga.,Flujos económicos consistentes.,negocio/TPL-051_business_model_kit_intercambio_de_valor.md
+TPL-052,negocio,Business Model Navigator,Explora 3 modelos y compara según evidencia.,Modelo preferido y razones.,negocio/TPL-052_business_model_navigator.md
+TPL-053,negocio,Revenue Model Flowchart,"Compara cobro por usuario, suscripción, tarea, consumo, licencia, resultado, white label.",Unidad de cobro y prueba.,negocio/TPL-053_revenue_model_flowchart.md
+TPL-054,negocio,Pricing y Packaging,"Relaciona precios a valor y costo, muestra precio efectivo.",Precio defendible y condiciones claras.,negocio/TPL-054_pricing_y_packaging.md
+TPL-055,negocio,Customer Value Model,Modela valor incremental sin doble conteo.,Beneficio cuantificado y límites.,negocio/TPL-055_customer_value_model.md
+TPL-056,negocio,Effectuation Canvas,Empieza por medios y compromisos disponibles.,Experimento posible con riesgo limitado.,negocio/TPL-056_effectuation_canvas.md
+TPL-057,negocio,Ecosystem Canvas,No confundir conversación con alianza.,Mapa accionable y reciprocidad.,negocio/TPL-057_ecosystem_canvas.md
+TPL-058,negocio,Business Case / ROI,Distingue caja de capacidad liberada; calcula escenario conservador.,"Cálculo verificable, comprador lo comprende.",negocio/TPL-058_business_case_roi.md
+TPL-059,validacion,Assumption Map,Ordena incertidumbres por capacidad de invalidar negocio.,Supuestos críticos priorizados.,validacion/TPL-059_assumption_map.md
+TPL-060,validacion,Riskiest Assumption,Selecciona una hipótesis y una prueba económica.,Prueba vinculada al principal riesgo.,validacion/TPL-060_riskiest_assumption.md
+TPL-061,validacion,Experiment Canvas / Test Card,Define éxito antes de observar datos; prueba proporcional.,Experimento ejecutable y auditable.,validacion/TPL-061_experiment_canvas_test_card.md
+TPL-062,validacion,Learning Card,Registra resultado negativo también; evita cambiar umbrales.,Aprendizaje y decisión documentados.,validacion/TPL-062_learning_card.md
+TPL-063,validacion,Validation Board,Gestiona estado de supuestos con trazabilidad.,No hay hipótesis validada sin respaldo.,validacion/TPL-063_validation_board.md
+TPL-064,validacion,Evidence Planning,Define qué probaría la afirmación y qué no.,Plan de evidencia por afirmación.,validacion/TPL-064_evidence_planning.md
+TPL-065,validacion,Experiment Picker,Selecciona el experimento más barato que produzca evidencia útil.,Método proporcional al riesgo.,validacion/TPL-065_experiment_picker.md
+TPL-066,validacion,Prototype Canvas,Construye lo mínimo para aprender; aclara si es simulado.,Prototipo acotado con prueba.,validacion/TPL-066_prototype_canvas.md
+TPL-067,validacion,Pilot Charter,"Acordar con cliente antes de pilotar, incluyendo cierre.",No hay piloto sin criterio de decisión.,validacion/TPL-067_pilot_charter.md
+TPL-068,validacion,Pilot Results Report,Reporta resultados reales y confusores.,Conclusión no exagera evidencia.,validacion/TPL-068_pilot_results_report.md
+TPL-069,validacion,Progress Board / Innovation Scorecard,"Mide aprendizaje, no solo actividades.",Siguiente gasto elimina incertidumbre.,validacion/TPL-069_progress_board_innovation_scorecard.md
+TPL-070,producto,Lean Product Canvas,Separa objetivo empresarial de funcionalidad.,Producto v1 alineado a resultado.,producto/TPL-070_lean_product_canvas.md
+TPL-071,producto,Product Vision Board,Integra producto y negocio con foco.,Visión orienta roadmap.,producto/TPL-071_product_vision_board.md
+TPL-072,producto,Opportunity Solution Tree,Cada rama es una hipótesis; no confundir oportunidad y feature.,Alternativas y pruebas conectadas.,producto/TPL-072_opportunity_solution_tree.md
+TPL-073,producto,Product Canvas,Delimita experiencia y calidad mínima.,Escenarios y aceptación claros.,producto/TPL-073_product_canvas.md
+TPL-074,producto,User Story Map,"Mapea flujo completo, selecciona slice mínimo.",Release entrega resultado extremo a extremo.,producto/TPL-074_user_story_map.md
+TPL-075,producto,Design Sprint Plan,"Preparar investigación, explorar, elegir, prototipar y probar.",Aprendizaje documentado.,producto/TPL-075_design_sprint_plan.md
+TPL-076,producto,Outcome Roadmap,"Planifica resultados, no solo features y fechas.",Roadmap coherente con riesgos.,producto/TPL-076_outcome_roadmap.md
+TPL-077,producto,North Star Framework,Elige métrica de resultado útil y protege calidad.,No optimiza volumen a costa del valor.,producto/TPL-077_north_star_framework.md
+TPL-078,producto,PMF Pyramid,Valida niveles inferiores antes de pulir interfaz.,Producto ligado a necesidad.,producto/TPL-078_pmf_pyramid.md
+TPL-079,producto,AARRR / Growth Loops,"Define evento, denominador, período y canal.",Métricas accionables.,producto/TPL-079_aarrr_growth_loops.md
+TPL-080,producto,Cohort Analysis,"Conserva denominador, analiza por segmento.",Retención e ingreso comparables.,producto/TPL-080_cohort_analysis.md
+TPL-081,ventas,Go-to-Market Plan,Empieza con canales limitados y conecta funnel a caja.,Plan de adquisición cuantificado.,ventas/TPL-081_go_to_market_plan.md
+TPL-082,ventas,Sales Playbook,"Documenta proceso probado, revisa pérdidas.",Venta repetible o hipótesis clara.,ventas/TPL-082_sales_playbook.md
+TPL-083,ventas,Pipeline y Win/Loss,Registra oportunidades reales; no confundir lead y oportunidad.,Forecast trazable y causas.,ventas/TPL-083_pipeline_y_win_loss.md
+TPL-084,ventas,Buyer Enablement Pack,"Prepara business case, seguridad e integración por actor.",Comprador puede avanzar internamente.,ventas/TPL-084_buyer_enablement_pack.md
+TPL-085,ventas,Customer Success Plan,"Mide valor, no solo logins.",Éxito y renovación evaluables.,ventas/TPL-085_customer_success_plan.md
+TPL-086,ventas,Venture Client / Design Partner,Busca compromiso concreto y reglas; revisión contractual.,Colaboración con recursos y resultado.,ventas/TPL-086_venture_client_design_partner.md
+TPL-087,finanzas,Unit Economics,"Usa costos atribuibles, evita LTV sin retención estable.",Economía por unidad defendible.,finanzas/TPL-087_unit_economics.md
+TPL-088,finanzas,Flujo de caja y escenarios,"Separa ingresos de cobros, subsidio de ventas, IVA e impuestos según aplique.",Caja y capital requerido reconciliados.,finanzas/TPL-088_flujo_de_caja_y_escenarios.md
+TPL-089,finanzas,Capital Strategy,"Compara ventas, subsidios, capital y deuda.","Financia riesgo apropiado, no depende de promesas.",finanzas/TPL-089_capital_strategy.md
+TPL-090,finanzas,Investment Memo,Escribe desde perspectiva crítica del inversor.,Razones para invertir y no invertir explícitas.,finanzas/TPL-090_investment_memo.md
+TPL-091,finanzas,Cap Table simplificada,Modela dilución; valida con abogado antes de firmar.,Participaciones suman 100% y condiciones entendidas.,finanzas/TPL-091_cap_table_simplificada.md
+TPL-092,finanzas,Data Room Checklist,"Separa legal, contable, ventas, producto, IP y seguridad.",Acceso controlado y documentación actualizada.,finanzas/TPL-092_data_room_checklist.md
+TPL-093,operacion,RACI y Operating Model,Un aprobador por decisión cuando sea razonable.,Responsabilidades y capacidad claras.,operacion/TPL-093_raci_y_operating_model.md
+TPL-094,operacion,Risk Register / FMEA,Prioriza riesgos críticos; no promediar bloqueos.,Mitigación y responsable definidos.,operacion/TPL-094_risk_register_fmea.md
+TPL-095,operacion,Pre-mortem / Pivot Kill Criteria,Imagina fracaso y predefine cuándo cambiar o detenerse.,Criterios anteriores a inversión significativa.,operacion/TPL-095_pre_mortem_pivot_kill_criteria.md
+TPL-096,operacion,IP y licencias,"Audita código, datos, modelos, contratos y marca.",Derechos y riesgos registrados.,operacion/TPL-096_ip_y_licencias.md
+TPL-097,operacion,Security & Privacy,Aplicar minimización; verificar leyes vigentes y sector.,Riesgos críticos identificados y mitigados.,operacion/TPL-097_security_privacy.md
+TPL-098,operacion,Theory of Change / Sostenibilidad,Distingue resultados e impactos; prioriza ODS materiales.,Indicadores medibles y medidas.,operacion/TPL-098_theory_of_change_sostenibilidad.md
+TPL-099,operacion,Readiness Assessment,"TRL, IRL, ARL, PMF y EntreComp por separado.",No hay puntuación sin evidencia.,operacion/TPL-099_readiness_assessment.md
+TPL-100,operacion,Weekly Operating Review,Revisa hechos y un cuello de botella; define siguiente hito.,Decisiones y tareas medibles.,operacion/TPL-100_weekly_operating_review.md
+TPL-101,operacion,Mentor Session,"Prepara preguntas, registra y contrasta recomendaciones.",Acción concreta y dueño.,operacion/TPL-101_mentor_session.md
+TPL-102,operacion,Founder Case Study,"Separa declaración del fundador, observación y tu interpretación.",Aprendizaje trazable y no generalizado.,operacion/TPL-102_founder_case_study.md
+TPL-103,corfo,Funding Eligibility Matrix,"Verifica BAG, bases, focalización, modificaciones y formulario.",Ningún requisito crítico pendiente.,corfo/TPL-103_funding_eligibility_matrix.md
+TPL-104,corfo,Funding Dossier,"Define intervención específica, no toda la empresa.",Plan coherente con bases.,corfo/TPL-104_funding_dossier.md
+TPL-105,corfo,Presupuesto y rendición,Verifica elegibilidad y conciliación; no confundir gasto con rendición aprobada.,Montos y documentación trazables.,corfo/TPL-105_presupuesto_y_rendicin.md
+TPL-106,corfo,Marco lógico y Gantt,Relaciona cada actividad con resultado y recurso.,Cronograma ejecutable.,corfo/TPL-106_marco_lgico_y_gantt.md
+TPL-107,corfo,Rúbrica oficial y matriz de evidencia,"Transcribe criterios del llamado, no inventes pesos; evalúa admisibilidad primero.",Respuesta sustentada y versión oficial registrada.,corfo/TPL-107_rbrica_oficial_y_matriz_de_evidencia.md
+TPL-108,corfo,Pitch y Red Team,Ensaya formato exigido y respuestas críticas.,Pitch coherente con formulario.,corfo/TPL-108_pitch_y_red_team.md

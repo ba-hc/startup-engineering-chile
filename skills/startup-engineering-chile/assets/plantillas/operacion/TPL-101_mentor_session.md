@@ -1,0 +1,32 @@
+# TPL-101 — Mentor Session
+
+**Proyecto:** [ ] · **Versión:** [ ] · **Fecha:** [ ] · **Responsable:** [ ]
+
+**Uso:** Prepara preguntas, registra y contrasta recomendaciones.
+
+## Completar
+| Campo | Contenido | ID evidencia / supuesto / fuente |
+|---|---|---|
+| Mentor |  |  |
+| experiencia |  |  |
+| objetivo |  |  |
+| evidencia |  |  |
+| duda |  |  |
+| consejo |  |  |
+| conflicto |  |  |
+| decisión |  |  |
+| acción |  |  |
+| plazo |  |  |
+
+## Criterio de aceptación
+Acción concreta y dueño.
+
+## Decisión y control
+- Hipótesis más incierta: [ ]
+- Alternativa considerada: [ ]
+- Evidencia faltante / limitación: [ ]
+- Próxima acción y responsable: [ ]
+- Fecha y criterio de éxito: [ ]
+- Decisión: Go / Hold / Recycle / Kill / no aplica
+
+Formato de trabajo propio, inspirado en metodologías identificadas en el manual. Si corresponde utilizar el canvas visual original, consulta los enlaces de `../../../references/biblioteca/FUENTES.md`. No atribuir este formato a un tercero ni presentarlo como documento obligatorio de CORFO.

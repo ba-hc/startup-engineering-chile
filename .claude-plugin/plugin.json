@@ -1,0 +1,12 @@
+{
+  "name": "startup-engineering-chile",
+  "description": "Mentor de startups para Chile y LATAM: valida ideas con evidencia, analiza competencia y prepara postulaciones a CORFO, ANID y Start-Up Chile.",
+  "version": "1.0.0",
+  "author": {
+    "name": "ba-hc"
+  },
+  "homepage": "https://github.com/ba-hc/startup-engineering-chile",
+  "repository": "https://github.com/ba-hc/startup-engineering-chile",
+  "license": "MIT AND CC-BY-4.0",
+  "keywords": ["startup", "chile", "latam", "corfo", "validacion", "emprendimiento", "español"]
+}

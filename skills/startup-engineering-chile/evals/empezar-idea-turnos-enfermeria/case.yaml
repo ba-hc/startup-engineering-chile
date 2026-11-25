@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: empezar-idea-turnos-enfermeria
+expected_outcome: |
+  Primer turno liviano en modo Empezar: refleja el problema sin nombrar la app y pide corrección, entrega un hallazgo clave (alternativa existente o hipótesis más riesgosa), ubica al proyecto en G0, hace como máximo 3 preguntas y anticipa el próximo paso. Crea un expediente mínimo sin registrar decisiones ni criterios de éxito antes de que el usuario confirme, y sin inventar cifras del perfil.

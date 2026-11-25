@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: pulir-pitch-con-errores
+expected_outcome: |
+  Primer turno de Pulir: el bloqueo de admisibilidad (persona jurídica con ventas y ~35 meses no calza con Semilla Inicia) aparece al inicio; sugiere verificar bases y un instrumento alternativo; en el chat solo las 3 brechas principales y ≤3 preguntas; el diagnóstico por gate y la auditoría detallada del one-pager quedan en archivos del expediente.
+context:
+  scaffold_script: place-files.sh

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: retomar-con-entrevistas
+expected_outcome: |
+  Retoma desde el expediente existente, analiza las 5 notas contra el criterio fijado antes en EXP-001 y reconoce honestamente que no se cumple (solo 2 de 5 con ≥8 h, 2 casos de turno descubierto, ningún decisor), sin mover el umbral. Registra las entrevistas y la decisión (Recycle/Hold/Kill sobre H-001), destaca la señal inesperada (cambios de turno por WhatsApp, incluso con rFlex) como nueva hipótesis con su propia prueba, señala el vacío de decisores y actualiza 00_estado.md.
+context:
+  scaffold_script: place-files.sh

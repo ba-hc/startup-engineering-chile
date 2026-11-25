@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: complementar-competencia-bodegas
+expected_outcome: |
+  Complementar: hace el análisis completo en archivos (competidores con URL y fecha, alternativas no directas, precios con moneda y unidad, declarado vs verificado, comparación con 0,9 UF) y deja el chat corto con los hallazgos clave, ≤3 preguntas y un próximo paso de validación con clientes.
