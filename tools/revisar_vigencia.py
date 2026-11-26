@@ -9,7 +9,7 @@ Uso: python tools/revisar_vigencia.py [--hoy AAAA-MM-DD] [--salida informe.md]
 Revisa:
 - `_verificado` de parametros_cl.json (6 meses), fondos/instrumentos.json (3) y umbrales_gates.json (12);
 - "Última verificación: AAAA-MM-DD" de los flujos en references/flujos/ (6 meses);
-- fecha de reconsulta de fuentes.csv marcadas como verificadas (12 meses).
+- fecha de reconsulta de las fuentes (references/biblioteca/fuentes_*.csv) marcadas como verificadas (12 meses).
 Sale con código 1 si algo venció.
 """
 import argparse
@@ -57,10 +57,12 @@ def revisar(hoy):
             m = re.search(r"Última verificación:\**\s*(\d{4}-\d{2}-\d{2})", fh.read())
         if m:  # los flujos de método (sin datos que caduquen) no llevan fecha
             evaluar(f"references/flujos/{nombre}", fecha(m.group(1)), MESES_FLUJOS)
-    with open(os.path.join(SKILL, "references", "biblioteca", "fuentes.csv"), encoding="utf-8-sig", newline="") as fh:
-        for fila in csv.DictReader(fh):
-            if fila.get("estado", "").startswith("Verificada"):
-                evaluar(f"fuentes.csv {fila['id']}", fecha(fila.get("fecha_reconsulta", "")), MESES_FUENTES)
+    dbib = os.path.join(SKILL, "references", "biblioteca")
+    for nombre in sorted(n for n in os.listdir(dbib) if n.startswith("fuentes_") and n.endswith(".csv")):
+        with open(os.path.join(dbib, nombre), encoding="utf-8-sig", newline="") as fh:
+            for fila in csv.DictReader(fh):
+                if fila.get("estado", "").strip().lower().startswith("verificad"):
+                    evaluar(f"{nombre} {fila['id']}", fecha(fila.get("fecha_reconsulta", "")), MESES_FUENTES)
     return vencidos, sin_fecha
 
 

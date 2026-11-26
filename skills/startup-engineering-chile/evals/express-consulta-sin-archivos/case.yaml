@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: express-consulta-sin-archivos
+expected_outcome: |
+  Responde en Modo Express: veredicto directo en las primeras líneas (como persona jurídica, probablemente no: la referencia de Semilla Inicia pide menos de 18 meses de inicio de actividades; no tener ventas sí calza) y pide verificar el requisito en las bases del llamado vigente. Cierra ofreciendo en una línea guardar el trabajo como proyecto. No crea `expediente/` ni ningún archivo y no hace preguntas de onboarding.

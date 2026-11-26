@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: flip-delaware-prematuro
+expected_outcome: |
+  Desaconseja hacer el flip ahora: sin term sheet ni un inversionista que lo exija, solo suma costos (abogados en dos países, mantención de la C-Corp y agente registrado, contabilidad y cumplimiento dobles, efectos tributarios del traspaso de acciones y de la PI) sin beneficio. Explica que el gatillo es un term sheet o un inversionista que lo pida como condición. Propone seguir como SpA y dejarla lista para un flip rápido: pacto de accionistas limpio con vesting, PI cedida a la SpA y cap table ordenada. Se apoya en `references/flujos/flip_societario.md` y recomienda asesoría legal y tributaria profesional en Chile y EE. UU.

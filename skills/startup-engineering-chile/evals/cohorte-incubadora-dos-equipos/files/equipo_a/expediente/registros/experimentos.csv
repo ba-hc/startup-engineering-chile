@@ -1,3 +1,0 @@
-﻿experiment_id,hypothesis_id,metodo,poblacion,comparador,metrica,umbral,guardrail,costo_maximo_CLP,inicio,fin,resultado,evidence_id,decision,responsable
-EXP-001,H-001,entrevistas,jefes-mantencion,,nº con >5 h/semana,≥3 de 8,,,2026-10-01,2026-10-10,6 de 8,EV-001,Go,fundadora
-EXP-002,H-002,propuesta-de-precio,plantas-medianas,,nº que acepta,≥2 de 5,,,2026-10-15,2026-11-05,2 de 5,EV-002,Hold,fundadora

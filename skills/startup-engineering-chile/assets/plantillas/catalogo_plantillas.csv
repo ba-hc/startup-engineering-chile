@@ -24,15 +24,15 @@ TPL-022,cliente,Decision-Making Unit,Mapea el proceso de compra y quién aprueba
 TPL-023,cliente,JTBD,Describe resultado deseado independiente de producto.,Job específico y observado.,,no
 TPL-024,cliente,Customer Profile,Prioriza necesidades; no mezcles varios segmentos.,Necesidades priorizadas y trazables.,,no
 TPL-025,cliente,Stakeholder Map,Identifica quién afecta o es afectado por decisión.,Mapa con responsables y acciones.,,no
-TPL-026,cliente,Customer Journey / Experience Map,Reconstruye experiencia actual y futura; usa datos observados.,Fricciones vinculadas a oportunidades.,,no
+TPL-026,cliente,Customer Journey / Experience Map,Reconstruye experiencia actual y futura; usa datos observados.,Fricciones vinculadas a oportunidades.,cliente/TPL-026_customer_journey_experience_map.md,si
 TPL-027,cliente,Service Blueprint,Distingue experiencia visible de operación interna.,Dependencias y fallos identificados.,,no
 TPL-028,cliente,Affinity Diagram,Agrupa observaciones antes de formular insight.,Patrones trazables sin excluir negativos.,,no
 TPL-029,cliente,Importance-Satisfaction Matrix,Identifica necesidad importante poco satisfecha; no inferir sin medición.,Prioridades defendibles.,,no
 TPL-030,mercado,TAM SAM SOM,Calcula bottom-up y límites comerciales. Expresa rangos y evita doble conteo.,Mercado reproducible y SOM derivado de capacidad.,mercado/TPL-030_tam_sam_som.md,si
 TPL-031,mercado,Competitive Benchmark,Incluye no hacer nada e in-house; compara misma tarea y condiciones.,Competidores relevantes y diferencias demostrables.,mercado/TPL-031_competitive_benchmark.md,si
 TPL-032,mercado,Market Intelligence Report,Combina fuentes secundarias y primarias sin confundirlas.,Estudio reproducible y útil para decisión.,,no
-TPL-033,mercado,Positioning Map / Strategy Canvas,Escala y compara atributos valorados por compradores.,Posicionamiento frente a alternativas reales.,,no
-TPL-034,estrategia,Team Charter Canvas,Alinea equipo; acuerda formalmente cuando corresponda.,Responsables y reglas explícitas.,,no
+TPL-033,mercado,Positioning Map / Strategy Canvas,Escala y compara atributos valorados por compradores.,Posicionamiento frente a alternativas reales.,mercado/TPL-033_positioning_map_strategy_canvas.md,si
+TPL-034,estrategia,Team Charter y acuerdo de socios,Alinea equipo; acuerda formalmente cuando corresponda.,Responsables y reglas explícitas.,estrategia/TPL-034_team_charter_y_acuerdo_de_socios.md,si
 TPL-035,estrategia,Founder-Market Fit,Evalúa capacidades demostradas y faltantes.,Plan de cierre de brechas.,,no
 TPL-036,estrategia,Affordable Loss,Establece límite antes de experimentar.,Límite financiero/tiempo aprobado.,estrategia/TPL-036_affordable_loss.md,si
 TPL-037,estrategia,Vision y Design Criteria,Traduce visión en restricciones y criterios de diseño.,"Criterios verificables, no solo eslogan.",,no
@@ -56,7 +56,7 @@ TPL-054,negocio,Pricing y Packaging,"Relaciona precios a valor y costo, muestra 
 TPL-055,negocio,Customer Value Model,Modela valor incremental sin doble conteo.,Beneficio cuantificado y límites.,,no
 TPL-056,negocio,Effectuation Canvas,Empieza por medios y compromisos disponibles.,Experimento posible con riesgo limitado.,,no
 TPL-057,negocio,Ecosystem Canvas,No confundir conversación con alianza.,Mapa accionable y reciprocidad.,,no
-TPL-058,negocio,Business Case / ROI,Distingue caja de capacidad liberada; calcula escenario conservador.,"Cálculo verificable, comprador lo comprende.",,no
+TPL-058,negocio,Business Case / ROI,Distingue caja de capacidad liberada; calcula escenario conservador.,"Cálculo verificable, comprador lo comprende.",negocio/TPL-058_business_case_roi.md,si
 TPL-059,validacion,Assumption Map,Ordena incertidumbres por capacidad de invalidar negocio.,Supuestos críticos priorizados.,validacion/TPL-059_assumption_map.md,si
 TPL-060,validacion,Riskiest Assumption,Selecciona una hipótesis y una prueba económica.,Prueba vinculada al principal riesgo.,,no
 TPL-061,validacion,Experiment Canvas / Test Card,Define éxito antes de observar datos; prueba proporcional.,Experimento ejecutable y auditable.,validacion/TPL-061_experiment_canvas_test_card.md,si
@@ -74,13 +74,13 @@ TPL-072,producto,Opportunity Solution Tree,Cada rama es una hipótesis; no confu
 TPL-073,producto,Product Canvas,Delimita experiencia y calidad mínima.,Escenarios y aceptación claros.,,no
 TPL-074,producto,User Story Map,"Mapea flujo completo, selecciona slice mínimo.",Release entrega resultado extremo a extremo.,,no
 TPL-075,producto,Design Sprint Plan,"Preparar investigación, explorar, elegir, prototipar y probar.",Aprendizaje documentado.,,no
-TPL-076,producto,Outcome Roadmap,"Planifica resultados, no solo features y fechas.",Roadmap coherente con riesgos.,,no
+TPL-076,producto,Outcome Roadmap,"Planifica resultados, no solo features y fechas.",Roadmap coherente con riesgos.,producto/TPL-076_outcome_roadmap.md,si
 TPL-077,producto,North Star Framework,Elige métrica de resultado útil y protege calidad.,No optimiza volumen a costa del valor.,,no
-TPL-078,producto,PMF Pyramid,Valida niveles inferiores antes de pulir interfaz.,Producto ligado a necesidad.,,no
+TPL-078,producto,PMF Pyramid,Valida niveles inferiores antes de pulir interfaz.,Producto ligado a necesidad.,producto/TPL-078_pmf_pyramid.md,si
 TPL-079,producto,AARRR / Growth Loops,"Define evento, denominador, período y canal.",Métricas accionables.,,no
-TPL-080,producto,Cohort Analysis,"Conserva denominador, analiza por segmento.",Retención e ingreso comparables.,,no
+TPL-080,producto,Cohort Analysis,"Conserva denominador, analiza por segmento.",Retención e ingreso comparables.,producto/TPL-080_cohort_analysis.md,si
 TPL-081,ventas,Go-to-Market Plan,Empieza con canales limitados y conecta funnel a caja.,Plan de adquisición cuantificado.,,no
-TPL-082,ventas,Sales Playbook,"Documenta proceso probado, revisa pérdidas.",Venta repetible o hipótesis clara.,,no
+TPL-082,ventas,Sales Playbook,"Documenta proceso probado, revisa pérdidas.",Venta repetible o hipótesis clara.,ventas/TPL-082_sales_playbook.md,si
 TPL-083,ventas,Pipeline y Win/Loss,Registra oportunidades reales; no confundir lead y oportunidad.,Forecast trazable y causas.,ventas/TPL-083_pipeline_y_win_loss.md,si
 TPL-084,ventas,Buyer Enablement Pack,"Prepara business case, seguridad e integración por actor.",Comprador puede avanzar internamente.,,no
 TPL-085,ventas,Customer Success Plan,"Mide valor, no solo logins.",Éxito y renovación evaluables.,,no
@@ -89,13 +89,13 @@ TPL-087,finanzas,Unit Economics,"Usa costos atribuibles, evita LTV sin retenció
 TPL-088,finanzas,Flujo de caja y escenarios,"Separa ingresos de cobros, subsidio de ventas, IVA e impuestos según aplique.",Caja y capital requerido reconciliados.,finanzas/TPL-088_flujo_de_caja_y_escenarios.md,si
 TPL-089,finanzas,Capital Strategy,"Compara ventas, subsidios, capital y deuda.","Financia riesgo apropiado, no depende de promesas.",,no
 TPL-090,finanzas,Investment Memo,Escribe desde perspectiva crítica del inversor.,Razones para invertir y no invertir explícitas.,,no
-TPL-091,finanzas,Cap Table simplificada,Modela dilución; valida con abogado antes de firmar.,Participaciones suman 100% y condiciones entendidas.,,no
-TPL-092,finanzas,Data Room Checklist,"Separa legal, contable, ventas, producto, IP y seguridad.",Acceso controlado y documentación actualizada.,,no
+TPL-091,finanzas,Cap Table simplificada,Modela dilución; valida con abogado antes de firmar.,Participaciones suman 100% y condiciones entendidas.,finanzas/TPL-091_cap_table_simplificada.md,si
+TPL-092,finanzas,Data Room Checklist,"Separa legal, contable, ventas, producto, IP y seguridad.",Acceso controlado y documentación actualizada.,finanzas/TPL-092_data_room_checklist.md,si
 TPL-093,operacion,RACI y Operating Model,Un aprobador por decisión cuando sea razonable.,Responsabilidades y capacidad claras.,,no
-TPL-094,operacion,Risk Register / FMEA,Prioriza riesgos críticos; no promediar bloqueos.,Mitigación y responsable definidos.,,no
+TPL-094,operacion,Risk Register / FMEA,Prioriza riesgos críticos; no promediar bloqueos.,Mitigación y responsable definidos.,operacion/TPL-094_risk_register_fmea.md,si
 TPL-095,operacion,Pre-mortem / Pivot Kill Criteria,Imagina fracaso y predefine cuándo cambiar o detenerse.,Criterios anteriores a inversión significativa.,operacion/TPL-095_pre_mortem_pivot_kill_criteria.md,si
 TPL-096,operacion,IP y licencias,"Audita código, datos, modelos, contratos y marca.",Derechos y riesgos registrados.,,no
-TPL-097,operacion,Security & Privacy,Aplicar minimización; verificar leyes vigentes y sector.,Riesgos críticos identificados y mitigados.,,no
+TPL-097,operacion,Security & Privacy / Checklist Ley 21.719,Aplicar minimización; verificar leyes vigentes y sector.,Riesgos críticos identificados y mitigados.,operacion/TPL-097_security_privacy_checklist_ley_21_719.md,si
 TPL-098,operacion,Theory of Change / Sostenibilidad,Distingue resultados e impactos; prioriza ODS materiales.,Indicadores medibles y medidas.,,no
 TPL-099,operacion,Readiness Assessment,"TRL, IRL, ARL, PMF y EntreComp por separado.",No hay puntuación sin evidencia.,,no
 TPL-100,operacion,Weekly Operating Review,Revisa hechos y un cuello de botella; define siguiente hito.,Decisiones y tareas medibles.,,no
@@ -107,3 +107,6 @@ TPL-105,corfo,Presupuesto y rendición,Verifica elegibilidad y conciliación; no
 TPL-106,corfo,Marco lógico y Gantt,Relaciona cada actividad con resultado y recurso.,Cronograma ejecutable.,corfo/TPL-106_marco_logico_y_gantt.md,si
 TPL-107,corfo,Rúbrica oficial y matriz de evidencia,"Transcribe criterios del llamado, no inventes pesos; evalúa admisibilidad primero.",Respuesta sustentada y versión oficial registrada.,,no
 TPL-108,corfo,Pitch y Red Team,Ensaya formato exigido y respuestas críticas.,Pitch coherente con formulario.,corfo/TPL-108_pitch_y_red_team.md,si
+TPL-109,finanzas,SAFE y Term Sheet,Modela la conversión post-money con cap_table.py antes de negociar; compara cada término con lo habitual; revisión de abogado.,"Dilución simulada, términos entendidos y texto revisado por abogado antes de firmar.",finanzas/TPL-109_safe_y_term_sheet.md,si
+TPL-110,ventas,Carta de intención (LOI) B2B,"Documenta intención de compra con condición, precio, plazo y firmante con atribución; no confundir con venta facturada.","Condición medible, monto, fecha de decisión y atribución del firmante verificada.",ventas/TPL-110_carta_de_intencion_loi_b2b.md,si
+TPL-111,operacion,Acuerdo de confidencialidad (NDA),Protege información específica por un plazo definido cuando hay que compartirla; no se pide en discovery ni a inversionistas.,"Información, excepciones, plazo, devolución y PI definidos; revisado por abogado.",operacion/TPL-111_acuerdo_de_confidencialidad_nda.md,si

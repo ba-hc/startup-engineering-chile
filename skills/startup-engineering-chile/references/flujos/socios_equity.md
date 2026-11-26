@@ -12,13 +12,13 @@ Regístralo en TPL-034 (Team Charter) y en `00_estado.md` → Equipo y dedicaci�
 ## 2. Reparto
 - **Fijo** (p. ej. 50/50 o 60/40): simple; riesgoso si las dedicaciones divergen. Iguales con dedicaciones distintas es la fuente clásica de conflicto.
 - **Dinámico** (estilo "slicing pie"): acciones en proporción a aportes valorizados hasta un hito; justo pero exige registro disciplinado.
-- Reserva un **pool de opciones** (típicamente 5–15%; ver §7) si se contratará talento clave; simula con `finanzas.py dilucion --fundadores "A:50,B:50" --pool 10`.
+- Reserva un **pool de opciones** (típicamente 5–15%; ver §7) si se contratará talento clave; simula con `finanzas.py dilucion --fundadores "A:50,B:50" --pool 10`. Para llevar la tabla real: `cap_table.py init --fundadores "A:50,B:50" --pool 10 --vesting 48 --cliff 12 --inicio-vesting AAAA-MM-DD --dir <carpeta>`, luego `cap_table.py ver --fecha AAAA-MM-DD` (acciones consolidadas a esa fecha), `safe`, `emitir`, `ronda` y `exportar --xlsx`.
 
 ## 3. Vesting
 Estándar de mercado: **4 años con 1 año de cliff** (nada si se va antes de 12 meses; luego mensual). En Chile se implementa vía pacto de accionistas con opción de compra sobre acciones no consolidadas (no es automático por ley). Define *good leaver* / *bad leaver* y precio de recompra.
 
 ## 4. Propiedad intelectual
-Todo el código, marca y dominios deben quedar **a nombre de la SpA** (cesión de derechos de cada socio y freelancer). Revisa contratos laborales previos de los socios (cláusulas de PI o no competencia). Registra en `ip_licencias.csv`. Antes de lanzar marca: búsqueda en INAPI (ver `trampas_chile.md`).
+Todo el código, marca y dominios deben quedar **a nombre de la SpA** (cesión de derechos de cada socio y freelancer). Revisa contratos laborales previos de los socios (cláusulas de PI o no competencia). Regístralo en la bitácora (`tipo=ip`). Antes de lanzar marca: búsqueda en INAPI (ver `trampas_chile.md`).
 
 ## 5. Constituir la SpA
 - **Registro de Empresas y Sociedades ("Tu Empresa en un Día")**: gratis, en línea, RUT e inicio de actividades rápidos; modificaciones gratuitas en el mismo registro. Sirve y es habitual en etapas tempranas.

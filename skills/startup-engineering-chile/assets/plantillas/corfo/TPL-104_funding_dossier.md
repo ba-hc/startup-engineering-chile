@@ -1,6 +1,10 @@
 # TPL-104 — Expediente de postulación (Funding Dossier)
 
-**Para qué:** definir la intervención que financia el fondo (no toda la empresa), con resultados verificables, adicionalidad y presupuesto reconciliado. · **Gate:** transversal (fondos, tras TPL-103) · **Alimenta:** `rendiciones.csv`, `indicadores.csv`, `riesgos.csv`
+> **Para qué sirve:** Definir la intervención que financia el fondo (no toda la empresa), con resultados verificables, adicionalidad y presupuesto reconciliado.
+> **Cuándo NO usarla:** Antes de pasar la matriz de elegibilidad (TPL-103), o si el fondo te obliga a hacer algo que no está en tu plan; postular solo por la plata desvía el proyecto.
+> **Micro-ejemplo resuelto:** En vez de "financiar el crecimiento de la empresa", la intervención es "validar el sensor de heladas en 3 viñas del Maule en 8 meses", con subsidio de $25 M, aporte de $8,3 M (75/25) y resultado verificable "error de predicción ≤ 1 °C".
+
+**Gate:** transversal (fondos, tras TPL-103) · **Alimenta:** `rendiciones.csv`, `bitacora.csv` (tipo kpi y riesgo)
 
 ## Completar
 **Convocatoria:** [ ] · **Bases:** [versión, fecha, URL] · **Cierre:** [fecha y hora] · **Elegibilidad:** TPL-103 sin NO CUMPLE
@@ -18,7 +22,7 @@
 | [desarrollo / validación / comercialización / plazo] | | | |
 
 **Presupuesto:** total [ ] = subsidio [ ] + aporte [ ] → detalle en TPL-105 y `fondos_lint.py presupuesto --instrumento <clave> --dir .`
-**Actividades y cronograma:** TPL-106 (`fondos_lint.py coherencia`) · **Riesgos top 3:** [ ] → `riesgos.csv`
+**Actividades y cronograma:** TPL-106 (`fondos_lint.py coherencia`) · **Riesgos top 3:** [ ] → `bitacora.csv` (tipo riesgo)
 **Respuestas:** `entregables/postulacion_<instrumento>.md` con `## Título [máx N]` y `fondos_lint.py caracteres`; cada una: afirmación → evidencia → comparación → límite → siguiente acción.
 
 ## Ejemplo bueno (ficticio)

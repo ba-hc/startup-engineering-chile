@@ -1,0 +1,14 @@
+{
+  "capas": [
+    {
+      "base": "vacio",
+      "destino": ".",
+      "proyecto": "TurnoFacil",
+      "nivel": "sprint",
+      "registros": [
+        "evidencias",
+        "hipotesis"
+      ]
+    }
+  ]
+}

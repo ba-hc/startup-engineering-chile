@@ -1,4 +1,0 @@
-﻿hypothesis_id,venture_id,dominio,enunciado_refutable,importancia,evidencia_actual,criterio_rechazo,riesgo,dependencias,experiment_id,responsable,estado
-H-001,DEMO,problema,"Jefes de mantención de plantas medianas dedican >5 h/semana a armar informes de inspección; si <3 de 8 lo confirman, reformulamos",alta,8 entrevistas,<3 de 8 con >5 h/semana,alto,,,fundadora,confirmado
-H-002,DEMO,precio,Las plantas pagan ≥ 50.000/mes por emitir informes en el día,alta,,<2 de 5 aceptan propuesta a ese precio,alto,,,fundadora,confirmado
-H-003,DEMO,canal,El jefe de mantención puede aprobar una compra de este monto sin licitación,media,,,medio,,,fundadora,propuesta-agente

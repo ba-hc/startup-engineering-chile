@@ -1,6 +1,10 @@
 # TPL-015 — Ficha de entrevista (Interview Snapshot)
 
-**Para qué:** resumir una entrevista en una página, el mismo día, separando hechos de interpretación y ligándola a hipótesis. · **Gate:** G1 · **Alimenta:** `entrevistas.csv`, `evidencias.csv`, `hipotesis.csv`
+> **Para qué sirve:** Resumir una entrevista en una página, el mismo día, separando hechos de interpretación y ligándola a hipótesis.
+> **Cuándo NO usarla:** Para conversaciones casuales de networking sin guion ni hipótesis; registrarlas como entrevista infla el conteo de evidencia.
+> **Micro-ejemplo resuelto:** ENT-007 (jefe de bodega, distribuidora de 12 camiones) — hecho: "rehacemos 3 rutas por semana a mano, unas 2 h cada una"; interpretación: "el dolor sería la planificación, no el GPS"; se liga a H-003 como "apoya, débil (1 caso)".
+
+**Gate:** G1 · **Alimenta:** `entrevistas.csv`, `evidencias.csv`, `hipotesis.csv`
 
 ## Completar
 **ENT-xxx** · Fecha: [ ] · Segmento: [ ] · Rol: [ ] · Consentimiento: [si/no] · Entrevistador: [iniciales] · Notas originales anonimizadas: [ruta en `investigacion/notas/`]

@@ -1,3 +1,0 @@
-﻿hypothesis_id,venture_id,dominio,enunciado_refutable,importancia,evidencia_actual,criterio_rechazo,riesgo,dependencias,experiment_id,responsable,estado
-H-001,TurnoFacil,problema,Las supervisoras de enfermería de clínicas privadas dedican 8 h o más por ciclo mensual a armar la programación de turnos,alta,experiencia de la fundadora en 1 clínica (EV-001),menos de 4 de 6 supervisoras entrevistadas dedican 8 h o más,alto,,EXP-001,Fundadora,confirmado
-H-002,TurnoFacil,cliente,"Quien compraría es la jefatura de enfermería o RRHH, no la supervisora",alta,ninguna,ningún decisor reconoce el problema como prioridad,alto,,EXP-001,Fundadora,confirmado

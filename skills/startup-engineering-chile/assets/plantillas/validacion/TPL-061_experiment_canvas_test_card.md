@@ -1,6 +1,10 @@
 # TPL-061 — Tarjeta de experimento (Experiment Canvas / Test Card)
 
-**Para qué:** dejar escrito, antes de mirar un dato, qué se prueba, cómo se mide, qué umbral decide y qué se hará con cada resultado. · **Gate:** G1–G7 · **Alimenta:** `experimentos.csv`, `evidencias.csv`, `decisiones.csv`
+> **Para qué sirve:** Dejar escrito, antes de mirar un dato, qué se prueba, cómo se mide, qué umbral decide y qué se hará con cada resultado.
+> **Cuándo NO usarla:** Para tareas de ejecución sin incertidumbre (emitir una factura, corregir un error conocido); no todo trabajo es un experimento.
+> **Micro-ejemplo resuelto:** "de 200 pymes contactadas, ≥ 15% agenda una demo de conciliación bancaria → seguimos; < 5% → cambiamos de segmento; entre ambos → ajustamos el mensaje y repetimos una vez"; agendaron 19 (9,5%), así que se ajusta el mensaje.
+
+**Gate:** G1–G7 · **Alimenta:** `experimentos.csv`, `evidencias.csv`, `decisiones.csv`
 
 ## Completar
 *Los pasos 1–6 se firman (fecha y responsable) antes de lanzar. Después solo se llena el 7.*

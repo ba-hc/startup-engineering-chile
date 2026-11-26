@@ -1,6 +1,10 @@
 # TPL-103 — Matriz de elegibilidad del fondo (Funding Eligibility Matrix)
 
-**Para qué:** confirmar con las bases vigentes que el postulante es admisible antes de escribir la postulación. · **Gate:** transversal (fondos; antes de formular) · **Alimenta:** `corfo_elegibilidad.csv`, `evidencias.csv`
+> **Para qué sirve:** Confirmar con las bases vigentes que el postulante es admisible antes de escribir la postulación.
+> **Cuándo NO usarla:** Si no hay convocatoria abierta o anunciada con bases publicadas; sobre bases antiguas o la ficha web, la matriz da una falsa seguridad.
+> **Micro-ejemplo resuelto:** Una SpA con 20 meses de inicio de actividades descubre, antes de invertir 40 horas en formular, que el instrumento elegido exige menos de 18 meses (según las bases del llamado, supuesto) y cambia a uno para empresas con ventas.
+
+**Gate:** transversal (fondos; antes de formular) · **Alimenta:** `bitacora.csv` (tipo requisito), `evidencias.csv`
 
 ## Completar
 **1. Datos del postulante** (con respaldo)
@@ -48,7 +52,7 @@ Veredicto: no se formula hasta cerrar la incompatibilidad.
 - Cada requisito cita bases con fecha y URL y tiene `evidence_id` o estado FALTA DATO.
 - La salida de `fondos_lint.py elegibilidad` está pegada y sus VERIFICAR tienen responsable y fecha.
 - No queda ningún NO CUMPLE ni FALTA DATO crítico antes de formular.
-- Filas registradas en `corfo_elegibilidad.csv`.
+- Filas registradas en `bitacora.csv` (tipo requisito).
 
 ## Decisión
 Criterio fijado antes: [ ] · Resultado: [ ] · Decisión: Go / Hold / Recycle / Kill · Próxima acción, responsable y fecha: [ ]

@@ -1,0 +1,8 @@
+﻿gasto_id,actividad,resultado,cuenta_presupuestaria,presupuesto_CLP,comprometido_CLP,pagado_CLP,subsidio_CLP,aporte_CLP,tipo_aporte,iva_incluido,proveedor,documento,fecha,autorizacion,medio_verificacion,estado
+GAS-001,Honorarios socio (CTO): desarrollo de plataforma web y firmware,Plataforma MVP operativa,Recursos humanos,9600000,,,9600000,0,,no,Socio fundador (CTO),Boleta de honorarios mensual,2027-01-04,,,confirmado
+GAS-002,Ingeniero de firmware part-time (6 meses),Firmware de sensores estable,Recursos humanos,4400000,,,2400000,2000000,pecuniario,no,Por contratar,Contrato a plazo fijo,2027-03-01,,,confirmado
+GAS-003,Diseño de placa electrónica y prototipo inicial,Prototipo v0 del sensor,Operación,1190000,1190000,1190000,1190000,0,,si,Taller de electrónica (Concepción),Factura,2026-10-15,,Factura y comprobante de transferencia,confirmado
+GAS-004,Piloto en 3 distribuidoras (traslados e instalación),Informe de piloto con 3 distribuidoras,Operación,1354000,,,354000,1000000,pecuniario,no,Varios,Boletas y facturas,2027-05-03,,,confirmado
+GAS-005,Servicios cloud y conectividad IoT (12 meses),Plataforma en producción para el piloto,Operación,714000,,,714000,0,,si,Proveedor cloud,Factura mensual,2027-01-15,,,confirmado
+GAS-006,Compra anticipada de 20 sensores y 4 gateways LoRa,Kit de sensores para el piloto,Inversión,2142000,2142000,,742000,1400000,pecuniario,si,Distribuidor de componentes,Orden de compra,2026-12-10,,,confirmado
+GAS-007,Servicio contable y gastos de administración,Contabilidad del proyecto al día,Administración,600000,,,0,600000,pecuniario,no,Contador externo,Boleta de honorarios,2027-01-29,,,confirmado

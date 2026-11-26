@@ -46,7 +46,8 @@ Fuentes: Chambers 2026 (Chile), Index Ventures *Rewarding Talent* y datos de Car
    - `expediente.py informe deck`: borrador en Marp con cada vacío marcado [FALTA EVIDENCIA];
    - `informe onepager`;
    - modelo con `finanzas.py escenarios --modelo`;
-   - data room mínimo: estatutos, registro de accionistas, pacto, PI cedida a la SpA, contratos con clientes y estados financieros.
+   - data room mínimo: estatutos, registro de accionistas, pacto, PI cedida a la SpA, contratos con clientes y estados financieros. `dataroom.py revisar --dir <carpeta>` muestra qué falta en 9 carpetas y qué cifras del pitch no tienen EV-; `dataroom.py armar --zip` lo empaqueta sin notas de entrevistas;
+   - cap table al día: `cap_table.py ver` y, para la ronda, `cap_table.py ronda --pre … --inversion … --pool-post …`.
 2. **Lista de 30–60 inversionistas** con tesis compatible (etapa, sector, ticket). Regístralos en `cuentas_y_pipeline.csv` con `segmento=inversionista`.
 3. **Red team antes de salir** (`red_team.md`, rol "Inversionista seed LatAm") y compuerta antisesgo (`compuerta_antisesgo.md`).
 4. **Reuniones en bloque** de 2–3 semanas para crear ritmo. Registra cada objeción como evidencia: tres objeciones iguales son una hipótesis por probar, no un problema de pitch.

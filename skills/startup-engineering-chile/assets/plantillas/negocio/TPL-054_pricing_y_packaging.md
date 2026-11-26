@@ -1,6 +1,10 @@
 # TPL-054 — Precio y empaquetado (Pricing & Packaging)
 
-**Para qué:** fijar métrica de cobro, niveles y precio anclados al valor frente a la alternativa, y probarlos con un compromiso real. · **Gate:** G4 (–G7) · **Alimenta:** `experimentos.csv`, `evidencias.csv`, `decisiones.csv`
+> **Para qué sirve:** Fijar métrica de cobro, niveles y precio anclados al valor frente a la alternativa, y probarlos con un compromiso real.
+> **Cuándo NO usarla:** Antes de conocer la alternativa actual del cliente y su costo; sin ese ancla, cualquier precio es copiado o inventado.
+> **Micro-ejemplo resuelto:** Si una lavandería industrial pierde $1.200.000/mes en prendas extraviadas y el sistema de trazabilidad evita la mitad ($600.000), cobrar 6 UF/mes (≈ $240.000) captura 40% del ahorro y le deja al gerente un argumento claro.
+
+**Gate:** G4 (–G7) · **Alimenta:** `experimentos.csv`, `evidencias.csv`, `decisiones.csv`
 
 ## Completar
 ### 1. Ancla de valor

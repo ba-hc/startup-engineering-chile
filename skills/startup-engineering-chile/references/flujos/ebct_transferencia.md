@@ -13,7 +13,7 @@ Usa el track `deeptech` (`expediente.py init --track deeptech`): los umbrales pi
 |---|---|---|---|---|
 | Tesis | **VIU 2026** (ANID) | Estudiantes o egresados, con patrocinio de su universidad | Hasta $36M; aporte ≥20% | ≥2 |
 | I+D en la universidad | **FONDEF IDeA I+D 2027** (Res. Ex. ANID 9538/2026) | Solo entidades sin fines de lucro (universidades, centros), con 1–3 empresas asociadas | Hasta $230M en 24 meses; aporte ≥30% de la beneficiaria | 2–3 (sobre TRL 3 no puede postular) |
-| Spin-off | **ANID Startup CTCI 2027** (ex Startup Ciencia) | Persona jurídica de menos de 10 años, micro o pequeña (ventas ≤25.000 UF) | Hasta $134,55M (85%); aporte ≥15% (10% si la lidera una mujer o está fuera de la RM). Cierra el 14-01-2027 | 3–6 (2026) |
+| Spin-off | **ANID Startup CTCI 2027** (ex Startup Ciencia) | Persona jurídica de menos de 10 años, micro o pequeña (ventas ≤25.000 UF) | Hasta $134,55M (85%); aporte ≥15% (10% si la lidera una mujer o está fuera de la RM). Cierra el 14-01-2027 | 3–7 |
 | Validación de mercado | **CORFO Crea y Valida** | Empresas | Hasta $180M individual / $220M colaborativo; micro y pequeñas hasta 80% | Ver bases |
 | Escalamiento | **CORFO Consolida y Expande** | Empresas | Ver bases vigentes | — |
 
@@ -44,7 +44,7 @@ Si la tecnología nació en la universidad, la PI suele ser de la universidad. E
   
   No hay una fuente pública confiable de regalías "típicas" en Chile: compara con la política de cada universidad y con el modelo financiero (`finanzas.py escenarios`).
 - **Dedicación del equipo académico:** define por escrito cuántas horas aporta cada investigador y quién será el gerente de tiempo completo. Los evaluadores lo miran y los fondos lo exigen (Startup Ciencia pide gerente de 40 h).
-- Registra cada activo en `ip_licencias.csv` (titular, licencia, restricciones) y la negociación como riesgo en `riesgos.csv`.
+- Registra cada activo en la bitácora (`add bitacora tipo=ip titulo=… detalle="titular, licencia, restricciones"`) y la negociación como riesgo (`tipo=riesgo`).
 
 ## 4. Errores frecuentes
 - Confundir madurez técnica con validación de mercado: hay que hacer las entrevistas de G1 con usuarios industriales, no solo con académicos (`flujos/ciclo_bloque.md`).
@@ -52,4 +52,4 @@ Si la tecnología nació en la universidad, la PI suele ser de la universidad. E
 - Constituir la SpA sin resolver la licencia: los inversionistas y CORFO piden la cadena de titularidad.
 - Postular a FONDEF como empresa: solo postulan entidades sin fines de lucro; la empresa entra como asociada.
 
-Cierra con: TRL actual con su evidencia, gate comercial, instrumento siguiente con su fecha de cierre (`corfo_elegibilidad.csv`) y estado de la licencia.
+Cierra con: TRL actual con su evidencia, gate comercial, instrumento siguiente con su fecha de cierre (bitácora, `tipo=requisito`) y estado de la licencia.

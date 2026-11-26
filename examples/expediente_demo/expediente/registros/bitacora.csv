@@ -1,0 +1,3 @@
+﻿entrada_id,tipo,fecha,titulo,detalle,valor,meta,estado,responsable,revision,url,evidence_id,datos
+KPI-001,kpi,,Horas por informe,horas totales / informes,4,1,,,,,,"{""frecuencia"": ""semanal"", ""tipo"": ""resultado"", ""unidad"": ""h""}"
+R-001,riesgo,,Aceptación verbal no se convierte en orden de compra,piloto pagado con criterio de éxito firmado,,,abierto,fundadora,,,,"{""dominio"": ""comercial"", ""impacto"": ""alto"", ""probabilidad"": ""media""}"

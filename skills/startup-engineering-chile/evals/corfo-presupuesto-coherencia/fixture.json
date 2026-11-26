@@ -1,0 +1,15 @@
+{
+  "capas": [
+    {
+      "base": "vacio",
+      "destino": ".",
+      "proyecto": "RiegoData",
+      "nivel": "completo",
+      "registros": [
+        "decisiones",
+        "evidencias",
+        "hipotesis"
+      ]
+    }
+  ]
+}

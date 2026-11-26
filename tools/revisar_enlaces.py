@@ -2,9 +2,12 @@
 # /// script
 # requires-python = ">=3.8"
 # ///
-"""Revisa que respondan las URL de la biblioteca (fuentes, libros, charlas, mentores) y de los JSON de datos.
+"""Revisa que respondan las URL de la biblioteca (fuentes, libros, charlas, mentores), de los JSON de datos y de los
+Markdown de la skill (SKILL.md, references/, comandos y README).
 
-Uso: python tools/revisar_enlaces.py [--salida informe.md] [--hilos 8] [--timeout 20] [--estricto]
+Uso: python tools/revisar_enlaces.py [--salida informe.md] [--hilos 8] [--timeout 20] [--estricto] [--sin-md]
+
+Los enlaces internos entre archivos los revisa tools/check_refs.py (sin red), en la CI.
 
 Clasifica cada URL:
 - ok: responde 2xx/3xx;
@@ -29,12 +32,21 @@ import urllib.request
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKILL = os.path.join(RAIZ, "skills", "startup-engineering-chile")
-CSVS = ["fuentes.csv", "libros.csv", "charlas_y_cursos.csv", "mentores.csv"]
+CSVS = ["fuentes_publico_corfo.csv", "fuentes_mercado_latam.csv", "fuentes_legal_tributario.csv", "fuentes_saas_metricas.csv",
+        "libros.csv", "charlas_y_cursos.csv", "mentores.csv"]
 JSONS = ["assets/parametros_cl.json", "assets/fondos/instrumentos.json"]
 UA = "Mozilla/5.0 (compatible; revisor-enlaces-skill/1.0; +https://github.com/)"
 
 
-def recolectar():
+def markdowns():
+    """Rutas relativas de los .md cuyas URL externas se revisan."""
+    out = ["SKILL.md"]
+    for dp, _, fs in os.walk(os.path.join(SKILL, "references")):
+        out += [os.path.relpath(os.path.join(dp, f), SKILL) for f in sorted(fs) if f.endswith(".md")]
+    return out
+
+
+def recolectar(con_md=True):
     urls = {}
     for nombre in CSVS:
         ruta = os.path.join(SKILL, "references", "biblioteca", nombre)
@@ -47,6 +59,19 @@ def recolectar():
             texto = json.dumps(json.load(fh), ensure_ascii=False)
         for u in re.findall(r"https?://[^\s;,\"<>]+", texto):
             urls.setdefault(u.rstrip(".)"), []).append(rel)
+    if con_md:
+        extra = [(os.path.join(RAIZ, "README.md"), "README.md")]
+        cmd = os.path.join(RAIZ, "commands")
+        if os.path.isdir(cmd):
+            extra += [(os.path.join(cmd, f), f"commands/{f}") for f in sorted(os.listdir(cmd)) if f.endswith(".md")]
+        for ruta, rel in [(os.path.join(SKILL, r), r.replace(os.sep, "/")) for r in markdowns()] + extra:
+            with open(ruta, encoding="utf-8") as fh:
+                texto = fh.read()
+            for u in re.findall(r"https?://[^\s)\]>\"'`|*]+", texto):
+                u = u.rstrip(".,;:")
+                if "img.shields.io" in u or "localhost" in u or "<" in u:
+                    continue
+                urls.setdefault(u, []).append(rel)
     return urls
 
 
@@ -82,15 +107,16 @@ def main(argv=None):
     ap.add_argument("--hilos", type=int, default=8)
     ap.add_argument("--timeout", type=float, default=20)
     ap.add_argument("--estricto", action="store_true")
+    ap.add_argument("--sin-md", action="store_true", help="solo biblioteca y JSON, sin los Markdown")
     a = ap.parse_args(argv)
-    urls = recolectar()
+    urls = recolectar(con_md=not a.sin_md)
     res = {}
     with cf.ThreadPoolExecutor(max_workers=a.hilos) as ex:
         futuros = {ex.submit(probar, u, a.timeout): u for u in urls}
         for f in cf.as_completed(futuros):
             res[futuros[f]] = f.result()
     cuenta = {k: sum(1 for v in res.values() if v[0] == k) for k in ("ok", "bloqueado", "roto", "error")}
-    lineas = [f"## Enlaces de la biblioteca ({dt.date.today().isoformat()})", "",
+    lineas = [f"## Enlaces externos ({dt.date.today().isoformat()})", "",
               f"{len(urls)} URL únicas: {cuenta['ok']} ok · {cuenta['bloqueado']} bloqueadas · "
               f"{cuenta['roto']} rotas · {cuenta['error']} con error", ""]
     for clase, titulo in (("roto", "Rotas (reemplazar o marcar en la fila)"),

@@ -1,6 +1,10 @@
 # TPL-106 — Marco lógico y Gantt (Logical Framework)
 
-**Para qué:** encadenar fin, propósito, componentes y actividades con indicador, verificación, plazo y cuenta, de modo que cada actividad tenga gasto y cada gasto una actividad. · **Gate:** transversal (fondos: formulación) · **Alimenta:** `rendiciones.csv`, `indicadores.csv`, `riesgos.csv`
+> **Para qué sirve:** Encadenar fin, propósito, componentes y actividades con indicador, verificación, plazo y cuenta, de modo que cada actividad tenga gasto y cada gasto una actividad.
+> **Cuándo NO usarla:** Como plan de producto o roadmap interno; está hecho para el lenguaje y la rendición de un fondo, no para priorizar el trabajo diario (para eso, TPL-076).
+> **Micro-ejemplo resuelto:** El componente "piloto validado" tiene la actividad "instalar 40 sensores en 2 faenas (meses 3–5, $6 M, cuenta Operación)", con indicador "≥ 90% de lecturas válidas" y verificación "informe firmado por el cliente".
+
+**Gate:** transversal (fondos: formulación) · **Alimenta:** `rendiciones.csv`, `bitacora.csv` (tipo kpi y riesgo)
 
 ## Completar
 **Lógica vertical** (componente = resultado, no tarea)

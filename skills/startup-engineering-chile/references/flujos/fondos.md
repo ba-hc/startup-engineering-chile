@@ -12,21 +12,19 @@ Orden: **1) instrumento correcto para la etapa → 2) admisibilidad con las base
 | Ventas $80–800M y < 6 años | CORFO Escalamiento (hasta $60M, 70%) | Exige crecimiento acreditable |
 | ≥ 24 meses de inicio de actividades, ventas y **riesgo tecnológico** (I+D+i) | CORFO Crea y Valida (hasta $180M; 80% micro/pequeña) | No sirve a startups muy nuevas; no cualquier SaaS es I+D |
 | Base científico-tecnológica, micro/pequeña < 10 años | ANID Startup CTCI (ex Startup Ciencia; hasta ~$134,5M, 12 meses) | Aporte pecuniario mínimo 15% (10% mujeres o regiones); edición 2027 cierra 14-ene-2027 |
-| Negocio sin innovación escalable (comercio, servicio local), persona sin inicio de actividades | Sercotec Capital Semilla Emprende / Abeja (≈ $3,5M) | Mejor calce que CORFO para emprendimientos tradicionales |
+| Negocio sin innovación escalable (comercio, servicio local), persona sin inicio de actividades | Sercotec Capital Semilla Emprende / Abeja (≈ $3,5M) | Mejor calce que CORFO para emprendimientos tradicionales; decide con `sercotec_vs_corfo.md` |
 | Startup tecnológica que busca aceleración y red, sin ceder participación | Start-Up Chile Build ($15M), Ignite ($30M), Growth ($75M) | Términos por generación |
-| Ya gasta en I+D y paga impuesto de primera categoría | Ley I+D (crédito 35%, tope 15.000 UTM/año, certifica CORFO) | Es beneficio tributario, no caja; requiere certificación previa del proyecto |
-| Exporta o va a exportar | ProChile (programas y concursos sectoriales) | Revisa la convocatoria del año; suele exigir empresa constituida |
+| Ya gasta en I+D y paga impuesto de primera categoría | Ley I+D (crédito 35%, tope 15.000 UTM/año, certifica CORFO) | Es beneficio tributario, no caja; la certificación puede pedirse después de iniciado el gasto (con plazos). Calcula con `finanzas.py ley-id` y lee `ley_id.md` |
+| Exporta o va a exportar | ProChile (programas y concursos sectoriales) | Revisa la convocatoria del año; suele exigir empresa constituida. Ver `prochile_aterrizaje.md` |
 | Vender al Estado como primer cliente | `compras_publicas.md` | No es un fondo, pero suele ser más rápido que un subsidio |
 
-Verifica: `python <skill>/scripts/fondos_lint.py instrumentos` y luego
-`fondos_lint.py elegibilidad --instrumento semilla_inicia --tipo juridica --meses-inicio 10 --ventas-12m 0`.
-El resultado distingue CUMPLE / NO CUMPLE / FALTA DATO / VERIFICAR. Registra cada requisito en `corfo_elegibilidad.csv` con la URL de la base y el artículo.
+Calce: `python <skill>/scripts/fondos_matcher.py --dir <carpeta>` evalúa todos los instrumentos contra el perfil de `00_estado.md` (situación societaria, inicio de actividades, ventas, TRL, objetivo) y dice CALZA / FALTA DATO / NO CALZA con el motivo. Sin expediente: `fondos_matcher.py --tipo juridica --meses-inicio 10 --ventas-12m 0 --trl 4`. Para un instrumento: `fondos_lint.py elegibilidad --instrumento semilla_inicia --tipo juridica --meses-inicio 10 --ventas-12m 0` (CUMPLE / NO CUMPLE / FALTA DATO / VERIFICAR). Registra cada requisito en la bitácora (`expediente.py add bitacora tipo=requisito titulo=… url=… detalle="artículo …"`).
 
 ## 2. Formulación
 Lee `references/corfo/01_guia_de_postulacion.md` (instrumentos, admisibilidad, rúbrica de referencia), `02_proyecto_presupuesto_rendicion.md` y `03_pitch_y_red_team.md`. Separa el expediente permanente del *funding dossier* por convocatoria (TPL-104). Cada respuesta: afirmación → evidencia → comparación → límite → siguiente acción.
 
 - **Respuestas con límite de caracteres**: escríbelas en `expediente/entregables/postulacion_<instrumento>.md` con el límite en el título (`## Problema [máx 1500]`) y corre `fondos_lint.py caracteres` antes de pegarlas en el portal (deja ~3% de margen).
-- **Presupuesto**: registra cada ítem en `rendiciones.csv` (actividad, resultado, cuenta, presupuesto, subsidio, aporte) y corre `fondos_lint.py presupuesto --instrumento X --dir <carpeta>`: verifica que presupuesto = subsidio + aporte, tope y % de cofinanciamiento, y avisa de ítems que suelen ser no financiables.
+- **Presupuesto**: registra cada ítem en `rendiciones.csv` (actividad, resultado, cuenta, presupuesto, subsidio, aporte, `tipo_aporte` pecuniario/valorado, `iva_incluido`) con TPL-105 y corre `presupuesto_corfo.py revisar --instrumento X --dir <carpeta>`. Revisa presupuesto = subsidio + aporte, tope, % de cofinanciamiento, aporte pecuniario mínimo, IVA imputado cuando la empresa lo recupera, fechas fuera del convenio, plazo del instrumento, ítems no financiables, concentración en RR.HH. y pagos a socios (en Semilla Inicia, hasta $700.000 mensuales por persona y máximo 2 personas: el script suma las filas de cada socio y las compara con el tope por los meses de ejecución, sin pasar del plazo del instrumento). `presupuesto_corfo.py tabla --xlsx` arma la tabla por cuenta; la hoja `Fondos_y_moneda` del modelo financiero simula lo mismo en Excel. Los topes de RR.HH. y administración que no están en `instrumentos.json` salen como AVISO: pásalos con `--tope-rrhh`/`--tope-admin` según las bases.
 - **Coherencia**: `fondos_lint.py coherencia --marco documentos/TPL-106_marco_logico_y_gantt.md --dir <carpeta>`: toda actividad del marco lógico tiene presupuesto y todo gasto sirve a una actividad.
 - Ensaya con `red_team.md` (persona "Evaluador CORFO") antes de enviar.
 

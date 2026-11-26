@@ -1,6 +1,10 @@
 # TPL-001 — Brief de oportunidad (Opportunity Brief)
 
-**Para qué:** decidir si una oportunidad merece 2–4 semanas de investigación, antes de pensar en producto. · **Gate:** G0 · **Alimenta:** `hipotesis.csv`, `evidencias.csv`, `decisiones.csv`
+> **Para qué sirve:** Decidir si una oportunidad merece 2–4 semanas de investigación, antes de pensar en producto.
+> **Cuándo NO usarla:** Cuando ya tienes clientes pagando por una solución concreta; ahí el trabajo es de economía unitaria o repetibilidad, no de explorar oportunidades.
+> **Micro-ejemplo resuelto:** "AgendaDental" ve que 6 de 8 clínicas dentales visitadas en Ñuñoa pierden unas 12 horas al mes reagendando por WhatsApp; el brief limita la exploración a 3 semanas y $400.000 y fija como prueba conseguir 10 entrevistas con dueños de clínica.
+
+**Gate:** G0 · **Alimenta:** `hipotesis.csv`, `evidencias.csv`, `decisiones.csv`
 
 ## Completar
 **Observación:** [¿Qué viste, dónde y cuándo fue la última vez que pasó? Un hecho, no una opinión.] *Escríbela sin nombrar tu solución.*

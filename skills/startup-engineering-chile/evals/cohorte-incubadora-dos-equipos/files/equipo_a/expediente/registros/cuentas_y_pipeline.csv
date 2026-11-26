@@ -1,3 +1,0 @@
-﻿cuenta_id,segmento,industria,region,senal_compra,rol_comprador,etapa,necesidad,valor_estimado_CLP,probabilidad_interna,fecha_estimada,proxima_accion,causa_perdida,evidence_id
-CTA-001,planta-mediana,alimentos,RM,,,propuesta,,1800000,"0,4",,enviar orden de compra,,
-CTA-002,planta-mediana,metalmecánica,Biobío,,,piloto,,1800000,"0,6",,,,

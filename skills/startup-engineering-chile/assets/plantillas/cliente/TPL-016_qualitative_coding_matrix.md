@@ -1,6 +1,10 @@
 # TPL-016 — Matriz de codificación cualitativa (Qualitative Coding Matrix)
 
-**Para qué:** convertir un conjunto de entrevistas en conclusiones auditables por segmento, con casos negativos y saturación documentada. · **Gate:** G1(–G2) · **Alimenta:** `evidencias.csv`, `hipotesis.csv`
+> **Para qué sirve:** Convertir un conjunto de entrevistas en conclusiones auditables por segmento, con casos negativos y saturación documentada.
+> **Cuándo NO usarla:** Con menos de 5–6 entrevistas por segmento; con tan poco material la matriz aparenta un rigor que los datos no tienen.
+> **Micro-ejemplo resuelto:** De 14 entrevistas a colegios, el código "asistencia registrada a mano" aparece en 9 de 10 subvencionados y en 1 de 4 particulares; la conclusión se limita a subvencionados y se anota que las 2 últimas entrevistas no agregaron códigos nuevos (saturación).
+
+**Gate:** G1(–G2) · **Alimenta:** `evidencias.csv`, `hipotesis.csv`
 
 ## Completar
 **1. Libro de códigos** *(defínelo antes de codificar el lote; si agregas un código después, anótalo con fecha)*

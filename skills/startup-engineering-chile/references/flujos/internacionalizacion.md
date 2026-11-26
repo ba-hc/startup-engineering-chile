@@ -1,6 +1,6 @@
 # Internacionalización desde Chile
 
-Complementa el módulo 27 (`references/manual/27_escalamiento_e_internacionalizacion.md`). Regla: **no se internacionaliza un producto sin repetibilidad en casa** (G8): si en Chile aún no hay venta e implementación repetibles, salir multiplica el problema.
+Complementa el módulo 27 (`references/manual/G7-G9_venta_traccion_y_escala.md`). Regla: **no se internacionaliza un producto sin repetibilidad en casa** (G8): si en Chile aún no hay venta e implementación repetibles, salir multiplica el problema.
 
 ## 1. ¿Estás listo? (señales mínimas)
 - Venta repetible con un ICP claro y un ciclo de venta conocido.
@@ -27,6 +27,6 @@ Crear una sociedad matriz en EE.UU. (Delaware C-Corp) dueña de la SpA chilena.
 - Ajuste regional: no copies el precio chileno; valida con prueba de precio local.
 
 ## 5. Apoyos
-ProChile (programas y concursos de internacionalización), Start-Up Chile (red), redes de la universidad o la incubadora, cámaras binacionales. Revisa convocatorias vigentes y regístralas en `corfo_elegibilidad.csv`.
+ProChile (programas y concursos de internacionalización), Start-Up Chile (red), redes de la universidad o la incubadora, cámaras binacionales. Revisa convocatorias vigentes y regístralas en la bitácora (`tipo=requisito`). Aterrizaje en un mercado: `prochile_aterrizaje.md`.
 
 Cierra con una decisión de gate (G9) y un experimento de entrada acotado (p. ej. 10 entrevistas + 2 pilotos en el país objetivo en 90 días).

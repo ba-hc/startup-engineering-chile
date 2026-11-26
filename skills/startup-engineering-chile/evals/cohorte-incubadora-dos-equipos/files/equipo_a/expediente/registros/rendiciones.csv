@@ -1,4 +1,0 @@
-﻿gasto_id,actividad,resultado,cuenta_presupuestaria,presupuesto_CLP,comprometido_CLP,pagado_CLP,subsidio_CLP,aporte_CLP,proveedor,documento,fecha,autorizacion,medio_verificacion,estado
-GAS-001,Desarrollo del módulo de informes,MVP en piloto,Recursos humanos,12000000,,,9000000,3000000,,,2027-03-01,,,propuesta-agente
-GAS-002,Piloto con 3 plantas,3 pilotos con informe de resultados,Operación,4000000,,,3000000,1000000,,,2027-04-01,,,propuesta-agente
-GAS-003,Validación comercial y ventas,5 clientes pagando,Difusión,2000000,,,1500000,500000,,,2027-05-01,,,propuesta-agente

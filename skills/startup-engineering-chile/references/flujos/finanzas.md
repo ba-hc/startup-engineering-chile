@@ -1,12 +1,12 @@
 # Finanzas: unit economics, caja, modelo, contratar y dilución
 
-Regla: **ningún número financiero sale "a ojo"**. Corre el script, muestra la tabla corta en el chat y guarda el detalle en el expediente (TPL-087/088, `indicadores.csv`).
+Regla: **ningún número financiero sale "a ojo"**. Corre el script, muestra la tabla corta en el chat y guarda el detalle en el expediente (TPL-087/088 y la bitácora con `tipo=kpi`).
 
 ## Errores que debes detectar (y cómo)
 | Error | Señal | Qué hacer |
 |---|---|---|
 | LTV sobre ingreso en vez de contribución | "LTV = precio × vida" | `finanzas.py unit` muestra ambos y cuánto infla |
-| Churn inventado o casi cero | churn < 1% mensual sin cohortes | pide `cohortes.csv` o usa un rango; tope de vida 60 meses |
+| Churn inventado o casi cero | churn < 1% mensual sin cohortes | pide cohortes (bitácora `tipo=cohorte`) o usa un rango; tope de vida 60 meses |
 | Confundir margen bruto con ingreso | "facturamos 10M, ganamos 10M" | contribución = precio − costos variables directos |
 | TAM top-down sin sustento | "el 1% de un mercado de US$5.000M" | TAM/SAM/SOM bottom-up (TPL-030): unidades × precio, filtros justificados, SOM limitado por capacidad comercial |
 | Subsidio contado como venta | caja con fondo CORFO como ingreso | `escenarios` lo separa; en el pitch, subsidio ≠ tracción |
@@ -22,10 +22,11 @@ Regla: **ningún número financiero sale "a ojo"**. Corre el script, muestra la 
 - `modelo_xlsx.py leer|set|verificar` para actualizar los supuestos del Excel sin romper fórmulas (ver `references/herramientas.md`).
 - `finanzas.py costo-empleado (--bruto B | --liquido L) [--contrato plazo-fijo] [--gratificacion] [--provision-indemnizacion] [--mutual-adicional 0.0095]` → líquido, cotizaciones, aporte del empleador (reforma de pensiones, que desde ago-2026 incluye el SIS), AFC, mutual y costo empresa. Usa UF/UTM de `indicadores_cl.py` o del respaldo con fecha.
 - `finanzas.py honorarios (--bruto | --liquido)` → retención 2026 (15,25%; 16% en 2027).
-- `finanzas.py dilucion --fundadores "Ana:60,Beto:40" [--pool 10] [--safe 50000000:1000000000] --pre 2000000000 --inversion 500000000 --pool-post 10` → cap table antes y después; supuestos impresos (SAFE post-money solo con cap; pool pre-money).
+- `finanzas.py dilucion --fundadores "Ana:60,Beto:40" [--pool 10] [--safe 50000000:1000000000] --pre 2000000000 --inversion 500000000 --pool-post 10` → cap table antes y después; supuestos impresos (SAFE post-money solo con cap; pool pre-money). Para llevar la tabla real con vesting y SAFE: `cap_table.py` (ver `socios_equity.md`).
+- `finanzas.py ley-id --gasto 100000000 [--impuesto-primera 20000000] [--modalidad propio|contrato]` → crédito tributario de la Ley I+D (35%, tope 15.000 UTM), parte deducible, remanente y arancel de certificación. Ver `ley_id.md`.
 
 ## Monedas: CLP, UF y USD
-Un modelo que mezcla SaaS en UF, servidores en USD y subsidio en CLP necesita una **fecha de corte**: anota en `00_estado.md` (o en la hoja Supuestos) "UF = $X y USD = $Y al AAAA-MM-DD" con `indicadores_cl.py obtener uf dolar`. Convierte con `indicadores_cl.py convertir`. En proyecciones largas, explicita si los precios en UF se reajustan y si los costos en USD tienen riesgo cambiario.
+Un modelo que mezcla SaaS en UF, servidores en USD y subsidio en CLP necesita una **fecha de corte**: anota en `00_estado.md` (o en la hoja Supuestos) "UF = $X y USD = $Y al AAAA-MM-DD" con `indicadores_cl.py obtener uf dolar`. Convierte con `indicadores_cl.py convertir`. En el modelo, la hoja `Fondos_y_moneda` muestra caja, precios, equilibrio y presupuesto del fondo en CLP, UF o USD (escribe la moneda y el valor del día). En proyecciones largas, explicita si los precios en UF se reajustan y si los costos en USD tienen riesgo cambiario.
 
 ## Cuándo pedir un profesional
 Estructura tributaria, contratos laborales, valorización para una ronda y cap tables con instrumentos complejos (descuentos, MFN, pro-rata, preferentes): el script da órdenes de magnitud para conversar, no la cifra final.

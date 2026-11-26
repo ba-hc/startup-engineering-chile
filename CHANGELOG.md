@@ -6,6 +6,48 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). V
 - **menor:** flujos, scripts o plantillas nuevas;
 - **parche:** correcciones y actualización de cifras.
 
+## [2.0.0] - 2026-11-25
+
+Versión mayor: el expediente pasa al esquema v3. `expediente.py migrar` convierte uno v1/v2 sin perder datos (deja respaldo `.bak`) y los nombres antiguos de registros siguen funcionando en `add`, `ver` y los scripts.
+
+### Agregado
+- **Modos Express y Expediente.** Una consulta puntual o exploratoria se responde sin crear archivos; el expediente se crea solo si el usuario quiere guardar el proyecto.
+- **Onboarding de 3 preguntas** (`expediente.py onboarding`): problema, evidencia de calle y situación societaria/objetivo de financiamiento → `00_estado.md`, gate inferido y **misión de 7 días** con criterio de éxito. No sobrescribe un expediente existente.
+- **Formato de respuesta 1-3-1** (un diagnóstico, hasta tres hallazgos/opciones/preguntas, un próximo paso).
+- **Atajos** en `commands/`: `/estado`, `/destrozar`, `/fondos`, `/entrevista`, `/numeros`, `/exportar`.
+- **Scripts:**
+  - `fondos_matcher.py`: calce de todos los instrumentos con el perfil (tipo de persona, meses de inicio, ventas, TRL, mujeres, negocio tradicional);
+  - `presupuesto_corfo.py`: revisa presupuesto y rendición (tope, cofinanciamiento, aporte pecuniario mínimo, IVA recuperable, fechas fuera del convenio, plazo del instrumento, RR.HH., pagos a socios con el tope de $700.000 mensuales y máximo 2 personas en Semilla Inicia, ítems no financiables) y arma la tabla por cuenta en Excel;
+  - `cap_table.py`: cap table con vesting y cliff, SAFE, emisiones, ronda y export a Excel;
+  - `dataroom.py`: checklist de 9 carpetas, cifras del pitch sin EV- y paquete sin datos personales;
+  - `actualizar_parametros.py`: antigüedad de los datos legales y actualización de UF/UTM de respaldo;
+  - `finanzas.py ley-id`: crédito tributario de la Ley 20.241 (35%, tope 15.000 UTM, 65% deducible, remanente, arancel);
+  - `expediente.py gate` (chequeos deterministas por gate desde `umbrales_gates.json`), `buscar-fuente`, `id` y `exportar --xlsx`.
+- **Modelo financiero:** hoja `Fondos_y_moneda` con selector CLP/UF/USD, equilibrio y meses de caja en los 3 escenarios, presupuesto del fondo con aporte pecuniario y valorado y chequeos de tasa, tope, aporte mínimo, RR.HH. y administración.
+- **Referencias:** `glosario_sin_humo.md`, `conectores_y_apis.md` y los flujos `ley_id.md`, `sercotec_vs_corfo.md`, `prochile_aterrizaje.md`, `flip_societario.md` y `fintech_cmf.md`; 31 fuentes legales verificadas nuevas.
+- **Evals:** 5 casos nuevos (29 en total): modo Express sin archivos, red team, flip prematuro, Ley 21.719 y derivación a Sercotec.
+- `tools/armar_fixture.py`: arma los fixtures de los evals desde el demo, una base vacía o una base compartida, más las diferencias de cada caso.
+
+### Cambiado
+- **`SKILL.md`** es un enrutador de ~5 KB (antes 14 KB). El detalle de conversación, primer turno y onboarding pasa a `references/diagnostico.md`; scripts, entregables y estructura a `references/herramientas.md`. `check_refs.py` controla el tamaño.
+- **`expediente.py`** se dividió en `scripts/core/` (`storage`, `schemas`, `registros`, `estado`, `gates`, `exporters`, `busqueda`, `plantillas`) y queda como CLI delgada. El bloqueo del expediente es reentrante.
+- **Registros:** de 17 CSV a 8 tablas núcleo (hipótesis, evidencias, experimentos, decisiones, entrevistas, competencia, cuentas y pipeline, pilotos) + `rendiciones` (con `tipo_aporte` e `iva_incluido`) + `bitacora` (riesgos, KPI, fuentes, lecciones, desafíos, PI, requisitos de fondos, cohortes y notas).
+- **Manual:** 28 archivos y un índice duplicado pasan a 6 guías por etapa (G0, G1–G2, G3–G4, G5–G6, G7–G9 y transversal).
+- **Biblioteca:** `fuentes.csv` se partió en 4 archivos por tema (público/CORFO, mercado LATAM, legal-tributario, SaaS y métricas).
+- **Plantillas:** 40 troncales (antes 25), cada una con encabezado pedagógico (para qué sirve, cuándo no usarla, micro-ejemplo resuelto). TPL-105 usa las columnas nuevas de rendiciones.
+- **`auditar.py`:** integridad referencial (decisiones que citan evidencia inexistente, Kill/Hold/Recycle sin evidencia, experimentos vencidos sin decisión o sin resultado, notas y entrevistas con datos personales) y cifras de `00_estado.md` contra el modelo.
+- **Dashboard** interactivo: progreso G0–G9 con detalle de chequeos, semáforo de runway, embudo de validación y comercial, misión, filtro y tablas ordenables; sigue siendo un solo HTML sin dependencias.
+- **`cohorte.py`:** alerta de estancamiento (más de 14 días sin actividad), días en el gate, misión vencida, matriz TRL × CRL y export `--csv`/`--xlsx` consolidado.
+- **`ingesta.py` → `ingestar.py`**, que además detecta nombres por contexto ("la Sra. Pérez", "hablé con Rodrigo Soto").
+- **Normativa:** `privacidad.md` (Ley 21.719 vigente desde el 15-10-2027 por la Ley 21.855), `compras_publicas.md` (Compra Ágil y Contratos para la Innovación), guía CORFO con fichas de Semilla Inicia y ANID Startup CTCI 2027, `instrumentos.json` con plazo, prórroga, tipo de aporte, TRL y variante mujeres verificados, y Ley I+D en `parametros_cl.json`.
+- **Firecrawl** deja de ser una guía aparte y queda como conector opcional en `references/herramientas.md`.
+- **Mantención:** la CI revisa enlaces Markdown internos y valida los JSON contra sus esquemas; el workflow de mantención revisa enlaces y vigencia cada semana y una vez al mes abre un PR con los indicadores de respaldo.
+
+### Eliminado
+- `docs/proceso/` (proceso de construcción del pack): se conserva en la rama `dev/proceso`, fuera del paquete distribuible.
+- Copias duplicadas del expediente, del modelo y del ZIP en los evals (ahora se generan al vuelo).
+- `references/firecrawl.md`, `references/manual/indice_modulos.csv` y los 28 módulos sueltos del manual.
+
 ## [1.2.0] - 2026-11-25
 
 ### Agregado

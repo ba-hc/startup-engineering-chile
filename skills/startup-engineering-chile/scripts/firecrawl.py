@@ -49,7 +49,7 @@ AYUDA_SETUP = (
     f"Firecrawl no responde en {BASE}.\n"
     "- ¿Está levantado? Docker: `docker compose ps` en la carpeta de firecrawl; binario: `firecrawl-local serve`.\n"
     "- ¿Otra URL/puerto? Define FIRECRAWL_API_URL.\n"
-    "- Guía: references/firecrawl.md de la skill.\n"
+    "- Guía: references/herramientas.md de la skill (sección «Conector opcional: Firecrawl local»).\n"
     "Mientras tanto, el agente puede seguir con sus herramientas web y anotar la fuente igual."
 )
 

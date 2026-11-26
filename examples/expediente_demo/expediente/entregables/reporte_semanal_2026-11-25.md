@@ -1,14 +1,17 @@
 # Reporte semanal — InspectaYa (demo ficticia)
 
-2026-09-26 a 2026-11-25 · generado desde el expediente
+2026-11-18 a 2026-11-25 · generado desde el expediente
 
 ## Foco
 - **Gate actual:** G6
 - **Hipótesis más riesgosa:** H-003 (quién aprueba la compra)
 - **Único cuello de botella:**
 
+## Misión de 7 días
+- Acordar con el sponsor de PIL-001 la línea base, la meta (≤1 h por informe) y la fecha de decisión de compra (vence 2026-12-02; abierta)
+
 ## Avance de la semana
-competencia: +2, decisiones: +2, entrevistas: +8, evidencias: +2, experimentos: +2, pilotos: +1, rendiciones: +3
+competencia: +2, decisiones: +2, evidencias: +2, rendiciones: +3
 
 ## Embudo
 | Entrevistas | Cuentas en pipeline | Pilotos |

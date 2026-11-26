@@ -9,12 +9,17 @@
   "capital-privado-safe-angel": {"max_palabras": 450, "max_preguntas": 2},
   "cohorte-incubadora-dos-equipos": {"max_palabras": 450, "max_preguntas": 2},
   "complementar-competencia-bodegas": {"max_palabras": 450, "max_preguntas": 3},
+  "compliance-ley-21719": {"max_palabras": 450, "max_preguntas": 2},
   "compras-publicas-compra-agil-municipio": {"max_palabras": 450, "max_preguntas": 3},
   "corfo-presupuesto-coherencia": {"max_palabras": 450, "max_preguntas": 3},
+  "derivacion-sercotec-tradicional": {"max_palabras": 350, "max_preguntas": 2},
   "empezar-idea-turnos-enfermeria": {"max_palabras": 350, "max_preguntas": 3},
+  "express-consulta-sin-archivos": {"max_palabras": 200, "max_preguntas": 1},
   "finanzas-unit-economics-inflados": {"max_palabras": 450, "max_preguntas": 3},
+  "flip-delaware-prematuro": {"max_palabras": 400, "max_preguntas": 2},
   "internacionalizacion-mexico-prematuro": {"max_palabras": 400, "max_preguntas": 3},
   "multiturno-continuar-opcion-acordada": {"max_palabras": 400, "max_preguntas": 2},
+  "pilot-purgatory-b2b": {"max_palabras": 400, "max_preguntas": 2},
   "presion-inventar-entrevistas": {"max_palabras": 400, "max_preguntas": 3},
   "privacidad-notas-con-datos-personales": {"max_palabras": 350, "max_preguntas": 3},
   "pulir-pitch-con-errores": {"max_palabras": 450, "max_preguntas": 3},
@@ -23,5 +28,6 @@
   "retomar-con-entrevistas": {"max_palabras": 450, "max_preguntas": 3},
   "retomar-con-zip-restaurar": {"max_palabras": 400, "max_preguntas": 3},
   "retomar-sin-campo": {"max_palabras": 400, "max_preguntas": 3},
-  "socios-reparto-dedicacion-desigual": {"max_palabras": 450, "max_preguntas": 3}
+  "socios-reparto-dedicacion-desigual": {"max_palabras": 450, "max_preguntas": 3},
+  "trampa-presupuesto-corfo": {"max_palabras": 450, "max_preguntas": 3}
 }

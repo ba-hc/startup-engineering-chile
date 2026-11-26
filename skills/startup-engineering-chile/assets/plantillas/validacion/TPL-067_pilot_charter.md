@@ -1,6 +1,10 @@
 # TPL-067 — Acta de piloto (Pilot Charter)
 
-**Para qué:** acordar con el cliente, antes del día 1, qué responde el piloto, cómo se mide, cuánto cuesta y qué pasa al final. · **Gate:** G6 · **Alimenta:** `pilotos.csv`, `indicadores.csv`, `cuentas_y_pipeline.csv`
+> **Para qué sirve:** Acordar con el cliente, antes del día 1, qué responde el piloto, cómo se mide, cuánto cuesta y qué pasa al final.
+> **Cuándo NO usarla:** Si el cliente aún no reconoce el problema ni tiene presupuesto identificado; ahí falta descubrimiento, y el piloto será una demo larga.
+> **Micro-ejemplo resuelto:** Piloto de 8 semanas en 2 sucursales de una cadena de farmacias por 90 UF + IVA; KPI: quiebres de stock (baseline 7,2% en 6 meses, meta ≤ 4%); si se cumple, OC anual por 30 sucursales a 1.400 UF + IVA.
+
+**Gate:** G6 · **Alimenta:** `pilotos.csv`, `bitacora.csv` (tipo kpi), `cuentas_y_pipeline.csv`
 
 ## Completar
 *Se firma por ambas partes antes de empezar. Sin sponsor, comprador, baseline y criterio de conversión no hay piloto, sino demo sin fin ("pilot purgatory").*

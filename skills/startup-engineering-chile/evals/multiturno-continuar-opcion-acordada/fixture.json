@@ -1,0 +1,14 @@
+{
+  "capas": [
+    {
+      "base": "vacio",
+      "destino": ".",
+      "proyecto": "StockPyme",
+      "nivel": "sprint",
+      "registros": [
+        "evidencias",
+        "hipotesis"
+      ]
+    }
+  ]
+}

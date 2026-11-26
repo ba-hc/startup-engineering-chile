@@ -1,2 +1,0 @@
-﻿kpi_id,nombre,tipo,formula,unidad,denominador,baseline,meta,frecuencia,fuente,guardrail,responsable
-KPI-001,Horas por informe,resultado,horas totales / informes,h,,4,1,semanal,,,

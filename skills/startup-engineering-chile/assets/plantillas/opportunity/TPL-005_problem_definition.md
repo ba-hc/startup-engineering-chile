@@ -1,6 +1,10 @@
 # TPL-005 — Definición del problema (Problem Definition)
 
-**Para qué:** expresar la necesidad con unidad de medida, contexto y consecuencia económica, sin mencionar la solución. · **Gate:** G1 · **Alimenta:** `hipotesis.csv`, `evidencias.csv`
+> **Para qué sirve:** Expresar la necesidad con unidad de medida, contexto y consecuencia económica, sin mencionar la solución.
+> **Cuándo NO usarla:** Si todavía no has hablado con nadie que viva el problema; escrita desde el escritorio, solo formaliza tu suposición.
+> **Micro-ejemplo resuelto:** En vez de "falta una app de reservas", se escribe: "las 4 canchas de pádel de un club de La Florida quedan vacías unas 18 horas por semana por cancelaciones avisadas con menos de 2 horas, ≈ $540.000 semanales a $30.000 la hora".
+
+**Gate:** G1 · **Alimenta:** `hipotesis.csv`, `evidencias.csv`
 
 ## Completar
 **Enunciado:** [Rol] en [contexto] necesita [trabajo o resultado], pero [obstáculo medible], lo que provoca [consecuencia económica]. *Si la frase dice "no tienen un sistema de…", describiste la falta de tu solución, no el problema.*

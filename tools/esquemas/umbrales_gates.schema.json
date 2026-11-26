@@ -2,32 +2,107 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Umbrales por gate y track (assets/umbrales_gates.json)",
   "type": "object",
-  "required": ["_verificado", "tracks", "gates"],
+  "required": [
+    "_verificado",
+    "tracks",
+    "gates"
+  ],
   "properties": {
-    "_verificado": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
-    "_nota": {"type": "string"},
-    "_fuentes": {"type": "object"},
+    "_verificado": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "_nota": {
+      "type": "string"
+    },
+    "_fuentes": {
+      "type": "object"
+    },
     "tracks": {
       "type": "object",
       "minProperties": 1,
-      "patternProperties": {"^[a-z0-9_]+$": {"type": "string"}},
+      "patternProperties": {
+        "^[a-z0-9_]+$": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "gates": {
       "type": "object",
-      "required": ["G0", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9"],
+      "required": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G7",
+        "G8",
+        "G9"
+      ],
       "patternProperties": {
         "^G[0-9]$": {
           "type": "object",
-          "required": ["pregunta", "comun", "por_track"],
+          "required": [
+            "pregunta",
+            "comun",
+            "por_track"
+          ],
           "additionalProperties": false,
           "properties": {
-            "pregunta": {"type": "string"},
-            "comun": {"type": "array", "items": {"type": "string"}},
+            "pregunta": {
+              "type": "string"
+            },
+            "comun": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
             "por_track": {
               "type": "object",
-              "patternProperties": {"^[a-z0-9_]+$": {"type": "array", "items": {"type": "string"}}},
+              "patternProperties": {
+                "^[a-z0-9_]+$": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
               "additionalProperties": false
+            },
+            "chequeos": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "regla",
+                  "min",
+                  "texto"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^G[0-9]-[0-9]+$"
+                  },
+                  "regla": {
+                    "type": "string",
+                    "minLength": 3
+                  },
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "texto": {
+                    "type": "string",
+                    "minLength": 5
+                  }
+                }
+              }
             }
           }
         }

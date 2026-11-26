@@ -1,6 +1,6 @@
 {
   "_verificado": "2026-11-25",
-  "_nota": "Reglas de referencia para fondos_lint.py. Cambian por convocatoria y región: contrasta con las bases del llamado vigente. No certifica admisibilidad.",
+  "_nota": "Reglas de referencia para fondos_lint.py. Cambian por convocatoria y región: contrasta con las bases del llamado vigente. No certifica admisibilidad. v2.0: plazo_meses, prorroga_meses, aporte_tipos, aporte_pecuniario_min, trl_min/max, ventas_12m_max_UF y variante_mujeres solo donde se verificó en bases oficiales el 2026-11-25; perfil es una etiqueta de la skill para fondos_matcher.py (no viene de las bases).",
   "instrumentos": {
     "semilla_inicia": {
       "nombre": "CORFO Semilla Inicia",
@@ -19,11 +19,31 @@
       },
       "verificar": [
         "Convocatoria abierta y región (las de 2026 están cerradas)",
-        "Variante mujeres: hasta $17.000.000 y 85% (instrumento semilla_inicia_mujeres)",
-        "Restricciones de participación en otros proyectos CORFO",
-        "Patrocinador y condiciones de formalización"
+        "Persona jurídica: inicio de actividades no anterior a 18 meses desde la apertura y cero ventas hasta el mes anterior",
+        "Persona natural: no puede postular si ya participa en una sociedad titular del emprendimiento (postula la sociedad)",
+        "Equipo emprendedor de hasta 3 personas naturales; si la sociedad tiene fines de lucro, cada una con ≥5% del capital",
+        "Registro Nacional de Deudores de Pensiones de Alimentos (Ley 21.389): inscripción vigente = inadmisible",
+        "Entidad Patrocinadora habilitada en la región; una postulación por convocatoria",
+        "Ejecución hasta 10 meses (prórroga excepcional de hasta 2): no planifiques con la prórroga",
+        "Remuneración de socios o accionistas que trabajan en el proyecto: hasta $700.000 mensuales por persona y máximo 2 personas",
+        "Gastos de administración de la Entidad Patrocinadora: confirma en las bases el porcentaje y los montos mínimo y máximo vigentes"
       ],
-      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/semilla-inicia/"
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/semilla-inicia/",
+      "plazo_meses": 10,
+      "prorroga_meses": 2,
+      "remuneracion_socio_max_mensual_CLP": 700000,
+      "socios_remunerados_max": 2,
+      "aporte_tipos": [
+        "pecuniario",
+        "valorado"
+      ],
+      "variante_mujeres": {
+        "tope_subsidio_CLP": 17000000,
+        "cofinanciamiento_max": 0.85
+      },
+      "perfil": [
+        "innovacion"
+      ]
     },
     "semilla_inicia_mujeres": {
       "nombre": "CORFO Semilla Inicia (liderada por mujeres)",
@@ -41,9 +61,21 @@
         "natural": {}
       },
       "verificar": [
-        "Requisitos de participación y representación femenina según bases"
+        "Requisitos de participación y representación femenina según bases",
+        "Remuneración de socios: hasta $700.000 mensuales por persona y máximo 2 (misma regla que Semilla Inicia)"
       ],
-      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/semilla-inicia/"
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/semilla-inicia/",
+      "plazo_meses": 10,
+      "prorroga_meses": 2,
+      "remuneracion_socio_max_mensual_CLP": 700000,
+      "socios_remunerados_max": 2,
+      "aporte_tipos": [
+        "pecuniario",
+        "valorado"
+      ],
+      "perfil": [
+        "innovacion"
+      ]
     },
     "semilla_expande": {
       "nombre": "CORFO Semilla Expande (etapa 1)",
@@ -61,11 +93,20 @@
       },
       "verificar": [
         "Etapa 2 (hasta $20M) no es automática",
-        "Variante mujeres: $28,3M en etapa 1",
         "Las ventas se acreditan con facturación, no con cartas de intención",
-        "La nacional 2026 cerró el 24-feb-2026"
+        "La nacional 2026 cerró el 24-feb-2026",
+        "Resultado esperado: crecer ventas ≥30% (mínimo $6.000.000)",
+        "El mínimo de ventas de la solución ($100.000) no aparece en la ficha: confírmalo en las bases"
       ],
-      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/semilla-expande/"
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/semilla-expande/",
+      "variante_mujeres": {
+        "tope_subsidio_CLP": 28333334,
+        "cofinanciamiento_max": 0.75
+      },
+      "perfil": [
+        "innovacion",
+        "con_ventas"
+      ]
     },
     "escalamiento": {
       "nombre": "CORFO Escalamiento",
@@ -85,7 +126,11 @@
       "verificar": [
         "Llamado 2026 cerrado el 27-jul; revisar la nueva edición"
       ],
-      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/escalamiento/"
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/escalamiento/",
+      "perfil": [
+        "innovacion",
+        "con_ventas"
+      ]
     },
     "crea_y_valida": {
       "nombre": "CORFO Crea y Valida (individual)",
@@ -105,28 +150,53 @@
         "Colaborativo hasta $220M",
         "Requiere riesgo tecnológico (I+D+i), no cualquier SaaS"
       ],
-      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/crea-y-valida/"
+      "fuente": "https://www.corfo.gob.cl/sites/cpp/programa/crea-y-valida/",
+      "perfil": [
+        "innovacion",
+        "con_ventas"
+      ]
     },
     "anid_startup_ctci": {
       "nombre": "ANID Startup CTCI (ex Startup Ciencia)",
       "tope_subsidio_CLP": 134550000,
       "cofinanciamiento_max": 0.85,
       "beneficiarios": [
+        "natural",
         "juridica"
       ],
       "por_tipo": {
         "juridica": {
-          "meses_inicio_max": 120
-        }
+          "meses_inicio_max": 120,
+          "ventas_12m_max_UF": 25000
+        },
+        "natural": {}
       },
       "verificar": [
         "Base científico-tecnológica demostrable",
-        "Micro o pequeña empresa, ventas hasta 25.000 UF",
-        "Aporte pecuniario mínimo 15% (10% si es liderada por mujeres o fuera de la RM)",
-        "La edición 2027 cierra el 2027-01-14 a las 17:00",
-        "TRL de entrada 3 a 6 (Startup Ciencia 2026); 12 meses ampliables a 18"
+        "Micro o pequeña empresa con menos de 10 años; ventas anuales hasta 25.000 UF",
+        "Aporte pecuniario mínimo 15% (10% si es liderada por mujeres o con domicilio y actividad fuera de la RM; se elige al postular)",
+        "El personal preexistente no cuenta como aporte pecuniario",
+        "Dedicación mínima: dirección 80 h/mes desde Chile, gerencia de proyecto 160 h/mes, equipo científico-técnico 160 h/mes",
+        "Persona natural: puede postular con reglas para constituir la empresa",
+        "La edición 2027 (Res. Ex. ANID 9568/2026) cierra el 2027-01-14 a las 17:00"
       ],
-      "fuente": "https://anid.cl/concursos/startup-ctci-2027/"
+      "fuente": "https://anid.cl/concursos/startup-ctci-2027/",
+      "aporte_pecuniario_min": 0.15,
+      "aporte_tipos": [
+        "pecuniario"
+      ],
+      "trl_min": 3,
+      "trl_max": 7,
+      "plazo_meses": 12,
+      "prorroga_meses": 6,
+      "variante_mujeres": {
+        "tope_subsidio_CLP": 134550000,
+        "cofinanciamiento_max": 0.9
+      },
+      "perfil": [
+        "innovacion",
+        "base_cientifica"
+      ]
     },
     "sercotec_semilla_emprende": {
       "nombre": "Sercotec Capital Semilla Emprende",
@@ -141,9 +211,13 @@
       "verificar": [
         "Sin inicio de actividades en primera categoría",
         "Para negocios sin innovación escalable suele calzar mejor que CORFO",
-        "Abeja Emprende: misma lógica, solo mujeres, aporte 3%"
+        "Abeja Emprende: misma lógica, solo mujeres, aporte 3%",
+        "Las bases son regionales: confirma en la de tu región el aporte empresarial, el monto para acciones de gestión (en llamados recientes, entre $200.000 y $500.000) y el máximo para inversiones"
       ],
-      "fuente": "https://www.sercotec.cl/capital-semilla-emprende/"
+      "fuente": "https://www.sercotec.cl/capital-semilla-emprende/",
+      "perfil": [
+        "tradicional"
+      ]
     },
     "startup_chile_build": {
       "nombre": "Start-Up Chile Build",
@@ -159,7 +233,11 @@
         "Cofinanciamiento CORFO hasta 90% del costo",
         "Montos y requisitos por generación (BIG13 cerró el 2026-11-24; bases refundidas nov-2026, Res. Ex. Corfo 1.457/2025 y 1.411/2026)"
       ],
-      "fuente": "https://startupchile.org/build/"
+      "fuente": "https://startupchile.org/build/",
+      "perfil": [
+        "innovacion",
+        "global"
+      ]
     },
     "startup_chile_ignite": {
       "nombre": "Start-Up Chile Ignite",
@@ -179,7 +257,11 @@
         "Extensión opcional de hasta $20M y 6 meses",
         "Sin cesión de participación (equity-free)"
       ],
-      "fuente": "https://startupchile.org/ignite/"
+      "fuente": "https://startupchile.org/ignite/",
+      "perfil": [
+        "innovacion",
+        "global"
+      ]
     },
     "startup_chile_growth": {
       "nombre": "Start-Up Chile Growth",
@@ -199,7 +281,11 @@
         "Cofinanciamiento hasta 50% (60% si la líder es mujer)",
         "Sin cesión de participación (equity-free)"
       ],
-      "fuente": "https://startupchile.org/"
+      "fuente": "https://startupchile.org/",
+      "perfil": [
+        "innovacion",
+        "global"
+      ]
     }
   }
 }

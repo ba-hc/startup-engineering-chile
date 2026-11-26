@@ -1,4 +1,4 @@
-﻿gasto_id,actividad,resultado,cuenta_presupuestaria,presupuesto_CLP,comprometido_CLP,pagado_CLP,subsidio_CLP,aporte_CLP,proveedor,documento,fecha,autorizacion,medio_verificacion,estado
-GAS-001,Desarrollo del prototipo de sensores,Prototipo funcional,Recursos humanos,9000000,,,8100000,900000,,,2026-11-25,,,propuesta-agente
-GAS-002,Piloto en 2 predios,Informe de piloto,Operación,3000000,,,2700000,300000,,,2026-11-25,,,propuesta-agente
-GAS-003,Compra de camioneta para visitas a terreno,Logística,Inversión,4000000,,,3600000,400000,Automotora,,2026-11-25,,,propuesta-agente
+﻿gasto_id,actividad,resultado,cuenta_presupuestaria,presupuesto_CLP,comprometido_CLP,pagado_CLP,subsidio_CLP,aporte_CLP,tipo_aporte,iva_incluido,proveedor,documento,fecha,autorizacion,medio_verificacion,estado
+GAS-001,Desarrollo del prototipo de sensores,Prototipo funcional,Recursos humanos,9000000,,,8100000,900000,pecuniario,no,,,2026-11-25,,,propuesta-agente
+GAS-002,Piloto en 2 predios,Informe de piloto,Operación,3000000,,,2700000,300000,pecuniario,no,,,2026-11-25,,,propuesta-agente
+GAS-003,Compra de camioneta para visitas a terreno,Logística,Inversión,4000000,,,3600000,400000,pecuniario,no,Automotora,,2026-11-25,,,propuesta-agente

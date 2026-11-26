@@ -1,5 +1,5 @@
 {
-  "_nota": "Umbrales de referencia de la skill para pasar cada gate. Son heurísticas para fijar el criterio ANTES de salir a terreno, no normas: el equipo puede fijar otro umbral si lo justifica por escrito antes de ver los datos. Un umbral 'por_track' reemplaza al común con la misma clave o se suma a la lista.",
+  "_nota": "Umbrales de referencia de la skill para pasar cada gate. Son heurísticas para fijar el criterio ANTES de salir a terreno, no normas: el equipo puede fijar otro umbral si lo justifica por escrito antes de ver los datos. Un umbral 'por_track' reemplaza al común con la misma clave o se suma a la lista. Los `chequeos` son conteos verificables en el expediente (expediente.py gate); cumplirlos significa 'listo para decidir', no Go automático.",
   "_verificado": "2026-11-25",
   "_fuentes": {
     "sean_ellis": "Sean Ellis, prueba de PMF (40% 'muy decepcionado'): https://pmfsurvey.com/",
@@ -23,8 +23,36 @@
         "Pérdida aceptable definida: horas y dinero máximos antes de decidir (TPL-036)"
       ],
       "por_track": {
-        "deeptech": ["Resultado de investigación identificado y situación de su PI conocida (quién es dueño, si hay publicación o patente)"]
-      }
+        "deeptech": [
+          "Resultado de investigación identificado y situación de su PI conocida (quién es dueño, si hay publicación o patente)"
+        ]
+      },
+      "chequeos": [
+        {
+          "id": "G0-1",
+          "regla": "perfil_frase",
+          "min": 1,
+          "texto": "Oportunidad escrita sin nombrar la solución (Perfil → Una frase)"
+        },
+        {
+          "id": "G0-2",
+          "regla": "competencia",
+          "min": 1,
+          "texto": "≥1 alternativa real registrada en competencia.csv"
+        },
+        {
+          "id": "G0-3",
+          "regla": "hipotesis",
+          "min": 1,
+          "texto": "≥1 hipótesis refutable registrada"
+        },
+        {
+          "id": "G0-4",
+          "regla": "perdida_aceptable",
+          "min": 1,
+          "texto": "Recursos y pérdida aceptable anotados en el perfil"
+        }
+      ]
     },
     "G1": {
       "pregunta": "¿Qué necesidad existe?",
@@ -35,9 +63,34 @@
         "Criterio fijado antes de entrevistar y registrado en experimentos.csv"
       ],
       "por_track": {
-        "b2c": ["≥12 entrevistas o una encuesta con n ≥ 100 y método declarado, además de las entrevistas"],
-        "deeptech": ["≥5 entrevistas con usuarios industriales o clínicos (no solo académicos)", "Revisión de estado del arte y de patentes documentada"]
-      }
+        "b2c": [
+          "≥12 entrevistas o una encuesta con n ≥ 100 y método declarado, además de las entrevistas"
+        ],
+        "deeptech": [
+          "≥5 entrevistas con usuarios industriales o clínicos (no solo académicos)",
+          "Revisión de estado del arte y de patentes documentada"
+        ]
+      },
+      "chequeos": [
+        {
+          "id": "G1-1",
+          "regla": "entrevistas_mismo_segmento",
+          "min": 8,
+          "texto": "≥8 entrevistas en un mismo segmento"
+        },
+        {
+          "id": "G1-2",
+          "regla": "entrevistas_con_hecho",
+          "min": 5,
+          "texto": "≥5 entrevistas con situación y un hecho concreto registrados"
+        },
+        {
+          "id": "G1-3",
+          "regla": "experimentos_con_umbral",
+          "min": 1,
+          "texto": "Criterio fijado antes en experimentos.csv (umbral)"
+        }
+      ]
     },
     "G2": {
       "pregunta": "¿A quién vender?",
@@ -47,10 +100,30 @@
         "SAM bottom-up: cuentas × precio anual × penetración razonable (TPL-030)"
       ],
       "por_track": {
-        "saas_b2b": ["Usuario, comprador y aprobador identificados en ≥3 cuentas reales (TPL-020)"],
-        "b2c": ["Canal de adquisición principal identificado con un costo por usuario estimado o probado"],
-        "marketplace": ["Lado más difícil de atraer identificado y con ≥10 conversaciones de ese lado"]
-      }
+        "saas_b2b": [
+          "Usuario, comprador y aprobador identificados en ≥3 cuentas reales (TPL-020)"
+        ],
+        "b2c": [
+          "Canal de adquisición principal identificado con un costo por usuario estimado o probado"
+        ],
+        "marketplace": [
+          "Lado más difícil de atraer identificado y con ≥10 conversaciones de ese lado"
+        ]
+      },
+      "chequeos": [
+        {
+          "id": "G2-1",
+          "regla": "cuentas",
+          "min": 5,
+          "texto": "≥5 cuentas del ICP identificadas en cuentas_y_pipeline.csv"
+        },
+        {
+          "id": "G2-2",
+          "regla": "evidencias_secundarias_con_fuente",
+          "min": 1,
+          "texto": "Conteo de cuentas del ICP con fuente (evidencia secundaria con URL o ruta)"
+        }
+      ]
     },
     "G3": {
       "pregunta": "¿Por qué elegirnos?",
@@ -59,8 +132,24 @@
         "≥3 de 5 personas del segmento prefieren la propuesta frente a su alternativa actual en una prueba (demo, prototipo, landing con compromiso)"
       ],
       "por_track": {
-        "deeptech": ["Ventaja técnica medida frente al estado del arte (métrica y condición de prueba)"]
-      }
+        "deeptech": [
+          "Ventaja técnica medida frente al estado del arte (métrica y condición de prueba)"
+        ]
+      },
+      "chequeos": [
+        {
+          "id": "G3-1",
+          "regla": "competencia_con_limitacion",
+          "min": 2,
+          "texto": "≥2 alternativas con su limitación documentada"
+        },
+        {
+          "id": "G3-2",
+          "regla": "experimentos_cerrados",
+          "min": 1,
+          "texto": "≥1 prueba de preferencia cerrada (resultado y decisión)"
+        }
+      ]
     },
     "G4": {
       "pregunta": "¿Se puede cobrar rentablemente?",
@@ -70,12 +159,38 @@
         "Precio con IVA y unidad de cobro explícitos (TPL-054)"
       ],
       "por_track": {
-        "saas_b2b": ["≥2 compromisos firmados al precio objetivo", "Proyección LTV/CAC ≥ 3 y payback ≤ 12–18 meses con churn supuesto conservador"],
-        "b2c": ["Conversión a pago o reserva medida con tráfico del canal real; el umbral se fija antes según canal (referencia en tráfico frío: 1–5 %)"],
-        "marketplace": ["Take rate aceptado por el lado que paga en ≥5 transacciones o compromisos"],
-        "hardware": ["Costo unitario de fabricación (BOM + armado + logística) cotizado con proveedor para el volumen del primer lote", "Margen bruto objetivo ≥ 40 % al volumen del primer lote"],
-        "deeptech": ["Modelo de ingresos elegido (licencia, producto, servicio) con ≥1 contraparte industrial que valide el precio o cofinancie"]
-      }
+        "saas_b2b": [
+          "≥2 compromisos firmados al precio objetivo",
+          "Proyección LTV/CAC ≥ 3 y payback ≤ 12–18 meses con churn supuesto conservador"
+        ],
+        "b2c": [
+          "Conversión a pago o reserva medida con tráfico del canal real; el umbral se fija antes según canal (referencia en tráfico frío: 1–5 %)"
+        ],
+        "marketplace": [
+          "Take rate aceptado por el lado que paga en ≥5 transacciones o compromisos"
+        ],
+        "hardware": [
+          "Costo unitario de fabricación (BOM + armado + logística) cotizado con proveedor para el volumen del primer lote",
+          "Margen bruto objetivo ≥ 40 % al volumen del primer lote"
+        ],
+        "deeptech": [
+          "Modelo de ingresos elegido (licencia, producto, servicio) con ≥1 contraparte industrial que valide el precio o cofinancie"
+        ]
+      },
+      "chequeos": [
+        {
+          "id": "G4-1",
+          "regla": "compromisos",
+          "min": 1,
+          "texto": "≥1 compromiso real: preventa, depósito, LOI firmada con precio u OC"
+        },
+        {
+          "id": "G4-2",
+          "regla": "modelo_financiero",
+          "min": 1,
+          "texto": "Modelo financiero en entregables/ (expediente.py modelo)"
+        }
+      ]
     },
     "G5": {
       "pregunta": "¿Funciona técnicamente?",
@@ -84,9 +199,28 @@
         "Riesgos de seguridad y datos personales revisados (TPL-097, flujos/privacidad.md)"
       ],
       "por_track": {
-        "deeptech": ["TRL ≥ 5 (validado en entorno relevante) documentado"],
-        "hardware": ["Prototipo funcional probado en terreno ≥ 2 semanas o ciclo operativo completo", "Certificaciones necesarias identificadas (SEC, ISP, SAG, etc.)"]
-      }
+        "deeptech": [
+          "TRL ≥ 5 (validado en entorno relevante) documentado"
+        ],
+        "hardware": [
+          "Prototipo funcional probado en terreno ≥ 2 semanas o ciclo operativo completo",
+          "Certificaciones necesarias identificadas (SEC, ISP, SAG, etc.)"
+        ]
+      },
+      "chequeos": [
+        {
+          "id": "G5-1",
+          "regla": "experimentos_cerrados",
+          "min": 2,
+          "texto": "≥2 experimentos cerrados con resultado y decisión"
+        },
+        {
+          "id": "G5-2",
+          "regla": "riesgos",
+          "min": 1,
+          "texto": "Riesgos de seguridad y datos registrados en la bitácora (tipo riesgo)"
+        }
+      ]
     },
     "G6": {
       "pregunta": "¿Entrega valor en contexto?",
@@ -96,9 +230,33 @@
         "≥1 piloto convierte a contrato pagado o tiene precio posterior aceptado por escrito"
       ],
       "por_track": {
-        "deeptech": ["TRL ≥ 7 (demostración en entorno operativo)"],
-        "hardware": ["Tasa de fallas y costo de soporte en terreno medidos"]
-      }
+        "deeptech": [
+          "TRL ≥ 7 (demostración en entorno operativo)"
+        ],
+        "hardware": [
+          "Tasa de fallas y costo de soporte en terreno medidos"
+        ]
+      },
+      "chequeos": [
+        {
+          "id": "G6-1",
+          "regla": "pilotos_definidos",
+          "min": 1,
+          "texto": "Piloto con métrica, línea base y meta definidas antes de partir"
+        },
+        {
+          "id": "G6-2",
+          "regla": "pilotos_con_resultado",
+          "min": 1,
+          "texto": "Piloto con resultado medido"
+        },
+        {
+          "id": "G6-3",
+          "regla": "pilotos_convertidos",
+          "min": 1,
+          "texto": "≥1 piloto convertido a contrato, OC o precio aceptado por escrito"
+        }
+      ]
     },
     "G7": {
       "pregunta": "¿Compra y usa el cliente?",
@@ -106,10 +264,31 @@
         "Clientes pagando sin descuentos de amigo, con uso activo medido (no solo licencias vendidas)"
       ],
       "por_track": {
-        "saas_b2b": ["≥3–5 clientes pagando", "≥60 % de los usuarios con licencia activos cada semana"],
-        "b2c": ["Retención de la cohorte a 30 días medida y estable en ≥2 cohortes"],
-        "marketplace": ["Tasa de repetición de compra del lado demanda medida"]
-      }
+        "saas_b2b": [
+          "≥3–5 clientes pagando",
+          "≥60 % de los usuarios con licencia activos cada semana"
+        ],
+        "b2c": [
+          "Retención de la cohorte a 30 días medida y estable en ≥2 cohortes"
+        ],
+        "marketplace": [
+          "Tasa de repetición de compra del lado demanda medida"
+        ]
+      },
+      "chequeos": [
+        {
+          "id": "G7-1",
+          "regla": "cuentas_ganadas",
+          "min": 1,
+          "texto": "≥1 cuenta ganada en el pipeline"
+        },
+        {
+          "id": "G7-2",
+          "regla": "kpis_con_valor",
+          "min": 1,
+          "texto": "Uso activo medido: ≥1 KPI con línea base en la bitácora"
+        }
+      ]
     },
     "G8": {
       "pregunta": "¿Se repite venta e implementación?",
@@ -119,9 +298,27 @@
         "Prueba de Sean Ellis ≥ 40 % 'muy decepcionado' en usuarios activos, o retención de cohortes que se aplana"
       ],
       "por_track": {
-        "saas_b2b": ["Churn mensual de logos ≤ 2–3 % (pymes) o NRR ≥ 100 % (empresas medianas)"],
-        "b2c": ["Curva de retención que se aplana (no tiende a cero) en ≥3 cohortes"]
-      }
+        "saas_b2b": [
+          "Churn mensual de logos ≤ 2–3 % (pymes) o NRR ≥ 100 % (empresas medianas)"
+        ],
+        "b2c": [
+          "Curva de retención que se aplana (no tiende a cero) en ≥3 cohortes"
+        ]
+      },
+      "chequeos": [
+        {
+          "id": "G8-1",
+          "regla": "cuentas_ganadas",
+          "min": 10,
+          "texto": "≥10 cuentas ganadas con el mismo proceso"
+        },
+        {
+          "id": "G8-2",
+          "regla": "kpis_con_valor",
+          "min": 2,
+          "texto": "CAC y ciclo de venta conocidos: ≥2 KPI con valor"
+        }
+      ]
     },
     "G9": {
       "pregunta": "¿Conviene invertir más?",
@@ -130,7 +327,21 @@
         "Caja para 12–18 meses con el plan de crecimiento (finanzas.py runway)",
         "Riesgos de escala (equipo, regulación, nuevo país) con dueño y plan"
       ],
-      "por_track": {}
+      "por_track": {},
+      "chequeos": [
+        {
+          "id": "G9-1",
+          "regla": "modelo_financiero",
+          "min": 1,
+          "texto": "Modelo financiero actualizado para el plan de crecimiento"
+        },
+        {
+          "id": "G9-2",
+          "regla": "riesgos",
+          "min": 3,
+          "texto": "≥3 riesgos de escala con dueño y plan en la bitácora"
+        }
+      ]
     }
   }
 }
