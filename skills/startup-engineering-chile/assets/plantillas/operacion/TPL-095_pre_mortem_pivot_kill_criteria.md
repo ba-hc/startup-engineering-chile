@@ -1,6 +1,10 @@
 # TPL-095 — Pre-mortem y criterios de pivote o cierre (Pre-mortem / Pivot-Kill Criteria)
 
-**Para qué:** fijar, antes de un gasto significativo, por qué podría fracasar y qué cifra concreta obliga a perseverar, pivotar o detenerse. · **Gate:** transversal (antes de un gasto que cambia de etapa, típ. G5–G7) · **Alimenta:** `riesgos.csv`, `decisiones.csv`, `experimentos.csv`
+> **Para qué sirve:** Fijar, antes de un gasto significativo, por qué podría fracasar y qué cifra concreta obliga a perseverar, pivotar o detenerse.
+> **Cuándo NO usarla:** Para gastos pequeños y reversibles, o cuando el gasto ya se comprometió; un pre-mortem posterior es racionalización.
+> **Micro-ejemplo resuelto:** Antes de contratar 2 vendedores por $3,6 M/mes, el equipo fija: "si al mes 4 cada uno no cierra ≥ 2 cuentas al mes, se despide a uno y el fundador vuelve a vender", y registra como causa probable un ciclo de venta de 5 meses (R-007).
+
+**Gate:** transversal (antes de un gasto que cambia de etapa, típ. G5–G7) · **Alimenta:** `bitacora.csv` (tipo riesgo), `decisiones.csv`, `experimentos.csv`
 
 ## Completar
 **Decisión en juego:** [qué, monto CLP, meses, ¿reversible?] · **Pérdida aceptable:** [TPL-036]
@@ -41,7 +45,7 @@ Fijado el 2026-12-01 por ambos socios (DEC-012), antes de firmar contratos.
 - La mitigación no es una acción con responsable.
 
 ## Criterio de aceptación
-- Cada causa tiene señal medible, umbral y mitigación registrada en `riesgos.csv`.
+- Cada causa tiene señal medible, umbral y mitigación registrada en `bitacora.csv` (tipo riesgo).
 - Cada métrica decisiva tiene los tres umbrales y una fecha de corte.
 - `decisiones.csv` registra los criterios con fecha anterior al gasto.
 - El monto en juego está dentro de la pérdida aceptable o se achicó.

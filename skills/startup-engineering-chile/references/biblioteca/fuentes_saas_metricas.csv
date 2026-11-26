@@ -1,0 +1,92 @@
+﻿id,categoria,titulo,autor_institucion,url,estado,fecha_reconsulta,uso_y_limites
+METODO-001,METODO,MIT Disciplined Entrepreneurship,Martin Trust Center,https://diymtc.mit.edu/education/deframework/,Verificada en esta consolidación (resultado recuperado),2026-11-25,"24 pasos, hojas de trabajo y MOOCs archivados."
+METODO-002,METODO,MIT OCW,MIT,https://ocw.mit.edu/,Referencia previa/canónica; revalidar URL y edición,,"Buscar 15.390 New Enterprises; syllabus, tareas y clases."
+METODO-003,METODO,Disciplined Entrepreneurship,Bill Aulet / MIT,https://www.d-eship.com/,Referencia previa/canónica; revalidar URL y edición,,Método y cursos.
+METODO-004,METODO,MIT Venture Mentoring Service,MIT,https://vms.mit.edu/,Referencia previa/canónica; revalidar URL y edición,,Mentoría estructurada y conflictos de interés.
+METODO-005,METODO,NSF I-Corps,NSF,https://new.nsf.gov/funding/initiatives/i-corps,Referencia previa/canónica; revalidar URL y edición,,Customer discovery y comercialización científica.
+METODO-006,METODO,NSF SBIR Project Pitch,NSF,https://seedfund.nsf.gov/,Referencia previa/canónica; revalidar URL y edición,,Instrucciones de pitch y commercialization plan.
+METODO-007,METODO,NASA I-Corps,NASA,https://www.nasa.gov/sbir_sttr/icorps/,Verificada en esta consolidación (resultado recuperado),2026-11-25,Ejemplo de requisitos de investigación y comercialización.
+METODO-008,METODO,Effectuation,Society for Effectual Action,https://effectuation.org/,Referencia previa/canónica; revalidar URL y edición,,"Cinco principios, decisiones bajo incertidumbre."
+METODO-009,METODO,Market Opportunity Navigator,Gruber y Tal,https://wheretoplay.co/,Referencia previa/canónica; revalidar URL y edición,,Selección de oportunidades y mercado principal.
+METODO-010,METODO,Duke Entrepreneurship Manual,Duke / Fuqua,https://entrepreneurship.duke.edu/,URL anterior rota (404 al 2026-11-25); buscar el manual desde el sitio de Duke,2026-11-25,"Evaluación de oportunidad, estrategia y ejecución."
+METODO-011,METODO,Steve Blank,Steve Blank,https://steveblank.com/,Referencia previa/canónica; revalidar URL y edición,,"Customer development, investment readiness."
+METODO-012,METODO,Strategyzer — biblioteca,Strategyzer,https://www.strategyzer.com/library,Referencia previa/canónica; revalidar URL y edición,,"Canvas, herramientas y playbooks."
+METODO-013,METODO,Business Model Canvas,Strategyzer,https://www.strategyzer.com/library/the-business-model-canvas,Verificada en esta consolidación (resultado recuperado),2026-11-25,Plantilla original y nueve bloques.
+METODO-014,METODO,BMC manual,Strategyzer,https://www.strategyzer.com/library/the-business-model-canvas-instruction-manual,Referencia previa/canónica; revalidar URL y edición,,Guía de uso.
+METODO-015,METODO,Value Proposition Canvas,Strategyzer,https://www.strategyzer.com/library/the-value-proposition-canvas,Referencia previa/canónica; revalidar URL y edición,,Perfil de cliente y mapa de valor.
+METODO-016,METODO,Customer Profile,Strategyzer,https://www.strategyzer.com/library/the-customer-profile,Referencia previa/canónica; revalidar URL y edición,,"Jobs, pains, gains."
+METODO-017,METODO,Value Map,Strategyzer,https://www.strategyzer.com/library/the-value-map,Referencia previa/canónica; revalidar URL y edición,,"Aliviadores, creadores y oferta."
+METODO-018,METODO,Business Model Space,Strategyzer,https://www.strategyzer.com/library/the-business-model-space,Referencia previa/canónica; revalidar URL y edición,,Entorno del modelo.
+METODO-019,METODO,Portfolio Map,Strategyzer,https://www.strategyzer.com/library/the-business-model-portfolio,Referencia previa/canónica; revalidar URL y edición,,Gestionar portafolio.
+METODO-020,METODO,Strategic Guidance Framework,Strategyzer,https://www.strategyzer.com/library/strategic-guidance-framework,Referencia previa/canónica; revalidar URL y edición,,Alinear dirección y cartera.
+METODO-021,METODO,30 herramientas Strategyzer,Strategyzer,https://www.strategyzer.com/library/access-30-free-strategyzer-tools-in-our-resource-library,Referencia previa/canónica; revalidar URL y edición,,"Test cards, learning y progreso."
+METODO-022,METODO,Business Model Navigator,St. Gallen / BMI Lab,https://businessmodelnavigator.com/,Referencia previa/canónica; revalidar URL y edición,,55 patrones originales y alternativas de modelo.
+METODO-023,METODO,Design a Better Business — herramientas,Van der Pijl y colaboradores,https://www.designabetterbusiness.tools/,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Canvas de preparación, contexto, visión, ideación y validación."
+METODO-024,METODO,Design a Better Business — libro,Wiley,https://onlinelibrary.wiley.com/book/10.1002/9781119272144,Referencia previa/canónica; revalidar URL y edición,,Libro y capítulos; acceso editorial.
+METODO-025,METODO,Board of Innovation toolbox,BOI,https://www.boardofinnovation.com/tools/,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Diseño de modelos, IA, portafolio, experimentos."
+METODO-026,METODO,Revenue flowchart B2B,BOI,https://www.boardofinnovation.com/tools/revenue-model-flowchart-b2b/,Verificada en esta consolidación (resultado recuperado),2026-11-25,Selección de monetización B2B.
+METODO-027,METODO,Revenue flowchart B2C,BOI,https://www.boardofinnovation.com/tools/b2c-revenue-model-flowchart/,Verificada en esta consolidación (resultado recuperado),2026-11-25,Selección de monetización B2C.
+METODO-028,METODO,Foundation Sprint,Character Capital,https://www.character.vc/guide/foundation-sprint,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Dos días para cliente, problema, diferenciación y alternativas."
+METODO-029,METODO,Foundation Sprint template,Character Capital,https://www.character.vc/guide/foundation-sprint-design-sprint-template,Referencia previa/canónica; revalidar URL y edición,,Plantilla de taller.
+METODO-030,METODO,Note and Vote,Character Capital,https://www.character.vc/guide/note-and-vote,Referencia previa/canónica; revalidar URL y edición,,Decisiones grupales.
+METODO-031,METODO,Design Sprint,Character Capital,https://www.character.vc/guide/design-sprint,Referencia previa/canónica; revalidar URL y edición,,Prototipo y prueba.
+METODO-032,METODO,Design Sprint original,Google Ventures,https://www.gv.com/sprint,Referencia previa/canónica; revalidar URL y edición,,Guía y videos.
+METODO-033,METODO,Lean Product Canvas,Jeff Gothelf,https://jeffgothelf.com/blog/the-lean-product-canvas/,Referencia previa/canónica; revalidar URL y edición,,Separación de estrategia y discovery.
+METODO-034,METODO,Lean Strategy y Product Canvas — video,Jeff Gothelf,https://www.youtube.com/watch?v=V_cpMJDNXwU,Referencia previa/canónica; revalidar URL y edición,,Presentación original.
+METODO-035,METODO,Herramientas de producto,Roman Pichler,https://www.romanpichler.com/tools/,Referencia previa/canónica; revalidar URL y edición,,"Product Vision Board, roadmap, persona."
+METODO-036,METODO,Product Vision Board,Roman Pichler,https://www.romanpichler.com/tools/product-vision-board/,Referencia previa/canónica; revalidar URL y edición,,Visión y estrategia.
+METODO-037,METODO,Product Strategy Framework 2026,Roman Pichler,https://romanpichler.substack.com/p/the-product-strategy-framework-a,Referencia previa/canónica; revalidar URL y edición,,Revisión de mayo 2026.
+METODO-038,METODO,Product Talk,Teresa Torres,https://www.producttalk.org/,Referencia previa/canónica; revalidar URL y edición,,Continuous discovery y opportunity solution trees.
+METODO-039,METODO,Interview Snapshot,Teresa Torres,https://www.producttalk.org/interview-snapshot/,Referencia previa/canónica; revalidar URL y edición,,Síntesis trazable de entrevistas.
+METODO-040,METODO,David Bland — biblioteca,Precoil,https://www.youtube.com/@DavidJBlandPrecoil,Referencia previa/canónica; revalidar URL y edición,,"Experimentación, riesgo, casos."
+METODO-041,METODO,Testing Business Ideas with AI,David Bland,https://www.youtube.com/watch?v=VL7G0KjBwnI,Referencia previa/canónica; revalidar URL y edición,,Conferencia 2026; revisar contenido directamente.
+METODO-042,METODO,Design Kit,IDEO.org,https://www.designkit.org/,Referencia previa/canónica; revalidar URL y edición,,Métodos de investigación y prototipado.
+METODO-043,METODO,Design Thinking Bootleg,Stanford d.school,https://dschool.stanford.edu/resources/design-thinking-bootleg,Referencia previa/canónica; revalidar URL y edición,,Métodos de diseño.
+METODO-044,METODO,LUMA 36 methods,LUMA Institute,https://www.luma-institute.com/about-luma/luma-system-explore-methods/,Referencia previa/canónica; revalidar URL y edición,,"Looking, understanding, making."
+METODO-045,METODO,DIY Toolkit,Nesta,https://www.nesta.org.uk/toolkit/diy-toolkit/,Referencia previa/canónica; revalidar URL y edición,,Herramientas de innovación; revisar licencia no comercial.
+METODO-046,METODO,DIY herramientas,Nesta,https://diy-toolkit.org/tools/,Referencia previa/canónica; revalidar URL y edición,,Plantillas; no redistribuir sin verificar licencia.
+METODO-047,METODO,Standards of Evidence,Nesta,https://www.nesta.org.uk/,Referencia previa/canónica; revalidar URL y edición,,Buscar marco de evidencia e impacto.
+METODO-048,METODO,KTH Innovation Readiness Levels,KTH,https://kthinnovationreadinesslevel.com/,Referencia previa/canónica; revalidar URL y edición,,"Seis dimensiones, madurez 1–9; revisar licencia."
+METODO-049,METODO,Adoption Readiness Levels,US DOE,https://www.energy.gov/technologycommercialization/adoption-readiness-levels-arl-framework,Verificada en esta consolidación (resultado recuperado),2026-11-25,"17 dimensiones de adopción, cuatro grupos de riesgo."
+METODO-050,METODO,First Round PMF Method,First Round,https://www.firstround.com/pmf,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Seis sesiones, cuatro Ps, diseño de ventas."
+METODO-051,METODO,4 Levels of PMF,First Round,https://www.firstround.com/levels,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Satisfacción, demanda y eficiencia."
+METODO-052,METODO,SVPG — cuatro riesgos,Marty Cagan,https://www.svpg.com/four-big-risks/,Referencia previa/canónica; revalidar URL y edición,,"Valor, usabilidad, factibilidad y viabilidad."
+METODO-053,METODO,Lean Product Playbook,Dan Olsen,https://dan-olsen.com/book/,Referencia previa/canónica; revalidar URL y edición,,Pirámide de PMF y necesidades.
+METODO-054,METODO,Dan Olsen — charla PMF,Mind the Product,https://www.mindtheproduct.com/sunday-rewind-the-playbook-for-achieving-product-market-fit-by-dan-olsen/,Referencia previa/canónica; revalidar URL y edición,,Conferencia y método.
+METODO-055,METODO,Ten Types of Innovation,Doblin / Design Atlas,https://designatlas.org/disciplinas/diseno-de-negocio/diez-tipos-de-innovacion/,Referencia previa/canónica; revalidar URL y edición,,Clasificación de innovación y diferenciación.
+METODO-056,METODO,Stage-Gate,Stage-Gate International,https://www.stage-gate.com/,Referencia previa/canónica; revalidar URL y edición,,Discovery-to-launch y gates de inversión.
+METODO-057,METODO,EntreComp,Comisión Europea JRC,https://joint-research-centre.ec.europa.eu/entrecomp-entrepreneurship-competence-framework_en,Referencia previa/canónica; revalidar URL y edición,,"15 competencias, 8 niveles; consultar edición."
+METODO-058,METODO,OIT SIYB,OIT,https://www.ilo.org/,Referencia previa/canónica; revalidar URL y edición,,"Buscar Start and Improve Your Business, módulos de gestión."
+METODO-059,METODO,ISO/TC 279,ISO,https://www.iso.org/committee/4587737.html,Referencia previa/canónica; revalidar URL y edición,,Familia ISO 56000; las normas pueden ser de pago.
+METODO-060,METODO,INN,Instituto Nacional de Normalización,https://www.inn.cl/,Referencia previa/canónica; revalidar URL y edición,,Buscar NCh-ISO 56008:2026.
+METODO-061,METODO,WIPO IP Strategy Checklist,WIPO,https://www.wipo.int/en/web/business/checklist,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Inventario, protección, comercialización; no asesoría legal."
+METODO-062,METODO,NIST Cybersecurity Framework,NIST,https://www.nist.gov/cyberframework,Referencia previa/canónica; revalidar URL y edición,,CSF 2.0 y guía para empresas pequeñas.
+METODO-063,METODO,RE-AIM,RE-AIM,https://re-aim.org/,Referencia previa/canónica; revalidar URL y edición,,"Evaluar alcance, efectividad, adopción, implementación y mantenimiento."
+METODO-064,METODO,Implementation Outcome Repository,Implementation Science,https://implementationoutcomerepository.org/,Referencia previa/canónica; revalidar URL y edición,,Instrumentos de medición.
+METODO-065,METODO,AAPOR,AAPOR,https://aapor.org/,Referencia previa/canónica; revalidar URL y edición,,Buenas prácticas de encuesta y transparencia.
+METODO-066,METODO,The Green Book 2026,HM Treasury,https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026,Referencia previa/canónica; revalidar URL y edición,,Evaluación de alternativas y decisiones de inversión pública.
+METODO-067,METODO,World Bank — publicaciones,Banco Mundial,https://openknowledge.worldbank.org/,Referencia previa/canónica; revalidar URL y edición,,Buscar Impact Evaluation in Practice e infoDev incubación.
+METODO-068,METODO,CEPAL,CEPAL,https://repositorio.cepal.org/,Referencia previa/canónica; revalidar URL y edición,,"Manual de marco lógico, formulación y evaluación."
+METODO-069,METODO,OCDE emprendimiento,OCDE,https://www.oecd.org/en/topics/entrepreneurship.html,Referencia previa/canónica; revalidar URL y edición,,Diagnóstico e indicadores de ecosistemas.
+ACADEMIA-001,ACADEMIA,Método científico en decisiones emprendedoras,Camuffo et al.,https://doi.org/10.1002/smj.3580,Referencia previa/canónica; revalidar URL y edición,,Cuatro experimentos; identificar ideas poco prometedoras.
+ACADEMIA-002,ACADEMIA,Start-Up Chile accelerator study,Gonzalez-Uribe y Leatherbee,https://doi.org/10.1093/rfs/hhx103,Verificada en esta consolidación (resultado recuperado),2026-11-25,Evaluación histórica; formación vs recursos solos.
+ACADEMIA-003,ACADEMIA,"Do Accelerators Work? If So, How?",Hallen y colaboradores,https://doi.org/10.1287/orsc.2019.1304,Referencia previa/canónica; revalidar URL y edición,,"Mentorías, consulta y aprendizaje."
+ACADEMIA-004,ACADEMIA,Metaanálisis aceleradoras,Journal of Technology Transfer,https://doi.org/10.1007/s10961-025-10218-6,Referencia previa/canónica; revalidar URL y edición,,Heterogeneidad y sesgo de selección.
+ACADEMIA-005,ACADEMIA,Beyond Demo Day 2026,Baek y Hegde,https://www.nber.org/papers/w35063,Verificada en esta consolidación (resultado recuperado),2026-11-25,"750.000 startups, 329 aceleradoras, working paper."
+ACADEMIA-006,ACADEMIA,How Do Venture Capitalists Make Decisions?,Gompers et al.,https://www.nber.org/papers/w22587,Referencia previa/canónica; revalidar URL y edición,,Encuesta de inversionistas y criterios.
+ACADEMIA-007,ACADEMIA,Venture Capital decision-making — journal,Gompers et al.,https://doi.org/10.1016/j.jfineco.2019.06.011,Referencia previa/canónica; revalidar URL y edición,,Versión publicada.
+ACADEMIA-008,ACADEMIA,Why Do Startups Fail?,Frontiers in Psychology,https://doi.org/10.3389/fpsyg.2024.1299135,Referencia previa/canónica; revalidar URL y edición,,Competencias y causas de fracaso.
+ACADEMIA-009,ACADEMIA,What Could We Learn from Startup Failures?,Journal of Innovation and Entrepreneurship,https://doi.org/10.1186/s13731-025-00493-w,Referencia previa/canónica; revalidar URL y edición,,Factores de fracaso.
+ACADEMIA-010,ACADEMIA,Understanding Startup Failure,Academy of Management,https://doi.org/10.5465/AMPROC.2025.21569abstract,Referencia previa/canónica; revalidar URL y edición,,Resumen de revisión.
+ACADEMIA-011,ACADEMIA,Understanding Business Failure,Sustainability,https://doi.org/10.3390/su18052167,Referencia previa/canónica; revalidar URL y edición,,Revisión de fracaso empresarial.
+ACADEMIA-012,ACADEMIA,Willingness to pay meta-analysis,Schmidt y Bijmolt,https://doi.org/10.1007/s11747-019-00666-6,Referencia previa/canónica; revalidar URL y edición,,Sesgo hipotético; no aplicar ajuste universal B2B.
+ACADEMIA-013,ACADEMIA,Sample sizes for saturation,Hennink y Kaiser,https://doi.org/10.1016/j.socscimed.2021.114523,Referencia previa/canónica; revalidar URL y edición,,Revisión de 23 estudios cualitativos.
+ACADEMIA-014,ACADEMIA,Information Power,Malterud et al.,https://doi.org/10.1177/1049732315617444,Referencia previa/canónica; revalidar URL y edición,,Justificar tamaño muestral cualitativo.
+ACADEMIA-015,ACADEMIA,Framework Method,Gale et al.,https://doi.org/10.1186/1471-2288-13-117,Referencia previa/canónica; revalidar URL y edición,,Análisis cualitativo mediante matrices.
+ACADEMIA-016,ACADEMIA,COREQ,Tong et al.,https://doi.org/10.1093/intqhc/mzm042,Referencia previa/canónica; revalidar URL y edición,,Checklist de investigación con entrevistas.
+ACADEMIA-017,ACADEMIA,Implementation Outcomes,Proctor et al.,https://doi.org/10.1007/s10488-010-0319-7,Referencia previa/canónica; revalidar URL y edición,,Taxonomía de ocho resultados de implementación.
+ACADEMIA-018,ACADEMIA,Microsoft Research — experimentation,Microsoft,https://www.microsoft.com/en-us/research/,Referencia previa/canónica; revalidar URL y edición,,Buscar Patterns of Trustworthy Experimentation y métricas guardrail.
+ACADEMIA-019,ACADEMIA,Capital Semilla CORFO — estudio 2018,Lucas Navarro,https://www.scielo.cl/,Referencia previa/canónica; revalidar URL y edición,,Buscar título Entrepreneurship Policy and Firm Performance: Chile's CORFO Seed Capital Program.
+ACADEMIA-020,ACADEMIA,Business practices in small firms,McKenzie y Woodruff,https://www.nber.org/papers/w21505,Referencia previa/canónica; revalidar URL y edición,,Prácticas de administración y resultados de pequeñas empresas.
+ACADEMIA-021,ACADEMIA,Experimentation and Startup Performance,"Koning, Hasan y Chatterji",https://www.nber.org/,Referencia previa/canónica; revalidar URL y edición,,Buscar Experimentation and Startup Performance: Evidence from A/B Testing.
+ACADEMIA-022,ACADEMIA,Learning to Quit? 2026,NBER,https://www.nber.org/,Referencia previa/canónica; revalidar URL y edición,,Buscar Learning to Quit?; working paper y selección de supervivientes.

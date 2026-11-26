@@ -10,7 +10,7 @@
   - quien compra (abastecimiento).
   
   Cada una tiene una objeción distinta. Regístralas en `cuentas_y_pipeline.csv`.
-- **Canal de entrada:** programas de innovación abierta y desafíos corporativos (`desafios_corporativos.csv`), presentaciones de inversionistas o clientes actuales. La puerta fría a abastecimiento rara vez funciona en una startup.
+- **Canal de entrada:** programas de innovación abierta y desafíos corporativos (bitácora, `tipo=desafio`), presentaciones de inversionistas o clientes actuales. La puerta fría a abastecimiento rara vez funciona en una startup.
 
 ## 2. Registros de proveedores (requisito habitual para facturar)
 | Registro | Quién lo usa (al 2026-11-25) |

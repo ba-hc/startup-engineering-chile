@@ -1,0 +1,79 @@
+﻿id,categoria,titulo,autor_institucion,url,estado,fecha_reconsulta,uso_y_limites
+CHILE-001,CHILE,Dinámica empresarial 2005–2024,Ministerio de Economía,https://www.economia.gob.cl/2026/11/16/informe-dinamica-empresarial-2005-2024.htm,Verificada en esta consolidación (resultado recuperado),2026-11-25,Supervivencia jurídica vs actividad; informe publicado 16 nov 2026.
+CHILE-002,CHILE,Estudios y encuestas,Ministerio de Economía,https://www.economia.gob.cl/category/estudios-encuestas,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Creación, evolución y estructura de empresas."
+CHILE-003,CHILE,Diagnóstico Deep Tech Chile 2026,BID Lab / emetris,https://publications.iadb.org/es/diagnostico-del-ecosistema-deep-tech-de-emprendimiento-e-inversion-en-etapas-tempranas-en-chile,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Brechas de capital, talento, articulación, pilotaje e internacionalización."
+CHILE-004,CHILE,Diagnóstico Deep Tech — DOI,BID,https://doi.org/10.18235/0013888,Verificada en esta consolidación (resultado recuperado),2026-11-25,Identificador persistente de publicación.
+CHILE-005,CHILE,Registro y caracterización EBCT,MinCiencia,https://www.minciencia.gob.cl/areas/innovacion-y-emprendimiento/ebct/,Referencia previa/canónica; revalidar URL y edición,,Datos de empresas de base científico-tecnológica.
+CHILE-007,CHILE,Encuesta Longitudinal de Empresas,INE,https://www.ine.gob.cl/estadisticas-por-tema/ciencia-y-tecnologia/encuesta-longitudinal-de-empresas,Referencia previa/canónica; revalidar URL y edición,,"Estructura, finanzas, clientes y proveedores."
+CHILE-008,CHILE,Encuesta Nacional de Innovación,INE,https://www.ine.gob.cl/estadisticas-por-tema/ciencia-y-tecnologia/encuesta-nacional-de-innovacion-en-empresas,Referencia previa/canónica; revalidar URL y edición,,"Prácticas, gastos, barreras, innovación."
+CHILE-009,CHILE,INE estadísticas,INE,https://www.ine.gob.cl/,Referencia previa/canónica; revalidar URL y edición,,Encuesta de microemprendimiento y estadísticas sectoriales.
+CHILE-014,CHILE,Banco Central,BCCh,https://www.bcentral.cl/,Referencia previa/canónica; revalidar URL y edición,,Informe de percepciones de negocios y contexto económico.
+CHILE-015,CHILE,Observatorio Logístico,Ministerio de Transportes,https://www.observatoriologistico.cl/,Referencia previa/canónica; revalidar URL y edición,,Estadísticas y mercados logísticos.
+CHILE-016,CHILE,DEIS,MINSAL,https://deis.minsal.cl/,Referencia previa/canónica; revalidar URL y edición,,Establecimientos y estadísticas sanitarias.
+CHILE-018,CHILE,INFOR,Instituto Forestal,https://www.infor.cl/,Referencia previa/canónica; revalidar URL y edición,,Directorios forestales y estadísticas industriales.
+CHILE-019,CHILE,CNED,Consejo Nacional de Educación,https://www.cned.cl/,Referencia previa/canónica; revalidar URL y edición,,"Educación superior, instituciones y oferta."
+CHILE-020,CHILE,SINIM,SUBDERE,https://www.sinim.gov.cl/,Referencia previa/canónica; revalidar URL y edición,,Datos municipales; verificar restricciones comerciales.
+CHILE-027,CHILE,Sistema Nacional de Inversiones,MDSF,https://sni.gob.cl/,Referencia previa/canónica; revalidar URL y edición,,Evaluación y formulación de proyectos públicos.
+CHILE-030,CHILE,ACAFI — documentos VC,ACAFI,https://acafi.cl/documentos-vc/,Referencia previa/canónica; revalidar URL y edición,,"SAFE, notas, pactos, modelos; revisión jurídica necesaria."
+CHILE-031,CHILE,Guía de buenas prácticas evaluación de inversión,ACAFI,https://www.acafi.cl/wp-content/uploads/2021/03/Est%C3%A1ndares-Homologaci%C3%B3n-FINAL.pdf,Referencia previa/canónica; revalidar URL y edición,,"Due diligence legal, comercial, financiera e IP."
+CHILE-032,CHILE,ACVC,Asociación Chilena de Venture Capital,https://acvc.cl/,Referencia previa/canónica; revalidar URL y edición,,"Fondos, reportes, criterios de inversión."
+CHILE-033,CHILE,ACVC preguntas frecuentes,ACVC,https://acvc.cl/preguntas-frecuentes/,Referencia previa/canónica; revalidar URL y edición,,Criterios y conceptos de VC.
+CHILE-034,CHILE,Chambers Venture Capital Chile 2026,Chambers,https://practiceguides.chambers.com/practice-guides/venture-capital-2026/chile/,Referencia previa/canónica; revalidar URL y edición,,Contexto legal de inversión; verificar fecha.
+LATAM-001,LATAM,Emprelatam — Academia,Emprelatam,https://emprelatam.com/blog,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Casos y aprendizajes de fundadores, incluyendo Helpers y rondas 2026."
+LATAM-002,LATAM,Emprelatam — mentores,Emprelatam,https://emprelatam.com/mentores,Verificada en esta consolidación (resultado recuperado),2026-11-25,Directorio de referentes; no implica disponibilidad individual.
+LATAM-003,LATAM,Emprelatam — programa,Emprelatam,https://emprelatam.com/,Verificada en esta consolidación (resultado recuperado),2026-11-25,Aceleradora; revisar costos y convocatorias.
+LATAM-004,LATAM,Startupeable,Enzo Cavalie,https://www.startupeable.com/podcast/,Verificada en esta consolidación (resultado recuperado),2026-11-25,Entrevistas y cursos temáticos en español.
+LATAM-005,LATAM,Startupeable — sitio,Startupeable,https://www.startupeable.com/,Referencia previa/canónica; revalidar URL y edición,,Biblioteca de founders y VC.
+LATAM-006,LATAM,Latitud,Latitud,https://www.latitud.com/,Referencia previa/canónica; revalidar URL y edición,,Playbooks y formación; buscar Latin America Goes Global 2026.
+LATAM-007,LATAM,Platzi startups,Platzi,https://platzi.com/,Referencia previa/canónica; revalidar URL y edición,,"Buscar escuela de startups, Founders y aspectos legales por país."
+LATAM-008,LATAM,Edson Rigonatti — videos,Edson Rigonatti,https://edsonrigonatti.com/videos,Verificada en esta consolidación (resultado recuperado),2026-11-25,"103 videos listados; ventas, crecimiento, PMF, APIs, VC."
+LATAM-009,LATAM,Edson Rigonatti — biblioteca,Edson Rigonatti,https://edsonrigonatti.com/,Referencia previa/canónica; revalidar URL y edición,,Ensayos y modelos mentales.
+LATAM-010,LATAM,Astella,Astella,https://astella.com.br/,Referencia previa/canónica; revalidar URL y edición,,Podcast y playbooks de empresas brasileñas.
+LATAM-011,LATAM,Endeavor Brasil,Endeavor,https://endeavor.org.br/,Referencia previa/canónica; revalidar URL y edición,,"Day1, escala, mentoría y recursos en portugués."
+LATAM-012,LATAM,Endeavor Argentina,Endeavor,https://www.endeavor.org.ar/,Referencia previa/canónica; revalidar URL y edición,,"Experiencias, masterclasses y jornadas."
+LATAM-013,LATAM,Endeavor Uruguay,Endeavor,https://endeavor.org.uy/,Referencia previa/canónica; revalidar URL y edición,,"Mentores, exportación desde mercados pequeños."
+LATAM-014,LATAM,Endeavor Perú,Endeavor,https://endeavor.org.pe/,Referencia previa/canónica; revalidar URL y edición,,Mentores y experiencias.
+LATAM-015,LATAM,Cracks Podcast,Oso Trava,https://cracks.la/,Referencia previa/canónica; revalidar URL y edición,,Entrevistas de liderazgo y negocios.
+LATAM-016,LATAM,Slidebean,Caya / Slidebean,https://slidebean.com/,Referencia previa/canónica; revalidar URL y edición,,"Pitch, modelos financieros, inversión."
+LATAM-017,LATAM,Bridge for Billions,Bridge for Billions,https://www.bridgeforbillions.org/,Referencia previa/canónica; revalidar URL y edición,,Incubación y mentoría de impacto en Latam.
+LATAM-018,LATAM,Koga Impact Lab,Koga,https://koga.com.py/,Referencia previa/canónica; revalidar URL y edición,,Innovación y mentorías Paraguay.
+LATAM-019,LATAM,BuenTrip,BuenTrip Ventures (México),https://buentriphub.com/,Verificada en esta consolidación (resultado recuperado),2026-11-25,Fondo y aceleradora de México; confirmar programa vigente antes de usar.
+LATAM-020,LATAM,ConQuito,ConQuito,https://www.conquito.org.ec/,Referencia previa/canónica; revalidar URL y edición,,Emprendimiento Ecuador.
+LATAM-021,LATAM,Ciudad del Saber,Ciudad del Saber,https://ciudaddelsaber.org/,Referencia previa/canónica; revalidar URL y edición,,Incubación Panamá.
+LATAM-022,LATAM,Cámara Comercio Bogotá toolkit,CCB,https://www.ccb.org.co/servicios/haz-crecer-tu-empresa/innovacion-empresarial/toolkit-innovacion,Referencia previa/canónica; revalidar URL y edición,,Herramientas de innovación.
+LATAM-023,LATAM,Tecnológico de Monterrey cursos,Tec,https://tec.mx/es/acciones-de-impacto-social/cursos-y-webinars/emprendimiento,Referencia previa/canónica; revalidar URL y edición,,Conferencias y formación empresarial.
+LATAM-024,LATAM,CIDE PUCP audiovisual,PUCP,https://educast.pucp.edu.pe/cide,Referencia previa/canónica; revalidar URL y edición,,Clases de Canvas y validación.
+LATAM-025,LATAM,ProInnóvate,Gobierno de Perú,https://www.gob.pe/proinnovate,Referencia previa/canónica; revalidar URL y edición,,"Financiamiento, casos, charlas."
+LATAM-026,LATAM,PAIE 2026 metodología,ANDE Uruguay,https://ande.org.uy/images/PAIE_Virtual_-_Programa_Emprendedores_2026_1.pdf,Referencia previa/canónica; revalidar URL y edición,,Términos de acompañamiento y herramientas.
+LATAM-027,LATAM,Validación de idea de negocios,Uruguay Emprendedor,https://www.uruguayemprendedor.uy/programa-de-apoyo/validacion-de-idea-de-negocios-ande/,Referencia previa/canónica; revalidar URL y edición,,Programa ANDE.
+LATAM-028,LATAM,Capacitar — modelos de negocio,Gobierno argentino,https://www.argentina.gob.ar/produccion/capacitar/tematicas/modelo-de-negocios,Referencia previa/canónica; revalidar URL y edición,,"Cursos de BMC, VPC, Lean Canvas y prototipado."
+LATAM-029,LATAM,MJV Design Thinking — libro,MJV Brasil,https://www.livrodesignthinking.com.br/,Referencia previa/canónica; revalidar URL y edición,,"Casos, inmersión, análisis, ideación y prototipado."
+LATAM-030,LATAM,MJV biblioteca,MJV Brasil,https://www.mjvinnovation.com/pt-br/biblioteca/,Referencia previa/canónica; revalidar URL y edición,,Consultoría de innovación en portugués.
+LATAM-031,LATAM,MJV Design Thinking Toolkit,MJV Brasil,https://ideas.mjvinnovation.com/pt-design-thinking-toolkit-2023/,Referencia previa/canónica; revalidar URL y edición,,"Descargas, pueden requerir registro."
+LATAM-032,LATAM,MJV Canvas de innovación,MJV Brasil,https://content.mjvinnovation.com/toolkit-canvas-de-inovacao,Referencia previa/canónica; revalidar URL y edición,,Material de innovación.
+LATAM-033,LATAM,Sebrae — cómo hacer Canvas,Sebrae,https://trilhas-apps.pr.sebrae.com.br/trilhas/trilha/como-fazer-um-canvas,Referencia previa/canónica; revalidar URL y edición,,Curso práctico portugués.
+LATAM-034,LATAM,Sebrae — ruta startup,Sebrae,https://es.loja.sebrae.com.br/trilha-startup,Referencia previa/canónica; revalidar URL y edición,,Canvas y validación.
+LATAM-035,LATAM,PM3,PM3 Brasil,https://pm3.com.br/cursos/,Referencia previa/canónica; revalidar URL y edición,,"Producto, Growth y discovery."
+LATAM-036,LATAM,CO.NECTA,BID / Nesta,https://publications.iadb.org/es/conecta-la-guia-para-equipos-de-emprendedores-creativos-en-america-latina-y-el-caribe-construir,Referencia previa/canónica; revalidar URL y edición,,"Equipos, relaciones y empresa sostenible."
+LATAM-037,LATAM,Prodem,Universidad Nacional General Sarmiento,https://prodem.ungs.edu.ar/,Referencia previa/canónica; revalidar URL y edición,,Índice de ecosistemas emprendedores.
+LATAM-038,LATAM,LAVCA,LAVCA,https://lavca.org/,Referencia previa/canónica; revalidar URL y edición,,Capital privado e inversión regional.
+LATAM-039,LATAM,BID publicaciones,BID,https://publications.iadb.org/,Referencia previa/canónica; revalidar URL y edición,,"Capital de riesgo, evaluación, innovación."
+VENTAS-001,VENTAS,Founding Sales,Pete Kazanjy,https://www.foundingsales.com/,Verificada en esta consolidación (resultado recuperado),2026-11-25,Manual B2B de primeras ventas.
+VENTAS-002,VENTAS,Founding Sales — capítulos,Pete Kazanjy,https://www.foundingsales.com/table-of-contents,Referencia previa/canónica; revalidar URL y edición,,Índice y lecturas.
+VENTAS-003,VENTAS,April Dunford,April Dunford,https://www.aprildunford.com/,Referencia previa/canónica; revalidar URL y edición,,Posicionamiento y alternativas competitivas.
+VENTAS-004,VENTAS,Simon-Kucher,Simon-Kucher,https://www.simon-kucher.com/,Referencia previa/canónica; revalidar URL y edición,,"Pricing, packaging, monetización."
+VENTAS-005,VENTAS,Bessemer,Bessemer Venture Partners,https://www.bvp.com/atlas,Referencia previa/canónica; revalidar URL y edición,,"Buscar AI pricing, vertical AI y playbooks de SaaS."
+VENTAS-006,VENTAS,SaaS Capital research,SaaS Capital,https://www.saas-capital.com/research/,Referencia previa/canónica; revalidar URL y edición,,Benchmarks B2B SaaS según tamaño y etapa.
+VENTAS-007,VENTAS,SaaS Capital growth,SaaS Capital,https://www.saas-capital.com/research/private-saas-company-growth-rate-benchmarks/,Referencia previa/canónica; revalidar URL y edición,,Benchmark crecimiento privado.
+VENTAS-008,VENTAS,Stripe resources,Stripe,https://stripe.com/resources/more,Referencia previa/canónica; revalidar URL y edición,,"Cohortes, retención, ingresos recurrentes."
+VENTAS-009,VENTAS,Amplitude,Amplitude,https://amplitude.com/,Referencia previa/canónica; revalidar URL y edición,,"North Star Playbook, AI Edition y métricas de producto."
+VENTAS-010,VENTAS,Bain — B2B Elements of Value,Bain,https://www.bain.com/insights/topics/elements-of-value/,Referencia previa/canónica; revalidar URL y edición,,Atributos de valor B2B y B2C.
+VENTAS-011,VENTAS,Forrester TEI,Forrester,https://www.forrester.com/,Referencia previa/canónica; revalidar URL y edición,,"Buscar Total Economic Impact, costos, beneficios, riesgo, flexibilidad."
+VENTAS-012,VENTAS,Gartner,Gartner,https://www.gartner.com/,Referencia previa/canónica; revalidar URL y edición,,Buscar Buyer Enablement y B2B buying journey.
+VENTAS-013,VENTAS,Reforge,Reforge,https://www.reforge.com/,Referencia previa/canónica; revalidar URL y edición,,Growth loops y crecimiento.
+VENTAS-014,VENTAS,Diego Cordovez,Diego Cordovez,https://diegocordovez.com/,Referencia previa/canónica; revalidar URL y edición,,Ventas B2B y generación de demanda.
+VENTAS-015,VENTAS,Lean Enterprise Institute,LEI,https://www.lean.org/,Referencia previa/canónica; revalidar URL y edición,,"VSM, PDCA, análisis de desperdicios."
+VENTAS-016,VENTAS,Damodaran Online,Aswath Damodaran / NYU,https://pages.stern.nyu.edu/~adamodar/,Referencia previa/canónica; revalidar URL y edición,,"Valoración de startups, DCF, escenarios, hojas de cálculo."
+VENTAS-017,VENTAS,CB Insights — fracaso,CB Insights,https://www.cbinsights.com/research/report/startup-failure-reasons-top/,Referencia previa/canónica; revalidar URL y edición,,Análisis de cierres de startups VC; no tasa poblacional.
+VENTAS-018,VENTAS,BMW Startup Garage,BMW,https://www.bmwstartupgarage.com/,Referencia previa/canónica; revalidar URL y edición,,"Venture Client, proveedor y compra piloto."
+LATAM-040,LATAM,Startupeable — trayectoria y objetivo,Enzo Cavalie,https://startupeable.com/acerca/,Verificada en esta consolidación (resultado recuperado),2026-11-25,"Fundadores, VC, aprendizaje en LATAM."

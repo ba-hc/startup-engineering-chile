@@ -1,6 +1,10 @@
 # TPL-031 — Benchmark competitivo (Competitive Benchmark)
 
-**Para qué:** comparar la oferta con las alternativas reales del cliente en la misma tarea, separando lo demostrado de lo declarado. · **Gate:** G3 · **Alimenta:** `competencia.csv`, `evidencias.csv`
+> **Para qué sirve:** Comparar la oferta con las alternativas reales del cliente en la misma tarea, separando lo demostrado de lo declarado.
+> **Cuándo NO usarla:** Como lista de logos para el pitch, o antes de saber qué tarea quiere resolver el cliente; sin tarea definida, cualquier comparación es arbitraria.
+> **Micro-ejemplo resuelto:** Para "cuadrar la caja diaria de un minimarket", la planilla actual toma 25 min/día y cuesta $0; un software extranjero toma 8 min pero cuesta $45.000/mes y no emite boleta electrónica chilena; el prototipo propio toma 10 min (medido en 3 locales) a $19.990/mes.
+
+**Gate:** G3 · **Alimenta:** `competencia.csv`, `evidencias.csv`
 
 ## Completar
 **Tarea de referencia** (la misma para todas las alternativas, p. ej. "cuadrar el stock de 3 tiendas al cierre de mes"): [ ]

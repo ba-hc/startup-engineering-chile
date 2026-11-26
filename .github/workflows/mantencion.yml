@@ -1,20 +1,32 @@
-name: Mantención de fuentes
+name: Mantención de fuentes y datos
 
-# Cada lunes revisa que los enlaces de la biblioteca respondan y que los datos fechados
-# (parámetros, reglas de fondos, umbrales, flujos) no superen su umbral de antigüedad.
-# Si encuentra algo, abre o actualiza un issue con la etiqueta "mantencion".
+# Cada lunes: enlaces externos (biblioteca, JSON y Markdown), enlaces internos entre archivos,
+# JSON de datos contra sus esquemas y antigüedad de los datos fechados. Si algo falla, abre o
+# actualiza un issue con la etiqueta "mantencion".
+# El día 1 de cada mes: consulta UF/UTM/dólar y, si cambiaron, abre un PR con los valores de
+# respaldo de assets/parametros_cl.json para revisión humana (nunca toca tasas ni reglas legales).
 on:
   schedule:
     - cron: "17 11 * * 1"
+    - cron: "23 12 1 * *"
   workflow_dispatch:
+    inputs:
+      tarea:
+        description: "Qué correr"
+        type: choice
+        options: [revisar, indicadores]
+        default: revisar
 
 permissions:
   contents: read
-  issues: write
 
 jobs:
   revisar:
+    if: github.event.schedule == '17 11 * * 1' || (github.event_name == 'workflow_dispatch' && inputs.tarea == 'revisar')
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,15 +36,25 @@ jobs:
         id: vigencia
         continue-on-error: true
         run: python tools/revisar_vigencia.py --salida vigencia.md
-      - name: Enlaces de la biblioteca
+      - name: Enlaces externos (biblioteca, JSON y Markdown)
         id: enlaces
         continue-on-error: true
         run: python tools/revisar_enlaces.py --salida enlaces.md
+      - name: Enlaces internos y rutas citadas
+        id: internos
+        continue-on-error: true
+        run: |
+          { echo "## Enlaces internos y rutas"; echo; python tools/check_refs.py; } > internos.md 2>&1
+      - name: JSON de datos contra sus esquemas
+        id: esquemas
+        continue-on-error: true
+        run: |
+          { echo "## Esquemas de datos"; echo; python tools/validar_datos.py; } > esquemas.md 2>&1
       - name: Informe
         if: always()
-        run: cat vigencia.md enlaces.md > informe.md && cat informe.md >> "$GITHUB_STEP_SUMMARY"
+        run: cat vigencia.md enlaces.md internos.md esquemas.md > informe.md 2>/dev/null; cat informe.md >> "$GITHUB_STEP_SUMMARY"
       - name: Abrir o actualizar issue
-        if: steps.vigencia.outcome == 'failure' || steps.enlaces.outcome == 'failure'
+        if: steps.vigencia.outcome == 'failure' || steps.enlaces.outcome == 'failure' || steps.internos.outcome == 'failure' || steps.esquemas.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -43,3 +65,52 @@ jobs:
           else
             gh issue create --title "Mantención: fuentes o datos por revisar" --label mantencion --body-file informe.md
           fi
+
+  indicadores:
+    if: github.event.schedule == '23 12 1 * *' || (github.event_name == 'workflow_dispatch' && inputs.tarea == 'indicadores')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Consultar indicadores y escribir el respaldo
+        run: python skills/startup-engineering-chile/scripts/actualizar_parametros.py indicadores --escribir
+      - name: Validar
+        run: |
+          python tools/validar_datos.py
+          python -m unittest discover -s tests
+      - name: Abrir PR si cambió algo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet -- skills/startup-engineering-chile/assets/parametros_cl.json; then
+            echo "Sin cambios en los indicadores de respaldo."
+            exit 0
+          fi
+          rama="mantencion/indicadores-$(date +%Y-%m)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$rama"
+          git add skills/startup-engineering-chile/assets/parametros_cl.json
+          git commit -m "Actualiza UF/UTM/dólar de respaldo ($(date +%Y-%m))"
+          git push --force -u origin "$rama"
+          python skills/startup-engineering-chile/scripts/actualizar_parametros.py revisar > revisar.md || true
+          {
+            echo "Valores de respaldo de UF, UTM y dólar consultados en mindicador.cl."
+            echo
+            echo "Revisa los valores contra el Banco Central o el SII antes de aprobar. Este PR no cambia \`_verificado\`: las tasas, topes y reglas legales se revisan a mano."
+            echo
+            echo '```'
+            git diff HEAD~1 -- skills/startup-engineering-chile/assets/parametros_cl.json
+            echo '```'
+            echo
+            echo "Antigüedad de los datos:"
+            echo
+            cat revisar.md
+          } > cuerpo.md
+          gh pr list --head "$rama" --state open --json number --jq '.[0].number' | grep -q . \
+            || gh pr create --title "Mantención: indicadores de respaldo $(date +%Y-%m)" --body-file cuerpo.md --head "$rama"

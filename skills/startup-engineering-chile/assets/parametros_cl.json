@@ -15,7 +15,7 @@
   "iva": {"valor": 0.19, "fuente": "DL 825"},
   "primera_categoria_pro_pyme": {"valor": 0.125, "nota": "Tasa transitoria años comerciales 2025-2027 (Ley 21.755); 15% en 2028; permanente 25%", "fuente": "SII Circular 53/2025"},
   "primera_categoria_general": {"valor": 0.27, "nota": "2026; la Ley 21.850 la baja a 25,5% en 2027, 24% en 2028 y 23% desde 2029 (verificar)", "fuente": "https://www.bcn.cl/leychile/navegar?idNorma=1229250"},
-  "ley_id_credito": {"valor": 0.35, "nota": "Crédito de 35% contra primera categoría; tope 15.000 UTM/año; certifica CORFO; vigencia extendida a 2035 por Ley 21.755 (verificar)", "fuente": "https://www.corfo.gob.cl/sites/cpp/incentivo_tributario/"},
+  "ley_id_credito": {"valor": 0.35, "tope_utm": 15000, "deducible_resto": 0.65, "arancel_max": 0.04, "arancel_min_utm": 10, "contrato_min_utm": 100, "nota": "Crédito de 35% contra primera categoría (contabilidad completa); el 65% restante se rebaja como gasto; tope 15.000 UTM por ejercicio (UTM al cierre); el remanente se imputa en ejercicios siguientes reajustado; certifica CORFO (arancel hasta 4% del costo, mínimo 10 UTM); contratos con centros del Registro CORFO por más de 100 UTM o proyectos propios certificados", "vigencia": "solicitudes de certificación hasta el 2035-12-31 (Ley 21.755, art. 29)", "fuente": "https://www.bcn.cl/leychile/navegar?idNorma=268637"},
   "compra_agil_max_utm": {"valor": 100, "nota": "Desde 2024-12-12; preferencia para empresas de menor tamaño y proveedores locales; mínimo 3 cotizaciones", "fuente": "https://www.chilecompra.cl/ley-compra-agil/"},
   "impuesto_unico_tramos": {
     "valor": [

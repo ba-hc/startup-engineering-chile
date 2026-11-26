@@ -1,0 +1,5 @@
+{
+  "capas": [
+    {"base": "vacio", "destino": ".", "proyecto": "FrioTrack", "registros": ["hipotesis", "evidencias"]}
+  ]
+}

@@ -1,6 +1,10 @@
 # TPL-059 — Mapa de supuestos (Assumption Map)
 
-**Para qué:** ordenar los supuestos por importancia y evidencia para probar primero el que, si es falso, mata el proyecto. · **Gate:** G0–G5 · **Alimenta:** `hipotesis.csv`, `experimentos.csv`
+> **Para qué sirve:** Ordenar los supuestos por importancia y evidencia para probar primero el que, si es falso, mata el proyecto.
+> **Cuándo NO usarla:** Cuando ya conoces el supuesto crítico y tienes listo el experimento para probarlo; volver a mapear solo posterga la prueba.
+> **Micro-ejemplo resuelto:** De 12 supuestos de una app de préstamo de herramientas entre vecinos, "los vecinos devuelven la herramienta en buen estado" es crítico y no tiene evidencia; se prueba primero con 20 préstamos en un condominio de Maipú, antes de programar pagos.
+
+**Gate:** G0–G5 · **Alimenta:** `hipotesis.csv`, `experimentos.csv`
 
 ## Completar
 1. Extrae 8–15 supuestos de tus canvas, al menos uno por dominio: demanda, valor, pago, canal, implementación, técnica, economía.

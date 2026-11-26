@@ -1,6 +1,10 @@
 # TPL-030 — Tamaño de mercado bottom-up (TAM / SAM / SOM)
 
-**Para qué:** dimensionar el mercado contando cuentas reales × precio anual, con fuente de cada conteo y un SOM limitado por capacidad. · **Gate:** G2 · **Alimenta:** `evidencias.csv`, `fuentes_nuevas.csv`, `hipotesis.csv`
+> **Para qué sirve:** Dimensionar el mercado contando cuentas reales × precio anual, con fuente de cada conteo y un SOM limitado por capacidad.
+> **Cuándo NO usarla:** Para decidir si el problema existe o si alguien pagará: el tamaño de mercado no reemplaza la evidencia de G1, y en G0 basta un orden de magnitud.
+> **Micro-ejemplo resuelto:** 1.200 ópticas en Chile (conteo por rubro, supuesto) × 24 UF/año = 28.800 UF de TAM; el SAM son 480 ópticas independientes de la RM y Valparaíso = 11.520 UF; con un vendedor que cierra 4 al mes, el SOM a 18 meses es ~70 ópticas ≈ 1.680 UF/año.
+
+**Gate:** G2 · **Alimenta:** `evidencias.csv`, `bitacora.csv` (tipo fuente), `hipotesis.csv`
 
 ## Completar
 **Unidad económica:** [empresa (RUT) / local / faena / hogar] · **Precio anual neto de referencia:** [CLP sin IVA, de qué sale: alternativa actual, entrevistas, prueba de precio] · **Año y moneda:** [ ]

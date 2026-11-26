@@ -1,2 +1,0 @@
-﻿decision_id,fecha,gate,alternativas,evidence_ids,criterio,decision,justificacion,responsable,siguiente_accion,revision
-DEC-001,2026-11-04,G0,construir la app ya / validar primero,EV-001;EV-002,problema plausible y recursos bajos,Go,vale la pena investigar; pausar desarrollo hasta tener entrevistas,Fundadora,EXP-001,2026-11-20

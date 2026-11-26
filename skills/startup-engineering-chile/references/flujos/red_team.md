@@ -27,5 +27,5 @@ Conversacional, no un documento. El fundador elige una persona (o las tres en se
 
 ## Cierre del ensayo
 1. Tabla: objeción · calidad de la respuesta (sólida / débil / sin respuesta) · evidencia que falta.
-2. Registra cada brecha relevante: `expediente.py add riesgos dominio=… riesgo=… mitigacion=…` y, si sale un aprendizaje, `add lecciones_mentores referente="red team (<persona>)" …`.
+2. Registra cada brecha relevante: `expediente.py add bitacora tipo=riesgo titulo=… detalle="mitigación…" responsable=… revision=AAAA-MM-DD` y, si sale un aprendizaje, `add bitacora tipo=leccion titulo="red team (<persona>)" detalle=…`.
 3. Propón la acción más barata que cierre la peor brecha (una entrevista, un dato, una cotización), no más slides.

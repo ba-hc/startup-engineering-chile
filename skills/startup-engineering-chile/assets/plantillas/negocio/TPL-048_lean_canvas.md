@@ -1,6 +1,10 @@
 # TPL-048 — Lienzo Lean (Lean Canvas)
 
-**Para qué:** resumir la apuesta de negocio en una página y señalar su supuesto más riesgoso antes de construir. · **Gate:** G0–G3 · **Alimenta:** `hipotesis.csv`, `decisiones.csv`
+> **Para qué sirve:** Resumir la apuesta de negocio en una página y señalar su supuesto más riesgoso antes de construir.
+> **Cuándo NO usarla:** Como documento para convencer a un inversionista o a un fondo, o si lo llenas una vez y no lo versionas; sirve para pensar, no para vender.
+> **Micro-ejemplo resuelto:** Un servicio de riego con sensores para paltos llena los 9 bloques y ve que todo depende de un supuesto sin evidencia (H-004: los asesores agrícolas lo recomendarán); la siguiente prueba es pedir a 5 asesores que lo ofrezcan a 2 clientes cada uno.
+
+**Gate:** G0–G3 · **Alimenta:** `hipotesis.csv`, `decisiones.csv`
 
 ## Completar
 *Orden: segmento → problema → alternativas → propuesta → solución. Marca cada bloque E (evidencia, ID) o S (supuesto, H-XXX).*

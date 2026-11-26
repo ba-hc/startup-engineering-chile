@@ -43,7 +43,7 @@ Genera `<competidor>/ficha.md` (solo la primera vez), y en `<competidor>/<fecha>
 ## R2. Mercado y TAM/SAM/SOM bottom-up (módulo 07 → TPL-030, TPL-032)
 
 1. Define con el usuario la **unidad** (empresa, establecimiento, profesional, hogar) y el precio anual neto supuesto.
-2. Fuentes chilenas de partida (todas en `references/biblioteca/fuentes.csv`):
+2. Fuentes chilenas de partida (en `references/biblioteca/fuentes_publico_corfo.csv` y vecinos; búscalas con `expediente.py buscar-fuente "texto"`):
    - SII estadísticas de empresas por rubro/tamaño/región — `https://www.sii.cl/sobre_el_sii/estadisticas_de_empresas.html`
    - INE (Encuesta Longitudinal de Empresas, Encuesta de Innovación) — `https://www.ine.gob.cl/`
    - ChileCompra datos abiertos (si el cliente es el Estado) — `https://datos-abiertos.chilecompra.cl/`
@@ -51,17 +51,17 @@ Genera `<competidor>/ficha.md` (solo la primera vez), y en `<competidor>/<fecha>
    Para otros países LATAM busca el equivalente (INEGI, DANE, IBGE, INEI…).
 3. `FC scrape <url> --out <proyecto>/expediente/investigacion/mercado` para guardar la página de la estadística; las tablas grandes suelen venir como Excel/CSV descargable: **pide permiso antes de descargar archivos** (nombre, origen y tamaño) y regístralos.
 4. Cada filtro del embudo TAM → SAM → SOM lleva fuente o se marca "supuesto" con plan para verificarlo. SOM sale de capacidad comercial y conversiones, nunca de "el 1% del mercado".
-5. Registra fuentes en `fuentes_nuevas.csv` y el cálculo en `TPL-030`.
+5. Registra fuentes en la bitácora (`add bitacora tipo=fuente titulo=… url=…`) y el cálculo en `TPL-030`.
 
 ---
 
-## R3. Verificar convocatorias CORFO / ANID / Start-Up Chile (módulo 25 → TPL-103, corfo_elegibilidad.csv)
+## R3. Verificar convocatorias CORFO / ANID / Start-Up Chile (módulo 25 → TPL-103, bitácora tipo=requisito)
 
 Los montos, plazos y requisitos de `references/corfo/01_guia_de_postulacion.md` tienen fecha de corte (25-11-2026) y **cambian por llamado**. Antes de afirmarle al usuario que puede postular:
-1. Scrapea la ficha del programa y la convocatoria vigente (URLs en la guía y en `fuentes.csv`, categoría CORFO). Si no sabes la URL vigente, busca "[instrumento] [año] convocatoria [región]".
+1. Scrapea la ficha del programa y la convocatoria vigente (URLs en la guía y en `fuentes_publico_corfo.csv`). Si no sabes la URL vigente, busca "[instrumento] [año] convocatoria [región]".
 2. Extrae: apertura, cierre (con hora y zona), beneficiario, antigüedad, ventas, monto y %, cofinanciamiento, patrocinador, documentos. Cita la página.
 3. Las bases suelen ser PDF: léelas como texto con `FC scrape <url.pdf> --timeout 180 --out <proyecto>/expediente/investigacion/fuentes` (o WebFetch). Leer un PDF público no requiere permiso; descargar el archivo original sí (dile nombre, origen y tamaño).
-4. Una fila por requisito: `expediente.py add corfo_elegibilidad convocatoria=… requisito=… url=… estado=cumple|no cumple|pendiente observacion=…`.
+4. Una fila por requisito: `expediente.py add bitacora tipo=requisito titulo=… url=… estado=cumple|no cumple|pendiente detalle=…`.
 5. Si un requisito bloquea (p. ej. ventas mayores a lo permitido por Semilla Inicia), dilo claro y propone el instrumento que sí corresponde. Nunca sugieras alterar fechas de facturación o datos para calzar.
 
 Para buscar proyectos adjudicados parecidos: DataInnovación (`https://datainnovacion.cl/buscador-proyectos`) y Data Emprendimiento de CORFO. Sirven para estudiar, no para estimar probabilidad de éxito.
@@ -76,7 +76,7 @@ Para buscar proyectos adjudicados parecidos: DataInnovación (`https://datainnov
 
 ---
 
-## R5. Señales de demanda y desafíos corporativos (módulos 02 y 15 → desafios_corporativos.csv)
+## R5. Señales de demanda y desafíos corporativos (módulos 02 y 15 → bitácora tipo=desafio)
 
 Programas de innovación abierta, desafíos de corporaciones, licitaciones de Compra Pública de Innovación (`https://www.chilecompra.cl/cpi/`), Expande Minería, etc. Scrapea las bases públicas y registra organización, problema, requisitos, TRL, presupuesto publicado y condición de piloto. Son pistas de oportunidad (G0) y posibles pilotos (G6).
 
@@ -84,9 +84,9 @@ Programas de innovación abierta, desafíos de corporaciones, licitaciones de Co
 
 ## R6. Re-verificar fuentes del pack
 
-`references/biblioteca/fuentes.csv` tiene 268 fuentes, solo 59 reconsultadas al corte. Cuando una afirmación importante del usuario dependa de una fuente marcada como no verificada, scrapea la URL, confirma que dice lo que se cita y registra la reconsulta en `fuentes_nuevas.csv` (fecha, hallazgo, límite, estado). Si la URL murió, dilo y busca la fuente vigente.
+Los cuatro `references/biblioteca/fuentes_*.csv` tienen 299 fuentes; 91 verificadas al corte (`expediente.py buscar-fuente … --verificadas`). Cuando una afirmación importante del usuario dependa de una fuente marcada como no verificada, scrapea la URL, confirma que dice lo que se cita y registra la reconsulta en la bitácora (`tipo=fuente`: fecha, hallazgo, límite, estado). Si la URL murió, dilo y busca la fuente vigente.
 
 ## R7. Fuentes públicas chilenas: compras del Estado, marcas y convocatorias
 - **Mercado Público** (demanda y precios reales del Estado): buscador web de licitaciones y órdenes de compra por rubro u organismo; la API (`api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?...&ticket=`) requiere un ticket personal obtenido con ClaveÚnica: úsala solo si el fundador lo tiene y lo autoriza. Registra precios y organismos en `competencia.csv` y `cuentas_y_pipeline.csv`. Flujo completo: `references/flujos/compras_publicas.md`.
-- **INAPI** (marcas): búsqueda preliminar de la marca y variantes en las clases Niza que apliquen (software 9 y 42; servicios 35) en el buscador de marcas de INAPI. Es preliminar: el examen de fondo lo hace INAPI. Anota resultado y fecha en `ip_licencias.csv`.
-- **Convocatorias abiertas**: páginas de convocatorias de CORFO, ANID, Sercotec, Start-Up Chile y ProChile. Scrapea la ficha y las bases (`firecrawl.py scrape URL.pdf --timeout 180`), guarda la fecha y actualiza `corfo_elegibilidad.csv`. Si un dato contradice `assets/fondos/instrumentos.json`, manda la base vigente: avisa al usuario y anótalo.
+- **INAPI** (marcas): búsqueda preliminar de la marca y variantes en las clases Niza que apliquen (software 9 y 42; servicios 35) en el buscador de marcas de INAPI. Es preliminar: el examen de fondo lo hace INAPI. Anota resultado y fecha en la bitácora (`tipo=ip`).
+- **Convocatorias abiertas**: páginas de convocatorias de CORFO, ANID, Sercotec, Start-Up Chile y ProChile. Scrapea la ficha y las bases (`firecrawl.py scrape URL.pdf --timeout 180`), guarda la fecha y actualiza la bitácora (`tipo=requisito`). Si un dato contradice `assets/fondos/instrumentos.json`, manda la base vigente: avisa al usuario y anótalo.

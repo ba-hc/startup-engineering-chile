@@ -1,6 +1,6 @@
 # Verticales reguladas: salud y otras
 
-**Última verificación:** 2026-11-25. En una vertical regulada, la regulación es una hipótesis de G5 tan crítica como la técnica. Regístrala en `hipotesis.csv` y en `riesgos.csv` desde G1. Orientación educativa: confirma con un abogado del sector.
+**Última verificación:** 2026-11-25. En una vertical regulada, la regulación es una hipótesis de G5 tan crítica como la técnica. Regístrala en `hipotesis.csv` y como riesgo en la bitácora (`tipo=riesgo`) desde G1. Orientación educativa: confirma con un abogado del sector.
 
 ## 1. Salud (healthtech)
 ### ¿Tu software es un dispositivo médico?
@@ -47,4 +47,4 @@ No hay una guía detallada en la skill. Usa la receta de investigación web R7 (
 | **Educación** | Sostenedores y Mineduc (compras, datos de menores: consentimiento de padres) |
 | **GovTech** | Ley 19.886, Compra Ágil (hasta 100 UTM), interoperabilidad y seguridad del Estado |
 
-Cierra con: hipótesis regulatoria con su prueba (consulta con abogado o regulador, revisión de la norma), costo y plazo estimados del cumplimiento en el modelo, y riesgo en `riesgos.csv` con su responsable.
+Cierra con: hipótesis regulatoria con su prueba (consulta con abogado o regulador, revisión de la norma), costo y plazo estimados del cumplimiento en el modelo, y riesgo en la bitácora (`tipo=riesgo`) con su responsable.

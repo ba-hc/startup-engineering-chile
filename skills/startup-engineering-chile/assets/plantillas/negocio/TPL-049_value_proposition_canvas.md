@@ -1,6 +1,10 @@
 # TPL-049 — Lienzo de propuesta de valor (Value Proposition Canvas)
 
-**Para qué:** comprobar que cada elemento de la oferta responde a un trabajo, dolor o ganancia observado en un segmento concreto. · **Gate:** G3 · **Alimenta:** `hipotesis.csv`, `evidencias.csv`, `entrevistas.csv`
+> **Para qué sirve:** Comprobar que cada elemento de la oferta responde a un trabajo, dolor o ganancia observado en un segmento concreto.
+> **Cuándo NO usarla:** Mezclando varios segmentos en un mismo lienzo, o sin entrevistas que respalden los dolores; termina siendo una lista de deseos.
+> **Micro-ejemplo resuelto:** El dolor "el apoderado no sabe si su hijo llegó al colegio" (7 de 11 entrevistas) justifica la notificación de llegada; el "chat entre apoderados" no calza con ningún dolor observado y sale del MVP.
+
+**Gate:** G3 · **Alimenta:** `hipotesis.csv`, `evidencias.csv`, `entrevistas.csv`
 
 ## Completar
 **Segmento (uno solo):** [rol + tipo de organización + tamaño] · **Comprador, si es distinto:** [rol]

@@ -1,0 +1,8 @@
+{
+  "capas": [
+    {
+      "base": "_bases/turnos",
+      "destino": "."
+    }
+  ]
+}

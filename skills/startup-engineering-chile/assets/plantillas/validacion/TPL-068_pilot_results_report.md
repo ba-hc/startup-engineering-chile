@@ -1,6 +1,10 @@
 # TPL-068 — Informe de resultados de piloto (Pilot Results Report)
 
-**Para qué:** contrastar el resultado con el criterio del acta, separar lo atribuible al producto de los confusores y cerrar con una decisión comercial. · **Gate:** G6–G7 · **Alimenta:** `pilotos.csv`, `evidencias.csv`, `decisiones.csv`
+> **Para qué sirve:** Contrastar el resultado con el criterio del acta, separar lo atribuible al producto de los confusores y cerrar con una decisión comercial.
+> **Cuándo NO usarla:** Si no hubo acta con baseline y criterio fijados antes (TPL-067); sin eso solo puedes escribir un relato, y hay que presentarlo como tal.
+> **Micro-ejemplo resuelto:** Los quiebres bajaron de 7,2% a 4,6%, pero 0,8 puntos se explican porque el cliente cambió de proveedor en la semana 5; lo atribuible al producto son ~1,8 puntos, bajo los 3,2 exigidos, así que no corresponde la OC prometida y se decide Hold.
+
+**Gate:** G6–G7 · **Alimenta:** `pilotos.csv`, `evidencias.csv`, `decisiones.csv`
 
 ## Completar
 **Piloto:** [PIL-ID, cuenta_id, fecha de firma del acta TPL-067] · **Pregunta del piloto (copiada del acta):** [ ]

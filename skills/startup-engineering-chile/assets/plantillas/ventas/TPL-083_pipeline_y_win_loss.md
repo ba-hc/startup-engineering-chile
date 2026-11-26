@@ -1,6 +1,10 @@
 # TPL-083 — Pipeline y análisis de ganadas/perdidas (Pipeline & Win/Loss)
 
-**Para qué:** registrar solo oportunidades reales, avanzarlas solo con evidencia verificable y aprender por qué se gana o pierde. · **Gate:** G7–G8 · **Alimenta:** `cuentas_y_pipeline.csv`, `decisiones.csv`
+> **Para qué sirve:** Registrar solo oportunidades reales, avanzarlas solo con evidencia verificable y aprender por qué se gana o pierde.
+> **Cuándo NO usarla:** Para llevar contactos fríos o seguidores en redes; si una "oportunidad" no tiene problema confirmado y siguiente paso con fecha, va a una lista de prospección, no al pipeline.
+> **Micro-ejemplo resuelto:** De 40 "leads", solo 9 tienen dolor confirmado, presupuesto y decisor identificado; el pronóstico baja de $48 M a $11,7 M (Σ valor × probabilidad por etapa) y 3 de 4 pérdidas se explican por "no se integra con nuestro ERP".
+
+**Gate:** G7–G8 · **Alimenta:** `cuentas_y_pipeline.csv`, `decisiones.csv`
 
 ## Completar
 ### 1. Etapas y criterio de salida

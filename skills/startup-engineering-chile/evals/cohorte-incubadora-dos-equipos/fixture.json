@@ -1,0 +1,18 @@
+{
+  "capas": [
+    {
+      "base": "demo",
+      "destino": "equipo_a"
+    },
+    {
+      "base": "vacio",
+      "destino": "equipo_b",
+      "proyecto": "AgroSensor",
+      "nivel": "sprint",
+      "registros": [
+        "hipotesis",
+        "evidencias"
+      ]
+    }
+  ]
+}

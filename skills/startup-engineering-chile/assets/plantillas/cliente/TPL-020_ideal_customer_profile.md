@@ -1,6 +1,10 @@
 # TPL-020 — Perfil de cliente ideal (Ideal Customer Profile)
 
-**Para qué:** definir el segmento inicial con criterios que permitan listar cuentas concretas y saber a quién hablarle dentro de cada una. · **Gate:** G2 · **Alimenta:** `cuentas_y_pipeline.csv`, `hipotesis.csv`
+> **Para qué sirve:** Definir el segmento inicial con criterios que permitan listar cuentas concretas y saber a quién hablarle dentro de cada una.
+> **Cuándo NO usarla:** Antes de tener entrevistas que muestren en qué tipo de cuenta duele más el problema; un ICP sin evidencia es un público objetivo con otro nombre.
+> **Micro-ejemplo resuelto:** "constructoras medianas de la RM con 3–10 obras activas y prevencionista propio" se traduce en una lista de 46 empresas armada desde permisos de edificación publicados, y en dos roles a contactar: gerente de obras (compra) y prevencionista (puede vetar).
+
+**Gate:** G2 · **Alimenta:** `cuentas_y_pipeline.csv`, `hipotesis.csv`
 
 ## Completar
 **Criterios de la cuenta** *(observables desde fuera; si no puedes verificarlo antes de llamar, no es un criterio)*

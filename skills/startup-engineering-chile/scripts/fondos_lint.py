@@ -8,7 +8,7 @@
   fondos_lint.py instrumentos                                   # lista instrumentos y fecha de verificación
   fondos_lint.py elegibilidad --instrumento semilla_inicia --tipo juridica|natural
                               [--meses-inicio N] [--ventas-12m CLP] [--ventas-solucion CLP]
-  fondos_lint.py presupuesto  --instrumento X (--dir RUTA | --csv rendiciones.csv)
+  fondos_lint.py presupuesto  --instrumento X (--dir RUTA | --csv rendiciones.csv)   # versión completa: presupuesto_corfo.py
   fondos_lint.py rendiciones  (--dir RUTA | --csv rendiciones.csv) --inicio AAAA-MM-DD --fin AAAA-MM-DD
   fondos_lint.py coherencia   --marco documentos/TPL-106_marco_logico_y_gantt.md (--dir RUTA | --csv ...)
   fondos_lint.py caracteres   respuestas.md [--max-defecto N]
@@ -21,57 +21,20 @@ siempre con las bases del llamado vigente.
 """
 import argparse
 import csv
-import datetime as dt
-import json
 import os
 import re
 import sys
 import unicodedata
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from core.fondos import (NO_FINANCIABLES, clp, evaluar_elegibilidad, fecha, instrumento, num, reglas,  # noqa: E402,F401
+                         revisar_presupuesto)
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 except Exception:
     pass
-
-SKILL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-REGLAS = os.path.join(SKILL_DIR, "assets", "fondos", "instrumentos.json")
-NO_FINANCIABLES = ["inmueble", "compra de terreno", "vehículo", "vehiculo", "camioneta", "automóvil", "deuda", "multa", "interés", "intereses", "iva recuperable",
-                   "dividendo", "acciones", "garantía", "garantia", "gasto previo", "retiro de socio"]
-
-
-def reglas():
-    r = json.load(open(REGLAS, encoding="utf-8"))
-    ver = r.get("_verificado", "?")
-    edad = (dt.date.today() - dt.date.fromisoformat(ver)).days if ver != "?" else 999
-    aviso = f" — hace {edad} días: revisa la convocatoria vigente" if edad > 90 else ""
-    return r, f"Reglas verificadas el {ver}{aviso}. Revisión previa, no certificación: manda la base del llamado."
-
-
-def instrumento(r, clave):
-    inst = r["instrumentos"].get(clave)
-    if not inst:
-        sys.exit(f"Instrumento desconocido '{clave}'. Disponibles: {', '.join(r['instrumentos'])}")
-    return inst
-
-
-def num(v):
-    v = (v or "").strip().replace("$", "").replace(" ", "")
-    if not v:
-        return 0.0
-    if re.fullmatch(r"-?\d{1,3}(\.\d{3})+(,\d+)?", v):
-        v = v.replace(".", "").replace(",", ".")
-    elif re.fullmatch(r"-?\d+,\d+", v):
-        v = v.replace(",", ".")
-    try:
-        return float(v)
-    except ValueError:
-        return float("nan")
-
-
-def clp(x):
-    return "$" + f"{x:,.0f}".replace(",", ".")
-
 
 def filas_rendicion(a):
     path = a.csv or os.path.join(os.path.abspath(a.dir or "."), "expediente", "registros", "rendiciones.csv")
@@ -102,39 +65,7 @@ def cmd_instrumentos(a):
 def cmd_elegibilidad(a):
     r, nota = reglas()
     i = instrumento(r, a.instrumento)
-    res = []
-    tipos = i.get("beneficiarios", [])
-    if tipos:
-        res.append(("CUMPLE" if a.tipo in tipos else "NO CUMPLE", f"tipo de postulante '{a.tipo}' (admite: {', '.join(tipos)})"))
-    reglas_tipo = i.get("por_tipo", {}).get(a.tipo, {})
-    mmax, mmin = reglas_tipo.get("meses_inicio_max"), reglas_tipo.get("meses_inicio_min")
-    if mmax is not None or mmin is not None:
-        if a.meses_inicio is None:
-            res.append(("FALTA DATO", "meses desde el inicio de actividades en el SII"))
-        else:
-            ok = (mmax is None or a.meses_inicio < mmax) and (mmin is None or a.meses_inicio >= mmin)
-            rango = (f"< {mmax}" if mmax is not None else "") + (f" y ≥ {mmin}" if mmin is not None else "")
-            res.append(("CUMPLE" if ok else "NO CUMPLE", f"antigüedad {a.meses_inicio} meses (regla: {rango.strip(' y')})"))
-    vmax, vmin = reglas_tipo.get("ventas_12m_max_CLP"), reglas_tipo.get("ventas_12m_min_CLP")
-    if vmax is not None or vmin is not None:
-        if a.ventas_12m is None:
-            res.append(("FALTA DATO", "ventas netas de los últimos 12 meses"))
-        else:
-            ok = (vmax is None or a.ventas_12m <= vmax) and (vmin is None or a.ventas_12m >= vmin)
-            res.append(("CUMPLE" if ok else "NO CUMPLE",
-                        f"ventas 12 meses {clp(a.ventas_12m)} (regla: {('≥ ' + clp(vmin)) if vmin is not None else ''}"
-                        f"{' y ' if vmin is not None and vmax is not None else ''}{('≤ ' + clp(vmax)) if vmax is not None else ''})"))
-    smin = reglas_tipo.get("ventas_solucion_min_CLP")
-    if smin is not None:
-        if a.ventas_solucion is None:
-            res.append(("FALTA DATO", "ventas de la solución postulada"))
-        else:
-            res.append(("CUMPLE" if a.ventas_solucion >= smin else "NO CUMPLE",
-                        f"ventas de la solución {clp(a.ventas_solucion)} (mínimo {clp(smin)})"))
-    if reglas_tipo.get("sin_ventas") and a.ventas_12m:
-        res.append(("NO CUMPLE", "la regla de referencia exige no tener ventas para este tipo de postulante"))
-    for v in i.get("verificar", []):
-        res.append(("VERIFICAR", v))
+    res = evaluar_elegibilidad(i, a.tipo, a.meses_inicio, a.ventas_12m, a.ventas_solucion, getattr(a, "trl", None))
     print(f"## {i['nombre']} — fuente: {i.get('fuente', '')}\n")
     salida(res, nota)
 
@@ -143,57 +74,16 @@ def cmd_presupuesto(a):
     r, nota = reglas()
     i = instrumento(r, a.instrumento)
     filas = filas_rendicion(a)
-    res = []
-    tot = {"presupuesto": 0.0, "subsidio": 0.0, "aporte": 0.0}
-    por_cuenta = {}
-    for f in filas:
-        gid = f.get("gasto_id", "?")
-        p, s, ap = num(f.get("presupuesto_CLP")), num(f.get("subsidio_CLP")), num(f.get("aporte_CLP"))
-        if any(x != x for x in (p, s, ap)):
-            res.append(("PROBLEMA", f"{gid}: monto no numérico"))
-            continue
-        if abs(p - (s + ap)) > 1:
-            res.append(("PROBLEMA", f"{gid}: presupuesto {clp(p)} ≠ subsidio {clp(s)} + aporte {clp(ap)}"))
-        if min(p, s, ap) < 0:
-            res.append(("PROBLEMA", f"{gid}: monto negativo"))
-        texto = (f.get("actividad", "") + " " + f.get("cuenta_presupuestaria", "") + " " + f.get("proveedor", "")).lower()
-        hit = [k for k in NO_FINANCIABLES if k in texto]
-        if hit:
-            res.append(("AVISO", f"{gid}: '{hit[0]}' suele ser no financiable; confirma en las bases"))
-        if not f.get("actividad", "").strip() or not f.get("resultado", "").strip():
-            res.append(("AVISO", f"{gid}: falta actividad o resultado (cada gasto debe servir a un resultado)"))
-        tot["presupuesto"] += p
-        tot["subsidio"] += s
-        tot["aporte"] += ap
-        c = f.get("cuenta_presupuestaria", "") or "(sin cuenta)"
-        por_cuenta[c] = por_cuenta.get(c, 0.0) + p
     if not filas:
         sys.exit("rendiciones.csv no tiene filas.")
-    tope = i.get("tope_subsidio_CLP")
-    if tope:
-        res.append(("OK" if tot["subsidio"] <= tope else "PROBLEMA", f"subsidio total {clp(tot['subsidio'])} vs tope {clp(tope)}"))
-    cof = i.get("cofinanciamiento_max")
-    if cof and tot["presupuesto"]:
-        share = tot["subsidio"] / tot["presupuesto"]
-        res.append(("OK" if share <= cof + 1e-9 else "PROBLEMA",
-                    f"subsidio = {share * 100:.1f}% del costo total (máximo {cof * 100:.0f}%); aporte mínimo {clp(tot['presupuesto'] * (1 - cof))}, tienes {clp(tot['aporte'])}"))
-    for c, lim in (i.get("topes_por_cuenta_pct") or {}).items():
-        v = sum(x for k, x in por_cuenta.items() if c.lower() in k.lower())
-        if tot["presupuesto"] and v / tot["presupuesto"] > lim:
-            res.append(("PROBLEMA", f"cuenta '{c}' = {v / tot['presupuesto'] * 100:.0f}% (tope de referencia {lim * 100:.0f}%)"))
+    res, tot, por_cuenta = revisar_presupuesto(filas, i)
     print(f"## Presupuesto vs {i['nombre']}\n")
     print("| Cuenta | Monto | % |\n|---|---|---|")
-    for c, v in sorted(por_cuenta.items(), key=lambda x: -x[1]):
-        print(f"| {c} | {clp(v)} | {v / tot['presupuesto'] * 100:.0f}% |")
+    for c, v in sorted(por_cuenta.items(), key=lambda x: -x[1]["total"]):
+        print(f"| {c} | {clp(v['total'])} | {v['total'] / tot['presupuesto'] * 100:.0f}% |")
     print(f"| **Total** | **{clp(tot['presupuesto'])}** | subsidio {clp(tot['subsidio'])} · aporte {clp(tot['aporte'])} |\n")
+    print("Revisión completa (IVA, fechas, plazo, RR.HH., pecuniario/valorado): presupuesto_corfo.py revisar --dir <carpeta>\n")
     salida(res, nota)
-
-
-def fecha(v):
-    try:
-        return dt.date.fromisoformat((v or "").strip()[:10])
-    except ValueError:
-        return None
 
 
 def cmd_rendiciones(a):
@@ -318,7 +208,8 @@ def main(argv=None):
     p = sp.add_parser("instrumentos"); p.set_defaults(f=cmd_instrumentos)
     p = sp.add_parser("elegibilidad"); p.add_argument("--instrumento", required=True)
     p.add_argument("--tipo", required=True, choices=["natural", "juridica"]); p.add_argument("--meses-inicio", type=float)
-    p.add_argument("--ventas-12m", type=float); p.add_argument("--ventas-solucion", type=float); p.set_defaults(f=cmd_elegibilidad)
+    p.add_argument("--ventas-12m", type=float); p.add_argument("--ventas-solucion", type=float); p.add_argument("--trl", type=int)
+    p.set_defaults(f=cmd_elegibilidad)
     for nombre, fn in (("presupuesto", cmd_presupuesto), ("rendiciones", cmd_rendiciones), ("coherencia", cmd_coherencia)):
         p = sp.add_parser(nombre); p.add_argument("--dir"); p.add_argument("--csv")
         if nombre == "presupuesto":

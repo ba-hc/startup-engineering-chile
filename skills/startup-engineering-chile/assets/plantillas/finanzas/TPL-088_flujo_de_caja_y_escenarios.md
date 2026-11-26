@@ -1,6 +1,10 @@
 # TPL-088 — Flujo de caja y escenarios (Cash Flow & Scenarios)
 
-**Para qué:** saber en qué mes se acaba la caja con cobros reales, IVA y desfase de pago, y cuánto capital falta para el próximo hito. · **Gate:** G4 / G9 · **Alimenta:** `indicadores.csv`, `decisiones.csv`, `riesgos.csv`
+> **Para qué sirve:** Saber en qué mes se acaba la caja con cobros reales, IVA y desfase de pago, y cuánto capital falta para el próximo hito.
+> **Cuándo NO usarla:** Para mostrar rentabilidad contable o "proyecciones a 5 años" a un fondo; esto es caja mes a mes y no reemplaza un estado de resultados.
+> **Micro-ejemplo resuelto:** Con $24 M en caja, gasto de $4 M/mes y ventas de $1,5 M/mes desde el mes 2 cobradas a 60 días, la caja dura ~7,8 meses, no los 9 que salen si lo facturado se cuenta como cobrado.
+
+**Gate:** G4 / G9 · **Alimenta:** `bitacora.csv` (tipo kpi y riesgo), `decisiones.csv`
 
 ## Completar
 **Caja inicial:** [ ] al [fecha] · **Plazo de cobro:** [días, según contratos] · **Hito que la caja debe alcanzar:** [ ]

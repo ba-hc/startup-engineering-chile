@@ -1,6 +1,6 @@
 [project]
 name = "startup-engineering-chile"
-version = "1.2.0"
+version = "2.0.0"
 description = "Scripts de la skill Startup Engineering Chile (solo biblioteca estándar)."
 requires-python = ">=3.8"
 dependencies = []

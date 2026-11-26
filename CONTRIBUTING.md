@@ -30,7 +30,7 @@ Los datos que caducan viven en tres archivos, cada uno con su esquema en `tools/
 5. Corre `python tools/validar_datos.py`.
 
 ## Fuentes de la biblioteca
-`references/biblioteca/fuentes.csv` tiene `estado` y `fecha_reconsulta` por fila. Marca una fila como verificada solo si leíste la página y confirmaste lo que la fila dice. Si el enlace está roto, reemplázalo o deja el estado como "URL rota (fecha)". El workflow semanal (`.github/workflows/mantencion.yml`) revisa los enlaces y abre un issue con lo que falle.
+Las fuentes están en cuatro archivos por tema (`references/biblioteca/fuentes_publico_corfo.csv`, `fuentes_mercado_latam.csv`, `fuentes_legal_tributario.csv` y `fuentes_saas_metricas.csv`), con `estado` y `fecha_reconsulta` por fila; `expediente.py buscar-fuente` busca en los cuatro. Marca una fila como verificada solo si leíste la página y confirmaste lo que la fila dice. Si el enlace está roto, reemplázalo o deja el estado como "URL rota (fecha)". El workflow semanal (`.github/workflows/mantencion.yml`) revisa los enlaces y abre un issue con lo que falle.
 
 `mentores.csv` describe a personas reales: usa solo su rol profesional público y una URL que lo respalde. No agregues datos personales ni opiniones sobre ellas.
 
@@ -38,10 +38,10 @@ Los datos que caducan viven en tres archivos, cada uno con su esquema en `tools/
 - Un flujo responde a una situación del fundador ("me ofrecen un SAFE"), no a un tema.
 - Abre con **Última verificación** si tiene cifras o normas, cita la fuente de cada dato y separa lo verificado de lo inferido.
 - Lo legal, tributario o clínico es orientación educativa: indica qué profesional lo confirma.
-- Agrega la fila al enrutador de `SKILL.md` y la mención en `references/mapa_modulos.md`.
+- Menciónalo en el enrutador de `SKILL.md` (tabla o lista de «Otros temas»; `SKILL.md` debe seguir bajo ~5 KB, lo revisa `check_refs.py`) y en `references/mapa_modulos.md`.
 
 ## Plantillas
-Las 25 troncales siguen el mismo formato: Para qué / Gate / Alimenta, Completar, Ejemplo bueno (ficticio), Ejemplo malo y por qué falla, Criterio de aceptación y Decisión. Los ejemplos son ficticios. Si una plantilla de catálogo merece ser troncal, márcala en `catalogo_plantillas.csv` y escríbela completa con ese formato.
+Las 40 troncales siguen el mismo formato: encabezado pedagógico (Para qué sirve, Cuándo NO usarla, Micro-ejemplo resuelto), Gate / Alimenta, Completar, Ejemplo bueno (ficticio), Ejemplo malo y por qué falla, Criterio de aceptación y Decisión. Los ejemplos son ficticios. Si una plantilla de catálogo merece ser troncal, márcala en `catalogo_plantillas.csv` y escríbela completa con ese formato.
 
 ## Scripts
 - Solo biblioteca estándar de Python 3.8+, con cabecera PEP 723.

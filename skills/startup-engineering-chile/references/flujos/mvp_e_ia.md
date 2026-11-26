@@ -14,7 +14,7 @@ Para productos que usan modelos de IA (LLM, visión, predicción). La pregunta n
 ## 2. Costo unitario de inferencia
 Calcula el costo por unidad de valor (por informe, por conversación, por documento):
 - **Fórmula:** tokens de entrada y salida por caso × precio por token del proveedor, más reintentos, más revisión humana (minutos × costo hora), más infraestructura.
-- **Cifras:** usa precios vigentes del proveedor con fecha de consulta en `fuentes_nuevas.csv`. No los cites de memoria.
+- **Cifras:** usa precios vigentes del proveedor con fecha de consulta en la bitácora (`tipo=fuente`). No los cites de memoria.
 - **Margen:** ponlo como costo variable en `finanzas.py unit --precio … --costo-variable …`. Si el margen de contribución es menor a ~60% en software, revisa el precio, el modelo usado o el diseño (caché, modelos más pequeños para tareas simples, procesamiento por lotes).
 - **Sensibilidad:** el costo por caso varía mucho entre usuarios. Mide la distribución en el piloto, no solo el promedio.
 
@@ -25,7 +25,7 @@ Pregunta por escrito qué de esto existe o se puede construir, y con qué eviden
 - **Distribución:** canal o alianza difícil de replicar.
 - **Conocimiento del dominio** reflejado en evaluaciones propias: conjunto de casos con la respuesta correcta que mide la calidad en cada cambio.
 
-Si la única ventaja es el prompt, asume que el proveedor del modelo o un competidor lo copiará. Regístralo como riesgo en `riesgos.csv`.
+Si la única ventaja es el prompt, asume que el proveedor del modelo o un competidor lo copiará. Regístralo como riesgo (`add bitacora tipo=riesgo …`).
 
 ## 4. Calidad y riesgo
 - Define antes del piloto una **evaluación**: 30–100 casos reales anonimizados con la respuesta esperada, una métrica (exactitud, tasa de error grave) y un umbral para salir a producción.

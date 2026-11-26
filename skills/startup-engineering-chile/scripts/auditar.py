@@ -10,10 +10,13 @@
   - decisiones Go sin respaldo o con resultados bajo el umbral;
   - precio del modelo financiero contra el pipeline;
   - hipótesis que llevan semanas abiertas sin experimento;
+  - integridad referencial: decisiones sin evidencia (o con IDs que no existen), experimentos vencidos sin cierre,
+    entrevistas sin nota anonimizada o con datos personales;
+  - números clave de 00_estado.md contra los supuestos de modelo_financiero.xlsx;
   - señales de sesgo: entrevistas complacientes, costo hundido, funciones agregadas antes de validar.
 
 Uso:
-  auditar.py --dir RUTA [--dias-hipotesis 30] [--estricto]
+  auditar.py --dir RUTA [--dias-hipotesis 30] [--estricto] [--hoy AAAA-MM-DD]
 
 Cada hallazgo es una pregunta para el fundador, no un veredicto. Solo biblioteca estándar (3.8+).
 """
@@ -50,18 +53,53 @@ def numero(texto):
         return None, ""
 
 
+def fecha_ok(v):
+    return bool(v) and ex.fecha_iso(v)
+
+
+def fmt(v):
+    return f"{v:.0%}".replace(".", ",") if 0 < abs(v) < 1 else f"{v:,.0f}".replace(",", ".")
+
+
+# etiqueta en Números clave de 00_estado.md -> variable en la hoja Supuestos del modelo
+PAREJAS = [("Precio mensual", "Precio mensual"), ("CAC", "CAC"), ("Churn mensual", "Churn mensual"), ("Caja actual (CLP)", "Caja inicial")]
+
+
+def comparar_modelo(base, txt, tolerancia=0.10):
+    """[(etiqueta, valor en 00_estado, valor en el modelo)] cuando difieren más que la tolerancia."""
+    modelo = os.path.join(ex.exp_dir(base), "entregables", "modelo_financiero.xlsx")
+    nc = ex.numeros_clave(txt)
+    if not nc or not os.path.exists(modelo):
+        return []
+    try:
+        import modelo_xlsx
+        sup = {s["variable"]: modelo_xlsx.numero(s["valor"]) for s in modelo_xlsx.supuestos(modelo, "Supuestos")}
+    except (Exception, SystemExit):
+        return []
+    out = []
+    for et, var in PAREJAS:
+        a, b = nc.get(et), sup.get(var)
+        if a is None or b is None:
+            continue
+        if b > 1 and a < 1 and "%" not in et:  # churn guardado como 5 (por ciento) vs 0,05
+            b = b / 100 if et == "Churn mensual" else b
+        if max(abs(a), abs(b)) and abs(a - b) / max(abs(a), abs(b)) > tolerancia:
+            out.append((et, a, b))
+    return out
+
+
 def gate_num(g):
     m = re.match(r"G(\d)", g or "")
     return int(m.group(1)) if m else None
 
 
-def auditar(base, dias_hip=30):
+def auditar(base, dias_hip=30, hoy=None):
     hallazgos = []
 
     def h(nivel, tema, texto, accion):
         hallazgos.append((nivel, tema, texto, accion))
     txt = ex.leer_estado(base)
-    hoy = dt.date.today()
+    hoy = hoy or dt.date.today()
     gate = ex.gate_actual_de(base)
     gn = gate_num(gate)
     dec = ex.filas(base, "decisiones")
@@ -107,8 +145,58 @@ def auditar(base, dias_hip=30):
         if dx == "go" and u is not None and r is not None and uu == ru and r < u and not re.search(r"≤|<=|menos|máximo|max", x.get("umbral", ""), re.I):
             h("ALERTA", "sesgo", f"{x.get('experiment_id')}: decisión Go con resultado {x.get('resultado')} bajo el umbral {x.get('umbral')}.",
               "Un resultado bajo el umbral es Hold o Recycle; bajar la meta después de ver los datos es sesgo de confirmación.")
-        if x.get("fin") and ex.fecha_iso(x["fin"]) and dt.date.fromisoformat(x["fin"][:10]) < hoy - dt.timedelta(days=7) and not x.get("resultado", "").strip():
+        if fecha_ok(x.get("fin")) and hoy - dt.timedelta(days=14) <= dt.date.fromisoformat(x["fin"][:10]) < hoy - dt.timedelta(days=7)                 and not x.get("resultado", "").strip():
             h("aviso", "experimento", f"{x.get('experiment_id')} terminó el {x['fin'][:10]} y no tiene resultado.", "Registra el resultado o extiende la fecha con una razón.")
+    # 3b. Integridad referencial: decisiones ↔ evidencias, experimentos vencidos, entrevistas ↔ notas
+    ev_ids = {v.get("evidence_id", "").strip() for v in evs}
+    for d in dec:
+        refs = [r for r in re.split(r"[;,\s]+", d.get("evidence_ids", "")) if r]
+        malos = [r for r in refs if re.fullmatch(r"EV-\d+", r) and r not in ev_ids]
+        if malos:
+            h("ALERTA", "integridad", f"{d.get('decision_id')} cita {', '.join(malos)}, que no existe(n) en evidencias.",
+              "Corrige el ID o registra la evidencia antes de sostener la decisión.")
+        if not refs and d.get("decision", "").lower() in ("kill", "hold", "recycle"):
+            h("aviso", "integridad", f"{d.get('decision_id')} ({d.get('gate')}) es {d.get('decision')} sin evidence_ids.",
+              "También un Kill o un Hold necesitan su evidencia: cítala para poder revisarla después.")
+    for x in exps:
+        fin = x.get("fin", "")
+        if not fecha_ok(fin) or dt.date.fromisoformat(fin[:10]) >= hoy:
+            continue
+        dias = (hoy - dt.date.fromisoformat(fin[:10])).days
+        if x.get("resultado", "").strip() and not x.get("decision", "").strip():
+            h("aviso", "integridad", f"{x.get('experiment_id')} terminó hace {dias} días con resultado pero sin decisión.",
+              "Cierra el experimento: Go, Hold, Recycle o Kill contra el umbral fijado antes.")
+        elif not x.get("resultado", "").strip() and dias > 14:
+            h("ALERTA", "integridad", f"{x.get('experiment_id')} venció hace {dias} días sin resultado ni cierre.",
+              "Registra lo que se midió (aunque sea parcial) o cierra con Kill; un experimento abierto para siempre no enseña nada.")
+    notas_dir = os.path.join(ex.exp_dir(base), "investigacion", "notas")
+    notas = sorted(os.listdir(notas_dir)) if os.path.isdir(notas_dir) else []
+    for f in notas:
+        if not f.endswith((".md", ".txt")):
+            continue
+        try:
+            with open(os.path.join(notas_dir, f), encoding="utf-8-sig", errors="replace") as fh:
+                pii = ex.buscar_pii(fh.read())
+        except OSError:
+            continue
+        if pii:
+            h("ALERTA", "privacidad", f"investigacion/notas/{f} contiene {', '.join(pii)}.",
+              "Pásala por `ingestar.py anonimizar` y borra la versión con datos personales.")
+        elif not f.endswith("_anon.md"):
+            h("aviso", "privacidad", f"investigacion/notas/{f} no pasó por ingestar.py (no termina en _anon.md).",
+              "Revísala con `ingestar.py revisar` antes de usarla como evidencia.")
+    for e in ents:
+        eid = e.get("entrevista_id", "")
+        pii = ex.buscar_pii([v for k, v in e.items() if k != "entrevista_id"])
+        if pii:
+            h("ALERTA", "privacidad", f"{eid} tiene {', '.join(pii)} en el registro.", "Reemplaza por rol y segmento; el registro no lleva datos personales.")
+        if notas and not any(n.startswith(eid + "_") for n in notas) and not e.get("hecho_o_cita_breve", "").strip():
+            h("aviso", "integridad", f"{eid} no tiene nota anonimizada ni hecho registrado.",
+              f"Anonimiza la nota con `ingestar.py anonimizar … --id {eid}` o registra el hecho concreto.")
+    # 3c. Números clave de 00_estado.md vs modelo financiero
+    for et, valor_estado, valor_modelo in comparar_modelo(base, txt):
+        h("ALERTA", "coherencia", f"«{et}»: 00_estado.md dice {fmt(valor_estado)} y el modelo financiero usa {fmt(valor_modelo)}.",
+          "Una de las dos cifras está desactualizada: corrígela (modelo_xlsx.py set o Números clave) antes de mostrar el modelo.")
     # 4. Hipótesis abiertas sin experimento
     for hid, enun, dias in ex.hipotesis_estancadas(base, hoy, dias=dias_hip):
         h("aviso", "hipótesis", f"{hid} lleva {dias} días sin experimento ni evidencia nueva: {enun}", "Diseña la prueba más barata (TPL-061) o descártala.")
@@ -162,7 +250,7 @@ def auditar(base, dias_hip=30):
     docs = os.path.join(ex.exp_dir(base), "documentos")
     marco = [f for f in os.listdir(docs) if f.startswith("TPL-106")] if os.path.isdir(docs) else []
     if marco and ex.filas(base, "rendiciones"):
-        h("info", "fondos", "Hay marco lógico y presupuesto.", f"Corre `fondos_lint.py coherencia --dir {base} --marco expediente/documentos/{marco[0]}` antes de postular.")
+        h("info", "fondos", "Hay marco lógico y presupuesto.", f"Corre `fondos_lint.py coherencia --dir {base} --marco expediente/documentos/{marco[0]}` y `presupuesto_corfo.py revisar --dir {base}` antes de postular.")
     return hallazgos
 
 
@@ -171,11 +259,13 @@ def main(argv=None):
     ap.add_argument("--dir", default=".")
     ap.add_argument("--dias-hipotesis", type=int, default=30)
     ap.add_argument("--estricto", action="store_true", help="código de salida 1 si hay alertas")
+    ap.add_argument("--hoy", help="fecha de referencia AAAA-MM-DD (por defecto, hoy; útil para un expediente de ejemplo)")
     a = ap.parse_args(argv)
     ex.requiere_expediente(a.dir)
-    hs = auditar(a.dir, a.dias_hipotesis)
+    hoy = dt.date.fromisoformat(a.hoy) if a.hoy else dt.date.today()
+    hs = auditar(a.dir, a.dias_hipotesis, hoy)
     orden = {"ALERTA": 0, "aviso": 1, "info": 2}
-    print(f"# Auditoría de coherencia — {ex.nombre_proyecto(a.dir)} — {dt.date.today().isoformat()}\n")
+    print(f"# Auditoría de coherencia — {ex.nombre_proyecto(a.dir)} — {hoy.isoformat()}\n")
     if not hs:
         print("Sin contradicciones ni señales de sesgo detectadas por las reglas automáticas.")
     for nivel, tema, texto, accion in sorted(hs, key=lambda x: orden[x[0]]):

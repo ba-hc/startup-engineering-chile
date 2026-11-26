@@ -1,6 +1,10 @@
 # TPL-014 — Guion de entrevista de descubrimiento (Mom Test)
 
-**Para qué:** obtener hechos del pasado sobre el problema, sin vender ni pedir opinión sobre la idea. · **Gate:** G1 · **Alimenta:** `entrevistas.csv`, `evidencias.csv`
+> **Para qué sirve:** Obtener hechos del pasado sobre el problema, sin vender ni pedir opinión sobre la idea.
+> **Cuándo NO usarla:** En una reunión comercial con un comprador que ya reconoce el problema y pide propuesta; ahí corresponde vender y negociar, no hacer descubrimiento.
+> **Micro-ejemplo resuelto:** En lugar de "¿usarías una app para controlar mermas?", se pregunta "¿cuándo fue la última vez que botaron mercadería vencida y cuánto fue?"; la jefa de local responde "el lunes, unos $85.000 en lácteos", un hecho que se registra como evidencia.
+
+**Gate:** G1 · **Alimenta:** `entrevistas.csv`, `evidencias.csv`
 
 ## Completar
 **Hipótesis que pone a prueba:** [H-xxx] · **A quién:** [rol, segmento, criterio de inclusión] · **Duración:** 30–40 min · **Entrevistas meta:** [N por segmento]

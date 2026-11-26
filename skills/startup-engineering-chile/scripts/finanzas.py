@@ -17,6 +17,8 @@
                            [--mutual-adicional 0] [--gratificacion] [--provision-indemnizacion]
                            [--uf V] [--utm V]
   finanzas.py honorarios   (--bruto B | --liquido L)
+  finanzas.py ley-id       --gasto CLP [--utm V] [--impuesto-primera CLP] [--modalidad propio|contrato]
+                           # incentivo tributario I+D (Ley 20.241): crédito 35%, gasto 65%, tope 15.000 UTM
 
 Todo en CLP salvo que se indique. Los parámetros legales (tasas, topes, tramos) vienen de
 assets/parametros_cl.json con su fecha de verificación: el script la muestra y avisa si tiene más
@@ -114,7 +116,7 @@ def cmd_unit(a):
             if 1 / a.churn > a.meses_max:
                 alertas.append(f"Churn {pct(a.churn)} implica vida > {a.meses_max} meses: se topó. Sin cohortes reales, no lo uses en un pitch.")
             if a.churn < 0.01:
-                alertas.append("Churn mensual < 1% es raro en etapa temprana; exige datos de cohortes (cohortes.csv).")
+                alertas.append("Churn mensual < 1% es raro en etapa temprana; exige datos de cohortes (bitácora tipo=cohorte).")
             if a.cac and ltv / a.cac < 3:
                 alertas.append("LTV/CAC < 3: el modelo de adquisición es frágil (referencia común de SaaS, no una regla).")
         else:
@@ -448,6 +450,37 @@ def cmd_honorarios(a):
     print("\nPara la empresa el costo es el bruto. Ojo en rendiciones de fondos: revisa si las bases admiten honorarios de socios.")
 
 
+# ---------------------------------------------------------------- Ley I+D
+def cmd_ley_id(a):
+    p = params()
+    r = p["ley_id_credito"]
+    tasa, resto = r["valor"], r.get("deducible_resto", 1 - r["valor"])
+    utm, origen = indicador("utm", a.utm)
+    tope = r.get("tope_utm", 15000) * utm
+    credito_bruto = a.gasto * tasa
+    credito = min(credito_bruto, tope)
+    print(f"Ley 20.241 (incentivo tributario a la I+D) — {r.get('vigencia', '')}. UTM {miles(utm)} ({origen}).\n")
+    print(f"| Concepto | Monto |\n|---|---|\n| Gasto en I+D certificado | {clp(a.gasto)} |")
+    print(f"| Crédito contra primera categoría ({pct(tasa)}) | {clp(credito)} |")
+    if credito_bruto > tope:
+        print(f"| ↳ topado en {miles(r.get('tope_utm', 15000))} UTM (sin tope serían {clp(credito_bruto)}) | |")
+    print(f"| Gasto deducible de la renta ({pct(resto)}) | {clp(a.gasto * resto)} |")
+    if a.impuesto_primera is not None:
+        usado = min(credito, a.impuesto_primera)
+        print(f"| Crédito usado este ejercicio | {clp(usado)} |\n| Remanente para ejercicios siguientes (reajustado) | {clp(credito - usado)} |")
+    arancel = max(a.gasto * r.get("arancel_max", 0.04), r.get("arancel_min_utm", 10) * utm)
+    print(f"| Arancel de certificación CORFO (máximo de referencia) | hasta {clp(arancel)} |")
+    if a.modalidad == "contrato":
+        minimo = r.get("contrato_min_utm", 100) * utm
+        estado = "cumple" if a.gasto > minimo else "NO cumple"
+        print(f"\nModalidad contrato: el centro debe estar en el Registro de Centros de I+D de CORFO y el contrato superar "
+              f"{miles(r.get('contrato_min_utm', 100))} UTM ({clp(minimo)}): {estado}.")
+    else:
+        print("\nModalidad proyecto propio: la empresa certifica su proyecto en CORFO antes de imputar gastos; puede ejecutarlo con "
+              "terceros (p. ej. una startup), pero el crédito es para quien financia.")
+    print("Requiere contabilidad completa y certificación CORFO. Ver references/flujos/ley_id.md. "
+          "Orientación educativa, no asesoría tributaria.")
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -478,6 +511,9 @@ def main(argv=None):
     p.set_defaults(f=cmd_costo_empleado)
     p = sp.add_parser("honorarios"); g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--bruto", type=float); g.add_argument("--liquido", type=float); p.set_defaults(f=cmd_honorarios)
+    p = sp.add_parser("ley-id"); p.add_argument("--gasto", type=float, required=True); p.add_argument("--utm")
+    p.add_argument("--impuesto-primera", type=float, help="impuesto de primera categoría del ejercicio, para calcular el remanente")
+    p.add_argument("--modalidad", default="propio", choices=["propio", "contrato"]); p.set_defaults(f=cmd_ley_id)
     a = ap.parse_args(argv)
     a.f(a)
 

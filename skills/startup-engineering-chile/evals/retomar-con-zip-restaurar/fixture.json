@@ -1,0 +1,11 @@
+{
+  "capas": [
+    {
+      "base": "demo",
+      "destino": "."
+    }
+  ],
+  "empaquetar": {
+    "salida": "expediente_ZIP.zip"
+  }
+}

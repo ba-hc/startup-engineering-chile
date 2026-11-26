@@ -1,6 +1,10 @@
 # TPL-036 — Pérdida aceptable (Affordable Loss)
 
-**Para qué:** fijar, antes de experimentar, cuánto tiempo, dinero y costo de oportunidad estás dispuesto a perder y qué señales te hacen parar. · **Gate:** G0 (se revisa en cada gate) · **Alimenta:** `decisiones.csv`, `experimentos.csv`
+> **Para qué sirve:** Fijar, antes de experimentar, cuánto tiempo, dinero y costo de oportunidad estás dispuesto a perder y qué señales te hacen parar.
+> **Cuándo NO usarla:** Para decisiones pequeñas y reversibles (un experimento de $50.000 o una tarde de trabajo), donde calcular la pérdida tarda más que asumirla.
+> **Micro-ejemplo resuelto:** Una fundadora con $6.000.000 ahorrados fija como máximo $2.500.000 y 5 meses a media jornada; si en el mes 3 no tiene 3 clientes pagando, vuelve a jornada completa en su empleo.
+
+**Gate:** G0 (se revisa en cada gate) · **Alimenta:** `decisiones.csv`, `experimentos.csv`
 
 ## Completar
 *La pregunta no es "¿cuánto puedo ganar?", sino "si pierdo todo esto, ¿sigo bien?"*
